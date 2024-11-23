@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QL_CuaHangModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="tb_ChungTu">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_ChungTu">
+        <MappingFragment StoreEntitySet="tb_ChungTu">
+          <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+          <ScalarProperty Name="SoChungTu" ColumnName="SoChungTu" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="SoChungTu2" ColumnName="SoChungTu2" />
+          <ScalarProperty Name="Ngay2" ColumnName="Ngay2" />
+          <ScalarProperty Name="LoaiCT" ColumnName="LoaiCT" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="MaCty" ColumnName="MaCty" />
+          <ScalarProperty Name="MaDVI" ColumnName="MaDVI" />
+          <ScalarProperty Name="MaDVI2" ColumnName="MaDVI2" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+          <ScalarProperty Name="Update_By" ColumnName="Update_By" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Chungtu_CT">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_Chungtu_CT">
+        <MappingFragment StoreEntitySet="tb_Chungtu_CT">
+          <ScalarProperty Name="KhoaCT" ColumnName="KhoaCT" />
+          <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="SoluongCT" ColumnName="SoluongCT" />
+          <ScalarProperty Name="Dongia" ColumnName="Dongia" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="idban" ColumnName="idban" />
+          <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="Chietkhau" ColumnName="Chietkhau" />
+          <ScalarProperty Name="Stt" ColumnName="Stt" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_CongTy">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_CongTy">
+        <MappingFragment StoreEntitySet="tb_CongTy">
+          <ScalarProperty Name="MaCty" ColumnName="MaCty" />
+          <ScalarProperty Name="TenCty" ColumnName="TenCty" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_DonVi">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_DonVi">
+        <MappingFragment StoreEntitySet="tb_DonVi">
+          <ScalarProperty Name="MaDvi" ColumnName="MaDvi" />
+          <ScalarProperty Name="TenDvi" ColumnName="TenDvi" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="MaCty" ColumnName="MaCty" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+          <ScalarProperty Name="Kho" ColumnName="Kho" />
+          <ScalarProperty Name="KyHieu" ColumnName="KyHieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_DonViTinh">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_DonViTinh">
+        <MappingFragment StoreEntitySet="tb_DonViTinh">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_NhaCC">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_NhaCC">
+        <MappingFragment StoreEntitySet="tb_NhaCC">
+          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+          <ScalarProperty Name="TenNCC" ColumnName="TenNCC" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_NhomHH">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_NhomHH">
+        <MappingFragment StoreEntitySet="tb_NhomHH">
+          <ScalarProperty Name="IdNhom" ColumnName="IdNhom" />
+          <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Param">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_Param">
+        <MappingFragment StoreEntitySet="tb_Param">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Macty" ColumnName="Macty" />
+          <ScalarProperty Name="Madvi" ColumnName="Madvi" />
+          <ScalarProperty Name="TenCty" ColumnName="TenCty" />
+          <ScalarProperty Name="TenDvi" ColumnName="TenDvi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Qlban">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_Qlban">
+        <MappingFragment StoreEntitySet="tb_Qlban">
+          <ScalarProperty Name="idban" ColumnName="idban" />
+          <ScalarProperty Name="tenban" ColumnName="tenban" />
+          <ScalarProperty Name="sokhach" ColumnName="sokhach" />
+          <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_Function">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_Function">
+        <MappingFragment StoreEntitySet="tb_SYS_Function">
+          <ScalarProperty Name="FUNC_Code" ColumnName="FUNC_Code" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Menu" ColumnName="Menu" />
+          <ScalarProperty Name="Tips" ColumnName="Tips" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_Group">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_Group">
+        <MappingFragment StoreEntitySet="tb_SYS_Group">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="Iduser_in_gr" ColumnName="Iduser_in_gr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_report">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_report">
+        <MappingFragment StoreEntitySet="tb_SYS_report">
+          <ScalarProperty Name="Rep_code" ColumnName="Rep_code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Rep_name" ColumnName="Rep_name" />
+          <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+          <ScalarProperty Name="TuNgay" ColumnName="TuNgay" />
+          <ScalarProperty Name="Thangnam" ColumnName="Thangnam" />
+          <ScalarProperty Name="Macty" ColumnName="Macty" />
+          <ScalarProperty Name="madvi" ColumnName="madvi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_Right">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_Right">
+        <MappingFragment StoreEntitySet="tb_SYS_Right">
+          <ScalarProperty Name="Func_code" ColumnName="Func_code" />
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="UserRight" ColumnName="UserRight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_Right_Rep">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_Right_Rep">
+        <MappingFragment StoreEntitySet="tb_SYS_Right_Rep">
+          <ScalarProperty Name="Rep_code" ColumnName="Rep_code" />
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="UserRight" ColumnName="UserRight" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_SEQUENCE">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_SEQUENCE">
+        <MappingFragment StoreEntitySet="tb_SYS_SEQUENCE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_SYS_User">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_SYS_User">
+        <MappingFragment StoreEntitySet="tb_SYS_User">
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Passwd" ColumnName="Passwd" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Macty" ColumnName="Macty" />
+          <ScalarProperty Name="Madvi" ColumnName="Madvi" />
+          <ScalarProperty Name="Last_PWD_Changed" ColumnName="Last_PWD_Changed" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+          <ScalarProperty Name="Isgroup" ColumnName="Isgroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Tonkho">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_Tonkho">
+        <MappingFragment StoreEntitySet="tb_Tonkho">
+          <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+          <ScalarProperty Name="Namky" ColumnName="Namky" />
+          <ScalarProperty Name="Ky" ColumnName="Ky" />
+          <ScalarProperty Name="Madvi" ColumnName="Madvi" />
+          <ScalarProperty Name="Lg_dau" ColumnName="Lg_dau" />
+          <ScalarProperty Name="Lg_nhap" ColumnName="Lg_nhap" />
+          <ScalarProperty Name="Lg_xuat" ColumnName="Lg_xuat" />
+          <ScalarProperty Name="Lg_cuoi" ColumnName="Lg_cuoi" />
+          <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_XuatXu">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_XuatXu">
+        <MappingFragment StoreEntitySet="tb_XuatXu">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_Chungtu_CT">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.V_Chungtu_CT">
+        <MappingFragment StoreEntitySet="V_Chungtu_CT">
+          <ScalarProperty Name="Khoa" ColumnName="Khoa" />
+          <ScalarProperty Name="SoChungTu" ColumnName="SoChungTu" />
+          <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="SoChungTu2" ColumnName="SoChungTu2" />
+          <ScalarProperty Name="Ngay2" ColumnName="Ngay2" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="MaCty" ColumnName="MaCty" />
+          <ScalarProperty Name="MaDVI" ColumnName="MaDVI" />
+          <ScalarProperty Name="MaDVI2" ColumnName="MaDVI2" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="Update_Date" ColumnName="Update_Date" />
+          <ScalarProperty Name="Update_By" ColumnName="Update_By" />
+          <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
+          <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="KhoaCT" ColumnName="KhoaCT" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Dongia" ColumnName="Dongia" />
+          <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Stt" ColumnName="Stt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_Func_SYS_Right">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.v_Func_SYS_Right">
+        <MappingFragment StoreEntitySet="v_Func_SYS_Right">
+          <ScalarProperty Name="FUNC_Code" ColumnName="FUNC_Code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="quyen" ColumnName="quyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_rep_sys_right_rep">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.V_rep_sys_right_rep">
+        <MappingFragment StoreEntitySet="V_rep_sys_right_rep">
+          <ScalarProperty Name="Rep_code" ColumnName="Rep_code" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Rep_name" ColumnName="Rep_name" />
+          <ScalarProperty Name="Visibled" ColumnName="Visibled" />
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="QUYEN" ColumnName="QUYEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_user_in_gr">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.V_user_in_gr">
+        <MappingFragment StoreEntitySet="V_user_in_gr">
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Passwd" ColumnName="Passwd" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Macty" ColumnName="Macty" />
+          <ScalarProperty Name="Madvi" ColumnName="Madvi" />
+          <ScalarProperty Name="Last_PWD_Changed" ColumnName="Last_PWD_Changed" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+          <ScalarProperty Name="Isgroup" ColumnName="Isgroup" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Group" ColumnName="Group" />
+          <ScalarProperty Name="Iduser_in_gr" ColumnName="Iduser_in_gr" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_user_not_in_group">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.v_user_not_in_group">
+        <MappingFragment StoreEntitySet="v_user_not_in_group">
+          <ScalarProperty Name="Iduser" ColumnName="Iduser" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Passwd" ColumnName="Passwd" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Macty" ColumnName="Macty" />
+          <ScalarProperty Name="Madvi" ColumnName="Madvi" />
+          <ScalarProperty Name="Last_PWD_Changed" ColumnName="Last_PWD_Changed" />
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+          <ScalarProperty Name="Isgroup" ColumnName="Isgroup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QL_CuaHangModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QL_CuaHangModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QL_CuaHangModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QL_CuaHangModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_CuaHangModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QL_CuaHangModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QL_CuaHangModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QL_CuaHangModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QL_CuaHangModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="tb_HangHoa">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_HangHoa">
+        <MappingFragment StoreEntitySet="tb_HangHoa">
+          <ScalarProperty Name="Disable" ColumnName="Disable" />
+          <ScalarProperty Name="Create_By" ColumnName="Create_By" />
+          <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="IdNhom" ColumnName="IdNhom" />
+          <ScalarProperty Name="Maxuatxu" ColumnName="Maxuatxu" />
+          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="DVT" ColumnName="DVT" />
+          <ScalarProperty Name="TenTat" ColumnName="TenTat" />
+          <ScalarProperty Name="TenHH" ColumnName="TenHH" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

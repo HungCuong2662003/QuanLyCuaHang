@@ -1,0 +1,16 @@
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DataLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DataLayer.pdb
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DevExpress.Data.v22.2.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DevExpress.Xpo.v22.2.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\EntityFramework.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DevExpress.Data.v22.2.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\DevExpress.Xpo.v22.2.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\EntityFramework.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Debug\DataLayer.csproj.AssemblyReference.cache
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Debug\DataLayer.csproj.Up2Date
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Debug\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Debug\DataLayer.pdb

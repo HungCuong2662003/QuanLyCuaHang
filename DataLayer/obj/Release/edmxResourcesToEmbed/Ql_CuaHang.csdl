@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_CuaHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tb_ChungTu">
+    <Key>
+      <PropertyRef Name="Khoa" />
+    </Key>
+    <Property Name="Khoa" Type="Guid" Nullable="false" />
+    <Property Name="SoChungTu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Ngay" Type="DateTime" Precision="3" />
+    <Property Name="SoChungTu2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Ngay2" Type="DateTime" Precision="3" />
+    <Property Name="LoaiCT" Type="Int32" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="TongTien" Type="Double" />
+    <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MaCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaDVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaDVI2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Int32" />
+    <Property Name="Create_Date" Type="DateTime" Precision="3" />
+    <Property Name="Create_By" Type="Int32" />
+    <Property Name="Update_Date" Type="DateTime" Precision="3" />
+    <Property Name="Update_By" Type="Int32" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="3" />
+    <Property Name="Delete_By" Type="Int32" />
+    <NavigationProperty Name="tb_Chungtu_CT" Relationship="Self.FK_tb_Chungtu_CT_tb_ChungTu" FromRole="tb_ChungTu" ToRole="tb_Chungtu_CT" />
+    <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_ChungTu_tb_DonVi" FromRole="tb_ChungTu" ToRole="tb_DonVi" />
+    <NavigationProperty Name="tb_NhaCC" Relationship="Self.FK_tb_ChungTu_tb_NhaCC" FromRole="tb_ChungTu" ToRole="tb_NhaCC" />
+  </EntityType>
+  <EntityType Name="tb_Chungtu_CT">
+    <Key>
+      <PropertyRef Name="KhoaCT" />
+    </Key>
+    <Property Name="KhoaCT" Type="Guid" Nullable="false" />
+    <Property Name="Khoa" Type="Guid" />
+    <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoluongCT" Type="Double" />
+    <Property Name="Dongia" Type="Double" />
+    <Property Name="GiaBan" Type="Double" />
+    <Property Name="idban" Type="Int32" />
+    <Property Name="Thanhtien" Type="Double" />
+    <Property Name="Ngay" Type="DateTime" Precision="3" />
+    <Property Name="Chietkhau" Type="Double" />
+    <Property Name="Stt" Type="Int32" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <NavigationProperty Name="tb_ChungTu" Relationship="Self.FK_tb_Chungtu_CT_tb_ChungTu" FromRole="tb_Chungtu_CT" ToRole="tb_ChungTu" />
+    <NavigationProperty Name="tb_Qlban" Relationship="Self.FK_tb_Chungtu_CT_tb_Qlban" FromRole="tb_Chungtu_CT" ToRole="tb_Qlban" />
+    <NavigationProperty Name="tb_HangHoa" Relationship="QL_CuaHangModel.FK_tb_Chungtu_CT_tb_HangHoa" FromRole="tb_Chungtu_CT" ToRole="tb_HangHoa" />
+  </EntityType>
+  <EntityType Name="tb_CongTy">
+    <Key>
+      <PropertyRef Name="MaCty" />
+    </Key>
+    <Property Name="MaCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenCty" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Disable" Type="Boolean" />
+    <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_DonVi_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_DonVi" />
+    <NavigationProperty Name="tb_SYS_User" Relationship="Self.FK_tb_SYS_User_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_SYS_User" />
+  </EntityType>
+  <EntityType Name="tb_DonVi">
+    <Key>
+      <PropertyRef Name="MaDvi" />
+    </Key>
+    <Property Name="MaDvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenDvi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="MaCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Disable" Type="Boolean" />
+    <Property Name="Kho" Type="Boolean" />
+    <Property Name="KyHieu" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tb_ChungTu" Relationship="Self.FK_tb_ChungTu_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_ChungTu" />
+    <NavigationProperty Name="tb_CongTy" Relationship="Self.FK_tb_DonVi_tb_CongTy" FromRole="tb_DonVi" ToRole="tb_CongTy" />
+    <NavigationProperty Name="tb_SYS_User" Relationship="Self.FK_tb_SYS_User_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_SYS_User" />
+  </EntityType>
+  <EntityType Name="tb_DonViTinh">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tb_NhaCC">
+    <Key>
+      <PropertyRef Name="MaNCC" />
+    </Key>
+    <Property Name="MaNCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenNCC" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Disable" Type="Boolean" />
+    <NavigationProperty Name="tb_ChungTu" Relationship="Self.FK_tb_ChungTu_tb_NhaCC" FromRole="tb_NhaCC" ToRole="tb_ChungTu" />
+    <NavigationProperty Name="tb_HangHoa" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_NhaCC" FromRole="tb_NhaCC" ToRole="tb_HangHoa" />
+  </EntityType>
+  <EntityType Name="tb_NhomHH">
+    <Key>
+      <PropertyRef Name="IdNhom" />
+    </Key>
+    <Property Name="IdNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Disable" Type="Boolean" />
+    <NavigationProperty Name="tb_HangHoa" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_NhomHH" FromRole="tb_NhomHH" ToRole="tb_HangHoa" />
+  </EntityType>
+  <EntityType Name="tb_Param">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Macty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenDvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tb_Qlban">
+    <Key>
+      <PropertyRef Name="idban" />
+    </Key>
+    <Property Name="idban" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sokhach" Type="Int32" />
+    <Property Name="trangthai" Type="Boolean" />
+    <NavigationProperty Name="tb_Chungtu_CT" Relationship="Self.FK_tb_Chungtu_CT_tb_Qlban" FromRole="tb_Qlban" ToRole="tb_Chungtu_CT" />
+  </EntityType>
+  <EntityType Name="tb_SYS_Function">
+    <Key>
+      <PropertyRef Name="FUNC_Code" />
+      <PropertyRef Name="Sort" />
+    </Key>
+    <Property Name="FUNC_Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsGroup" Type="Boolean" />
+    <Property Name="Parent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Menu" Type="Boolean" />
+    <Property Name="Tips" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tb_SYS_Group">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Group" Type="Int32" Nullable="false" />
+    <Property Name="Iduser_in_gr" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_SYS_report">
+    <Key>
+      <PropertyRef Name="Rep_code" />
+    </Key>
+    <Property Name="Rep_code" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rep_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Visibled" Type="Boolean" />
+    <Property Name="TuNgay" Type="Boolean" />
+    <Property Name="Thangnam" Type="Boolean" />
+    <Property Name="Macty" Type="Boolean" />
+    <Property Name="madvi" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tb_SYS_Right">
+    <Key>
+      <PropertyRef Name="Func_code" />
+      <PropertyRef Name="Iduser" />
+    </Key>
+    <Property Name="Func_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Iduser" Type="Int32" Nullable="false" />
+    <Property Name="UserRight" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_SYS_Right_Rep">
+    <Key>
+      <PropertyRef Name="Rep_code" />
+      <PropertyRef Name="Iduser" />
+    </Key>
+    <Property Name="Rep_code" Type="Int32" Nullable="false" />
+    <Property Name="Iduser" Type="Int32" Nullable="false" />
+    <Property Name="UserRight" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tb_SYS_SEQUENCE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="value" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tb_SYS_User">
+    <Key>
+      <PropertyRef Name="Iduser" />
+    </Key>
+    <Property Name="Iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Macty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Last_PWD_Changed" Type="DateTime" Precision="3" />
+    <Property Name="Disable" Type="Boolean" />
+    <Property Name="Isgroup" Type="Boolean" />
+    <NavigationProperty Name="tb_CongTy" Relationship="Self.FK_tb_SYS_User_tb_CongTy" FromRole="tb_SYS_User" ToRole="tb_CongTy" />
+    <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_SYS_User_tb_DonVi" FromRole="tb_SYS_User" ToRole="tb_DonVi" />
+  </EntityType>
+  <EntityType Name="tb_Tonkho">
+    <Key>
+      <PropertyRef Name="Khoa" />
+    </Key>
+    <Property Name="Khoa" Type="Int32" Nullable="false" />
+    <Property Name="Namky" Type="Int32" />
+    <Property Name="Ky" Type="Int32" />
+    <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lg_dau" Type="Double" />
+    <Property Name="Lg_nhap" Type="Double" />
+    <Property Name="Lg_xuat" Type="Double" />
+    <Property Name="Lg_cuoi" Type="Int32" />
+    <Property Name="Thanhtien" Type="Double" />
+    <Property Name="Ngay" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tb_XuatXu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Disable" Type="Boolean" />
+    <NavigationProperty Name="tb_HangHoa" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_XuatXu" FromRole="tb_XuatXu" ToRole="tb_HangHoa" />
+  </EntityType>
+  <EntityType Name="V_Chungtu_CT">
+    <Key>
+      <PropertyRef Name="Khoa" />
+      <PropertyRef Name="KhoaCT" />
+    </Key>
+    <Property Name="Khoa" Type="Guid" Nullable="false" />
+    <Property Name="SoChungTu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ngay" Type="DateTime" Precision="3" />
+    <Property Name="SoChungTu2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ngay2" Type="DateTime" Precision="3" />
+    <Property Name="SoLuong" Type="Double" />
+    <Property Name="TongTien" Type="Double" />
+    <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MaCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaDVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaDVI2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="Boolean" />
+    <Property Name="Create_Date" Type="DateTime" Precision="3" />
+    <Property Name="Create_By" Type="Int32" />
+    <Property Name="Update_Date" Type="DateTime" Precision="3" />
+    <Property Name="Update_By" Type="Int32" />
+    <Property Name="Delete_Date" Type="DateTime" Precision="3" />
+    <Property Name="Delete_By" Type="Int32" />
+    <Property Name="KhoaCT" Type="Guid" Nullable="false" />
+    <Property Name="Barcode" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Expr1" Type="Double" />
+    <Property Name="Dongia" Type="Double" />
+    <Property Name="Thanhtien" Type="Double" />
+    <Property Name="Expr2" Type="DateTime" Precision="3" />
+    <Property Name="Stt" Type="Int32" />
+  </EntityType>
+  <EntityType Name="v_Func_SYS_Right">
+    <Key>
+      <PropertyRef Name="FUNC_Code" />
+      <PropertyRef Name="Sort" />
+      <PropertyRef Name="Iduser" />
+    </Key>
+    <Property Name="FUNC_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsGroup" Type="Boolean" />
+    <Property Name="Parent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="Iduser" Type="Int32" Nullable="false" />
+    <Property Name="quyen" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="V_rep_sys_right_rep">
+    <Key>
+      <PropertyRef Name="Rep_code" />
+      <PropertyRef Name="Iduser" />
+    </Key>
+    <Property Name="Rep_code" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rep_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Visibled" Type="Boolean" />
+    <Property Name="Iduser" Type="Int32" Nullable="false" />
+    <Property Name="QUYEN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="V_user_in_gr">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="Group" />
+      <PropertyRef Name="Iduser_in_gr" />
+    </Key>
+    <Property Name="Iduser" Type="Int32" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Macty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Last_PWD_Changed" Type="DateTime" Precision="3" />
+    <Property Name="Disable" Type="Boolean" />
+    <Property Name="Isgroup" Type="Boolean" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Group" Type="Int32" Nullable="false" />
+    <Property Name="Iduser_in_gr" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="v_user_not_in_group">
+    <Key>
+      <PropertyRef Name="Iduser" />
+      <PropertyRef Name="Macty" />
+      <PropertyRef Name="Madvi" />
+    </Key>
+    <Property Name="Iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Passwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fullname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Macty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Last_PWD_Changed" Type="DateTime" Precision="3" />
+    <Property Name="Disable" Type="Boolean" />
+    <Property Name="Isgroup" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_tb_Chungtu_CT_tb_ChungTu">
+    <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_ChungTu">
+        <PropertyRef Name="Khoa" />
+      </Principal>
+      <Dependent Role="tb_Chungtu_CT">
+        <PropertyRef Name="Khoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ChungTu_tb_DonVi">
+    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_DonVi">
+        <PropertyRef Name="MaDvi" />
+      </Principal>
+      <Dependent Role="tb_ChungTu">
+        <PropertyRef Name="MaDVI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ChungTu_tb_NhaCC">
+    <End Role="tb_NhaCC" Type="Self.tb_NhaCC" Multiplicity="0..1" />
+    <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_NhaCC">
+        <PropertyRef Name="MaNCC" />
+      </Principal>
+      <Dependent Role="tb_ChungTu">
+        <PropertyRef Name="MaDVI2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_Chungtu_CT_tb_Qlban">
+    <End Role="tb_Qlban" Type="Self.tb_Qlban" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Qlban">
+        <PropertyRef Name="idban" />
+      </Principal>
+      <Dependent Role="tb_Chungtu_CT">
+        <PropertyRef Name="idban" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_DonVi_tb_CongTy">
+    <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_CongTy">
+        <PropertyRef Name="MaCty" />
+      </Principal>
+      <Dependent Role="tb_DonVi">
+        <PropertyRef Name="MaCty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_SYS_User_tb_CongTy">
+    <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
+    <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_CongTy">
+        <PropertyRef Name="MaCty" />
+      </Principal>
+      <Dependent Role="tb_SYS_User">
+        <PropertyRef Name="Macty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_SYS_User_tb_DonVi">
+    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
+    <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_DonVi">
+        <PropertyRef Name="MaDvi" />
+      </Principal>
+      <Dependent Role="tb_SYS_User">
+        <PropertyRef Name="Madvi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_ChungTu" EntityType="Self.tb_ChungTu" />
+    <EntitySet Name="tb_Chungtu_CT" EntityType="Self.tb_Chungtu_CT" />
+    <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" />
+    <EntitySet Name="tb_DonVi" EntityType="Self.tb_DonVi" />
+    <EntitySet Name="tb_DonViTinh" EntityType="Self.tb_DonViTinh" />
+    <EntitySet Name="tb_NhaCC" EntityType="Self.tb_NhaCC" />
+    <EntitySet Name="tb_NhomHH" EntityType="Self.tb_NhomHH" />
+    <EntitySet Name="tb_Param" EntityType="Self.tb_Param" />
+    <EntitySet Name="tb_Qlban" EntityType="Self.tb_Qlban" />
+    <EntitySet Name="tb_SYS_Function" EntityType="Self.tb_SYS_Function" />
+    <EntitySet Name="tb_SYS_Group" EntityType="Self.tb_SYS_Group" />
+    <EntitySet Name="tb_SYS_report" EntityType="Self.tb_SYS_report" />
+    <EntitySet Name="tb_SYS_Right" EntityType="Self.tb_SYS_Right" />
+    <EntitySet Name="tb_SYS_Right_Rep" EntityType="Self.tb_SYS_Right_Rep" />
+    <EntitySet Name="tb_SYS_SEQUENCE" EntityType="Self.tb_SYS_SEQUENCE" />
+    <EntitySet Name="tb_SYS_User" EntityType="Self.tb_SYS_User" />
+    <EntitySet Name="tb_Tonkho" EntityType="Self.tb_Tonkho" />
+    <EntitySet Name="tb_XuatXu" EntityType="Self.tb_XuatXu" />
+    <EntitySet Name="V_Chungtu_CT" EntityType="Self.V_Chungtu_CT" />
+    <EntitySet Name="v_Func_SYS_Right" EntityType="Self.v_Func_SYS_Right" />
+    <EntitySet Name="V_rep_sys_right_rep" EntityType="Self.V_rep_sys_right_rep" />
+    <EntitySet Name="V_user_in_gr" EntityType="Self.V_user_in_gr" />
+    <EntitySet Name="v_user_not_in_group" EntityType="Self.v_user_not_in_group" />
+    <AssociationSet Name="FK_tb_Chungtu_CT_tb_ChungTu" Association="Self.FK_tb_Chungtu_CT_tb_ChungTu">
+      <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
+      <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ChungTu_tb_DonVi" Association="Self.FK_tb_ChungTu_tb_DonVi">
+      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+      <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ChungTu_tb_NhaCC" Association="Self.FK_tb_ChungTu_tb_NhaCC">
+      <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
+      <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Chungtu_CT_tb_Qlban" Association="Self.FK_tb_Chungtu_CT_tb_Qlban">
+      <End Role="tb_Qlban" EntitySet="tb_Qlban" />
+      <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_DonVi_tb_CongTy" Association="Self.FK_tb_DonVi_tb_CongTy">
+      <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_SYS_User_tb_CongTy" Association="Self.FK_tb_SYS_User_tb_CongTy">
+      <End Role="tb_CongTy" EntitySet="tb_CongTy" />
+      <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_SYS_User_tb_DonVi" Association="Self.FK_tb_SYS_User_tb_DonVi">
+      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
+      <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QL_CuaHangModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QL_CuaHangModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="tb_HangHoa" EntityType="QL_CuaHangModel.tb_HangHoa" />
+    <AssociationSet Name="FK_tb_Chungtu_CT_tb_HangHoa" Association="QL_CuaHangModel.FK_tb_Chungtu_CT_tb_HangHoa">
+      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
+      <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_HangHoa_tb_NhaCC" Association="QL_CuaHangModel.FK_tb_HangHoa_tb_NhaCC">
+      <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
+      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_HangHoa_tb_NhomHH" Association="QL_CuaHangModel.FK_tb_HangHoa_tb_NhomHH">
+      <End Role="tb_NhomHH" EntitySet="tb_NhomHH" />
+      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_HangHoa_tb_XuatXu" Association="QL_CuaHangModel.FK_tb_HangHoa_tb_XuatXu">
+      <End Role="tb_XuatXu" EntitySet="tb_XuatXu" />
+      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="tb_HangHoa">
+    <Key>
+      <PropertyRef Name="BarCode" />
+    </Key>
+    <Property Name="BarCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenHH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TenTat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DVT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DonGia" Type="Double" />
+    <Property Name="GiaBan" Type="Double" />
+    <Property Name="MaNCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Maxuatxu" Type="Int32" />
+    <Property Name="IdNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mota" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Create_Date" Type="DateTime" Precision="3" />
+    <Property Name="Create_By" Type="Int32" />
+    <Property Name="Disable" Type="Boolean" />
+    <NavigationProperty Name="tb_Chungtu_CT" Relationship="QL_CuaHangModel.FK_tb_Chungtu_CT_tb_HangHoa" FromRole="tb_HangHoa" ToRole="tb_Chungtu_CT" />
+    <NavigationProperty Name="tb_NhaCC" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_NhaCC" FromRole="tb_HangHoa" ToRole="tb_NhaCC" />
+    <NavigationProperty Name="tb_NhomHH" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_NhomHH" FromRole="tb_HangHoa" ToRole="tb_NhomHH" />
+    <NavigationProperty Name="tb_XuatXu" Relationship="QL_CuaHangModel.FK_tb_HangHoa_tb_XuatXu" FromRole="tb_HangHoa" ToRole="tb_XuatXu" />
+  </EntityType>
+  <Association Name="FK_tb_Chungtu_CT_tb_HangHoa">
+    <End Type="QL_CuaHangModel.tb_HangHoa" Role="tb_HangHoa" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="QL_CuaHangModel.tb_Chungtu_CT" Role="tb_Chungtu_CT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_HangHoa">
+        <PropertyRef Name="BarCode" />
+      </Principal>
+      <Dependent Role="tb_Chungtu_CT">
+        <PropertyRef Name="Barcode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_HangHoa_tb_NhaCC">
+    <End Type="QL_CuaHangModel.tb_NhaCC" Role="tb_NhaCC" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="QL_CuaHangModel.tb_HangHoa" Role="tb_HangHoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_NhaCC">
+        <PropertyRef Name="MaNCC" />
+      </Principal>
+      <Dependent Role="tb_HangHoa">
+        <PropertyRef Name="MaNCC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_HangHoa_tb_NhomHH">
+    <End Type="QL_CuaHangModel.tb_NhomHH" Role="tb_NhomHH" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="QL_CuaHangModel.tb_HangHoa" Role="tb_HangHoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_NhomHH">
+        <PropertyRef Name="IdNhom" />
+      </Principal>
+      <Dependent Role="tb_HangHoa">
+        <PropertyRef Name="IdNhom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_HangHoa_tb_XuatXu">
+    <End Type="QL_CuaHangModel.tb_XuatXu" Role="tb_XuatXu" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="QL_CuaHangModel.tb_HangHoa" Role="tb_HangHoa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_XuatXu">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tb_HangHoa">
+        <PropertyRef Name="Maxuatxu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

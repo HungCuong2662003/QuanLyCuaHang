@@ -1,0 +1,15 @@
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\BusinessLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\BusinessLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\BusinessLayer.pdb
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\EntityFramework.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\EntityFramework.SqlServer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\DataLayer.pdb
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\DataLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\EntityFramework.xml
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Release\EntityFramework.SqlServer.xml
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Release\BusinessLayer.csproj.AssemblyReference.cache
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Release\BusinessLayer.csproj.CoreCompileInputs.cache
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Release\Business.EA331CBA.Up2Date
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Release\BusinessLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Release\BusinessLayer.pdb

@@ -1,0 +1,15 @@
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\BusinessLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\BusinessLayer.pdb
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\EntityFramework.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\DataLayer.pdb
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\DataLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\EntityFramework.xml
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Debug\Business.EA331CBA.Up2Date
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Debug\BusinessLayer.dll
+D:\winform\QL_Quan\QL_Quan\BusinessLayer\obj\Debug\BusinessLayer.pdb

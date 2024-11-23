@@ -1,0 +1,12 @@
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\DataLayer.dll.config
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\DataLayer.pdb
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\EntityFramework.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\EntityFramework.SqlServer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\EntityFramework.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\bin\Release\EntityFramework.SqlServer.xml
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Release\DataLayer.csproj.AssemblyReference.cache
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Release\DataLayer.csproj.CoreCompileInputs.cache
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Release\DataLayer.csproj.Up2Date
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Release\DataLayer.dll
+D:\winform\QL_Quan\QL_Quan\DataLayer\obj\Release\DataLayer.pdb
