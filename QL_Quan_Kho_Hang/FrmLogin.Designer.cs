@@ -81,7 +81,6 @@
             this.txt_tk.Name = "txt_tk";
             this.txt_tk.Size = new System.Drawing.Size(186, 21);
             this.txt_tk.TabIndex = 3;
-            this.txt_tk.Text = "admin";
             // 
             // txt_mk
             // 
@@ -91,7 +90,6 @@
             this.txt_mk.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txt_mk.Size = new System.Drawing.Size(186, 21);
             this.txt_mk.TabIndex = 4;
-            this.txt_mk.Text = "123";
             // 
             // btn_dangnhap
             // 

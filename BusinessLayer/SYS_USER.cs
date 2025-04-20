@@ -17,7 +17,8 @@ namespace BusinessLayer
         public List<tb_SYS_User> GetAll()
         {
             return db.tb_SYS_User.ToList();
-        }public List<tb_SYS_User> GetAllDisable()
+        }
+        public List<tb_SYS_User> GetAllDisable()
         {
             return db.tb_SYS_User.Where(x=>x.Disable==false).OrderByDescending(x => x.Isgroup).ToList();
         }

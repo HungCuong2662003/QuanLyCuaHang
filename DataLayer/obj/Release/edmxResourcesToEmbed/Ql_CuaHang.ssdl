@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QL_CuaHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="tb_ChungTu">
     <Key>
       <PropertyRef Name="Khoa" />
@@ -12,6 +22,8 @@
     <Property Name="LoaiCT" Type="int" />
     <Property Name="SoLuong" Type="float" />
     <Property Name="TongTien" Type="float" />
+    <Property Name="ChuyenKhoan" Type="bit" />
+    <Property Name="idban" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="500" />
     <Property Name="MaCty" Type="nvarchar" MaxLength="50" />
     <Property Name="MaDVI" Type="nvarchar" MaxLength="50" />
@@ -23,6 +35,7 @@
     <Property Name="Update_By" Type="int" />
     <Property Name="Delete_Date" Type="datetime" />
     <Property Name="Delete_By" Type="int" />
+    <Property Name="checkthanhtoan" Type="bit" />
   </EntityType>
   <EntityType Name="tb_Chungtu_CT">
     <Key>
@@ -34,12 +47,11 @@
     <Property Name="SoluongCT" Type="float" />
     <Property Name="Dongia" Type="float" />
     <Property Name="GiaBan" Type="float" />
-    <Property Name="idban" Type="int" />
     <Property Name="Thanhtien" Type="float" />
     <Property Name="Ngay" Type="datetime" />
+    <Property Name="IdKH" Type="nvarchar" MaxLength="50" />
     <Property Name="Chietkhau" Type="float" />
     <Property Name="Stt" Type="int" />
-    <Property Name="TrangThai" Type="bit" />
   </EntityType>
   <EntityType Name="tb_CongTy">
     <Key>
@@ -92,6 +104,17 @@
     <Property Name="Create_Date" Type="datetime" />
     <Property Name="Create_By" Type="int" />
     <Property Name="Disable" Type="bit" />
+  </EntityType>
+  <EntityType Name="tb_KhachHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HOTEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIENTHOAI" Type="nvarchar" MaxLength="50" />
+    <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+    <Property Name="MASOTHUE" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_NhaCC">
     <Key>
@@ -165,6 +188,7 @@
     <Property Name="Thangnam" Type="bit" />
     <Property Name="Macty" Type="bit" />
     <Property Name="madvi" Type="bit" />
+    <Property Name="tonkho" Type="bit" />
   </EntityType>
   <EntityType Name="tb_SYS_Right">
     <Key>
@@ -197,8 +221,8 @@
       <PropertyRef Name="Iduser" />
     </Key>
     <Property Name="Iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" MaxLength="50" />
-    <Property Name="Passwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Username" Type="nvarchar" MaxLength="500" />
+    <Property Name="Passwd" Type="nvarchar" MaxLength="1000" />
     <Property Name="Fullname" Type="nvarchar" MaxLength="250" />
     <Property Name="Macty" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Madvi" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -206,20 +230,28 @@
     <Property Name="Disable" Type="bit" />
     <Property Name="Isgroup" Type="bit" />
   </EntityType>
-  <EntityType Name="tb_Tonkho">
+  <EntityType Name="tb_TONKHO">
     <Key>
-      <PropertyRef Name="Khoa" />
+      <PropertyRef Name="KHOA" />
     </Key>
-    <Property Name="Khoa" Type="int" Nullable="false" />
-    <Property Name="Namky" Type="int" />
-    <Property Name="Ky" Type="int" />
-    <Property Name="Madvi" Type="nvarchar" MaxLength="50" />
-    <Property Name="Lg_dau" Type="float" />
-    <Property Name="Lg_nhap" Type="float" />
-    <Property Name="Lg_xuat" Type="float" />
-    <Property Name="Lg_cuoi" Type="int" />
-    <Property Name="Thanhtien" Type="float" />
-    <Property Name="Ngay" Type="datetime" />
+    <Property Name="KHOA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NAMKY" Type="int" />
+    <Property Name="NAM" Type="int" />
+    <Property Name="KY" Type="int" />
+    <Property Name="MACTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="MADVI" Type="nvarchar" MaxLength="50" />
+    <Property Name="BARCODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="LG_DAU" Type="float" />
+    <Property Name="LG_NHAPMUA" Type="float" />
+    <Property Name="LG_NHAPNB" Type="float" />
+    <Property Name="LG_XUATNB" Type="float" />
+    <Property Name="LG_XUATSI" Type="float" />
+    <Property Name="LG_BANLE" Type="float" />
+    <Property Name="LG_BANQUAY" Type="float" />
+    <Property Name="LG_CUOI" Type="float" />
+    <Property Name="TRIGIA" Type="float" />
+    <Property Name="TIEN_CUOI" Type="float" />
+    <Property Name="NGAY" Type="datetime" />
   </EntityType>
   <EntityType Name="tb_XuatXu">
     <Key>
@@ -228,6 +260,32 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Ten" Type="nvarchar" MaxLength="50" />
     <Property Name="Disable" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'QL_CuaHang.dbo.R_CHUNGTU' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="R_CHUNGTU">
+    <Key>
+      <PropertyRef Name="KHOA" />
+    </Key>
+    <Property Name="KHOA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NGAY" Type="datetime" />
+    <Property Name="SoChungTu" Type="nvarchar" MaxLength="500" />
+    <Property Name="SoChungTu2" Type="nvarchar" MaxLength="500" />
+    <Property Name="NGAY2" Type="datetime" />
+    <Property Name="LoaiCT" Type="int" />
+    <Property Name="TRANGTHAI" Type="int" />
+    <Property Name="SOLUONG" Type="float" />
+    <Property Name="TONGTIEN" Type="float" />
+    <Property Name="GHICHU" Type="nvarchar" MaxLength="500" />
+    <Property Name="MACTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="MADVI" Type="nvarchar" MaxLength="50" />
+    <Property Name="MADVI2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Create_By" Type="int" />
+    <Property Name="Create_Date" Type="datetime" />
+    <Property Name="Update_By" Type="int" />
+    <Property Name="Update_Date" Type="datetime" />
+    <Property Name="Delete_Date" Type="datetime" />
+    <Property Name="Delete_By" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'QL_CuaHang.dbo.V_Chungtu_CT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -345,141 +403,39 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tb_Chungtu_CT_tb_HangHoa">
-    <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_HangHoa">
-        <PropertyRef Name="BarCode" />
-      </Principal>
-      <Dependent Role="tb_Chungtu_CT">
-        <PropertyRef Name="Barcode" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_Chungtu_CT_tb_Qlban">
-    <End Role="tb_Qlban" Type="Self.tb_Qlban" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_Qlban">
-        <PropertyRef Name="idban" />
-      </Principal>
-      <Dependent Role="tb_Chungtu_CT">
-        <PropertyRef Name="idban" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_ChungTu_tb_DonVi">
-    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_DonVi">
-        <PropertyRef Name="MaDvi" />
-      </Principal>
-      <Dependent Role="tb_ChungTu">
-        <PropertyRef Name="MaDVI" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_ChungTu_tb_NhaCC">
-    <End Role="tb_NhaCC" Type="Self.tb_NhaCC" Multiplicity="0..1" />
-    <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_NhaCC">
-        <PropertyRef Name="MaNCC" />
-      </Principal>
-      <Dependent Role="tb_ChungTu">
-        <PropertyRef Name="MaDVI2" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_DonVi_tb_CongTy">
-    <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_CongTy">
-        <PropertyRef Name="MaCty" />
-      </Principal>
-      <Dependent Role="tb_DonVi">
-        <PropertyRef Name="MaCty" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_HangHoa_tb_NhaCC">
-    <End Role="tb_NhaCC" Type="Self.tb_NhaCC" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_NhaCC">
-        <PropertyRef Name="MaNCC" />
-      </Principal>
-      <Dependent Role="tb_HangHoa">
-        <PropertyRef Name="MaNCC" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_HangHoa_tb_NhomHH">
-    <End Role="tb_NhomHH" Type="Self.tb_NhomHH" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_NhomHH">
-        <PropertyRef Name="IdNhom" />
-      </Principal>
-      <Dependent Role="tb_HangHoa">
-        <PropertyRef Name="IdNhom" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_HangHoa_tb_XuatXu">
-    <End Role="tb_XuatXu" Type="Self.tb_XuatXu" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_XuatXu">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tb_HangHoa">
-        <PropertyRef Name="Maxuatxu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_SYS_User_tb_CongTy">
-    <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
-    <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_CongTy">
-        <PropertyRef Name="MaCty" />
-      </Principal>
-      <Dependent Role="tb_SYS_User">
-        <PropertyRef Name="Macty" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_SYS_User_tb_DonVi">
-    <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
-    <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_DonVi">
-        <PropertyRef Name="MaDvi" />
-      </Principal>
-      <Dependent Role="tb_SYS_User">
-        <PropertyRef Name="Madvi" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="FN_DOANHTHU_THEOMATHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYD" Type="datetime" Mode="In" />
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="tenhh" Type="nvarchar" MaxLength="50" />
+          <Property Name="SOLUONG" Type="float" />
+          <Property Name="THANHTIEN" Type="float" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="FN_DOANHTHU_THEONHOMHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYD" Type="datetime" Mode="In" />
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="IDNHOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="TENNHOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="THANHTIEN" Type="float" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="REP_TONKHO_DVI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYD" Type="datetime" Mode="In" />
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+    <Parameter Name="MADVI" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -491,6 +447,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
     <Parameter Name="owner_id" Type="int" Mode="In" />
     <Parameter Name="version" Type="int" Mode="In" />
     <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="SP_DOANHTHU_THEOMATHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYD" Type="datetime" Mode="In" />
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="SP_DOANHTHU_THEONHOMHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYD" Type="datetime" Mode="In" />
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
   </Function>
   <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -510,13 +474,25 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spNGAY_TINHTON" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYC" Type="datetime" Mode="InOut" />
+    <Parameter Name="NGAYD" Type="datetime" Mode="InOut" />
+    <Parameter Name="NAM" Type="int" Mode="InOut" />
+    <Parameter Name="KY" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="TINH_TONKHO_DONVI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+    <Parameter Name="MADVI" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="QL_CuaHangModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_ChungTu" EntityType="Self.tb_ChungTu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Chungtu_CT" EntityType="Self.tb_Chungtu_CT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_DonVi" EntityType="Self.tb_DonVi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_DonViTinh" EntityType="Self.tb_DonViTinh" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_HangHoa" EntityType="Self.tb_HangHoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_KhachHang" EntityType="Self.tb_KhachHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_NhaCC" EntityType="Self.tb_NhaCC" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_NhomHH" EntityType="Self.tb_NhomHH" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Param" EntityType="Self.tb_Param" Schema="dbo" store:Type="Tables" />
@@ -528,8 +504,31 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
     <EntitySet Name="tb_SYS_Right_Rep" EntityType="Self.tb_SYS_Right_Rep" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_SYS_SEQUENCE" EntityType="Self.tb_SYS_SEQUENCE" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_SYS_User" EntityType="Self.tb_SYS_User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tb_Tonkho" EntityType="Self.tb_Tonkho" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_TONKHO" EntityType="Self.tb_TONKHO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_XuatXu" EntityType="Self.tb_XuatXu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="R_CHUNGTU" EntityType="Self.R_CHUNGTU" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [R_CHUNGTU].[KHOA] AS [KHOA], 
+    [R_CHUNGTU].[NGAY] AS [NGAY], 
+    [R_CHUNGTU].[SoChungTu] AS [SoChungTu], 
+    [R_CHUNGTU].[SoChungTu2] AS [SoChungTu2], 
+    [R_CHUNGTU].[NGAY2] AS [NGAY2], 
+    [R_CHUNGTU].[LoaiCT] AS [LoaiCT], 
+    [R_CHUNGTU].[TRANGTHAI] AS [TRANGTHAI], 
+    [R_CHUNGTU].[SOLUONG] AS [SOLUONG], 
+    [R_CHUNGTU].[TONGTIEN] AS [TONGTIEN], 
+    [R_CHUNGTU].[GHICHU] AS [GHICHU], 
+    [R_CHUNGTU].[MACTY] AS [MACTY], 
+    [R_CHUNGTU].[MADVI] AS [MADVI], 
+    [R_CHUNGTU].[MADVI2] AS [MADVI2], 
+    [R_CHUNGTU].[Create_By] AS [Create_By], 
+    [R_CHUNGTU].[Create_Date] AS [Create_Date], 
+    [R_CHUNGTU].[Update_By] AS [Update_By], 
+    [R_CHUNGTU].[Update_Date] AS [Update_Date], 
+    [R_CHUNGTU].[Delete_Date] AS [Delete_Date], 
+    [R_CHUNGTU].[Delete_By] AS [Delete_By]
+    FROM [dbo].[R_CHUNGTU] AS [R_CHUNGTU]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="V_Chungtu_CT" EntityType="Self.V_Chungtu_CT" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [V_Chungtu_CT].[Khoa] AS [Khoa], 
@@ -612,46 +611,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
     <AssociationSet Name="FK_tb_Chungtu_CT_tb_ChungTu" Association="Self.FK_tb_Chungtu_CT_tb_ChungTu">
       <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
       <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_Chungtu_CT_tb_HangHoa" Association="Self.FK_tb_Chungtu_CT_tb_HangHoa">
-      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-      <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_Chungtu_CT_tb_Qlban" Association="Self.FK_tb_Chungtu_CT_tb_Qlban">
-      <End Role="tb_Qlban" EntitySet="tb_Qlban" />
-      <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_ChungTu_tb_DonVi" Association="Self.FK_tb_ChungTu_tb_DonVi">
-      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-      <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_ChungTu_tb_NhaCC" Association="Self.FK_tb_ChungTu_tb_NhaCC">
-      <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
-      <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_DonVi_tb_CongTy" Association="Self.FK_tb_DonVi_tb_CongTy">
-      <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_HangHoa_tb_NhaCC" Association="Self.FK_tb_HangHoa_tb_NhaCC">
-      <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
-      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_HangHoa_tb_NhomHH" Association="Self.FK_tb_HangHoa_tb_NhomHH">
-      <End Role="tb_NhomHH" EntitySet="tb_NhomHH" />
-      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_HangHoa_tb_XuatXu" Association="Self.FK_tb_HangHoa_tb_XuatXu">
-      <End Role="tb_XuatXu" EntitySet="tb_XuatXu" />
-      <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_SYS_User_tb_CongTy" Association="Self.FK_tb_SYS_User_tb_CongTy">
-      <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-      <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_SYS_User_tb_DonVi" Association="Self.FK_tb_SYS_User_tb_DonVi">
-      <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-      <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="QL_CuaHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tb_ChungTu">
           <Key>
             <PropertyRef Name="Khoa" />
@@ -17,6 +27,8 @@
           <Property Name="LoaiCT" Type="int" />
           <Property Name="SoLuong" Type="float" />
           <Property Name="TongTien" Type="float" />
+          <Property Name="ChuyenKhoan" Type="bit" />
+          <Property Name="idban" Type="int" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="500" />
           <Property Name="MaCty" Type="nvarchar" MaxLength="50" />
           <Property Name="MaDVI" Type="nvarchar" MaxLength="50" />
@@ -28,6 +40,7 @@
           <Property Name="Update_By" Type="int" />
           <Property Name="Delete_Date" Type="datetime" />
           <Property Name="Delete_By" Type="int" />
+          <Property Name="checkthanhtoan" Type="bit" />
         </EntityType>
         <EntityType Name="tb_Chungtu_CT">
           <Key>
@@ -39,12 +52,11 @@
           <Property Name="SoluongCT" Type="float" />
           <Property Name="Dongia" Type="float" />
           <Property Name="GiaBan" Type="float" />
-          <Property Name="idban" Type="int" />
           <Property Name="Thanhtien" Type="float" />
           <Property Name="Ngay" Type="datetime" />
+          <Property Name="IdKH" Type="nvarchar" MaxLength="50" />
           <Property Name="Chietkhau" Type="float" />
           <Property Name="Stt" Type="int" />
-          <Property Name="TrangThai" Type="bit" />
         </EntityType>
         <EntityType Name="tb_CongTy">
           <Key>
@@ -97,6 +109,17 @@
           <Property Name="Create_Date" Type="datetime" />
           <Property Name="Create_By" Type="int" />
           <Property Name="Disable" Type="bit" />
+        </EntityType>
+        <EntityType Name="tb_KhachHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HOTEN" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIENTHOAI" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="MASOTHUE" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tb_NhaCC">
           <Key>
@@ -203,8 +226,8 @@
             <PropertyRef Name="Iduser" />
           </Key>
           <Property Name="Iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" />
-          <Property Name="Passwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="500" />
+          <Property Name="Passwd" Type="nvarchar" MaxLength="1000" />
           <Property Name="Fullname" Type="nvarchar" MaxLength="250" />
           <Property Name="Macty" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Madvi" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -229,6 +252,7 @@
           <Property Name="LG_XUATNB" Type="float" />
           <Property Name="LG_XUATSI" Type="float" />
           <Property Name="LG_BANLE" Type="float" />
+          <Property Name="LG_BANQUAY" Type="float" />
           <Property Name="LG_CUOI" Type="float" />
           <Property Name="TRIGIA" Type="float" />
           <Property Name="TIEN_CUOI" Type="float" />
@@ -384,128 +408,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_Chungtu_CT_tb_HangHoa">
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_HangHoa">
-              <PropertyRef Name="BarCode" />
-            </Principal>
-            <Dependent Role="tb_Chungtu_CT">
-              <PropertyRef Name="Barcode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_Chungtu_CT_tb_Qlban">
-          <End Role="tb_Qlban" Type="Self.tb_Qlban" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Qlban">
-              <PropertyRef Name="idban" />
-            </Principal>
-            <Dependent Role="tb_Chungtu_CT">
-              <PropertyRef Name="idban" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_ChungTu_tb_DonVi">
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_DonVi">
-              <PropertyRef Name="MaDvi" />
-            </Principal>
-            <Dependent Role="tb_ChungTu">
-              <PropertyRef Name="MaDVI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_DonVi_tb_CongTy">
-          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_CongTy">
-              <PropertyRef Name="MaCty" />
-            </Principal>
-            <Dependent Role="tb_DonVi">
-              <PropertyRef Name="MaCty" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_NhaCC">
-          <End Role="tb_NhaCC" Type="Self.tb_NhaCC" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_NhaCC">
-              <PropertyRef Name="MaNCC" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="MaNCC" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_NhomHH">
-          <End Role="tb_NhomHH" Type="Self.tb_NhomHH" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_NhomHH">
-              <PropertyRef Name="IdNhom" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="IdNhom" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_XuatXu">
-          <End Role="tb_XuatXu" Type="Self.tb_XuatXu" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_XuatXu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="Maxuatxu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_SYS_User_tb_CongTy">
-          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
-          <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_CongTy">
-              <PropertyRef Name="MaCty" />
-            </Principal>
-            <Dependent Role="tb_SYS_User">
-              <PropertyRef Name="Macty" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_SYS_User_tb_DonVi">
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
-          <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_DonVi">
-              <PropertyRef Name="MaDvi" />
-            </Principal>
-            <Dependent Role="tb_SYS_User">
-              <PropertyRef Name="Madvi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="FN_DOANHTHU_THEOMATHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NGAYD" Type="datetime" Mode="In" />
@@ -588,12 +490,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Parameter Name="MADVI" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="QL_CuaHangModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ChungTu" EntityType="Self.tb_ChungTu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Chungtu_CT" EntityType="Self.tb_Chungtu_CT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DonVi" EntityType="Self.tb_DonVi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_DonViTinh" EntityType="Self.tb_DonViTinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_HangHoa" EntityType="Self.tb_HangHoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_KhachHang" EntityType="Self.tb_KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_NhaCC" EntityType="Self.tb_NhaCC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_NhomHH" EntityType="Self.tb_NhomHH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Param" EntityType="Self.tb_Param" Schema="dbo" store:Type="Tables" />
@@ -713,42 +617,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
             <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
             <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
           </AssociationSet>
-          <AssociationSet Name="FK_tb_Chungtu_CT_tb_HangHoa" Association="Self.FK_tb_Chungtu_CT_tb_HangHoa">
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-            <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_Chungtu_CT_tb_Qlban" Association="Self.FK_tb_Chungtu_CT_tb_Qlban">
-            <End Role="tb_Qlban" EntitySet="tb_Qlban" />
-            <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_ChungTu_tb_DonVi" Association="Self.FK_tb_ChungTu_tb_DonVi">
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-            <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_DonVi_tb_CongTy" Association="Self.FK_tb_DonVi_tb_CongTy">
-            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_NhaCC" Association="Self.FK_tb_HangHoa_tb_NhaCC">
-            <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_NhomHH" Association="Self.FK_tb_HangHoa_tb_NhomHH">
-            <End Role="tb_NhomHH" EntitySet="tb_NhomHH" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_XuatXu" Association="Self.FK_tb_HangHoa_tb_XuatXu">
-            <End Role="tb_XuatXu" EntitySet="tb_XuatXu" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_SYS_User_tb_CongTy" Association="Self.FK_tb_SYS_User_tb_CongTy">
-            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-            <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_SYS_User_tb_DonVi" Association="Self.FK_tb_SYS_User_tb_DonVi">
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-            <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -766,6 +634,16 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="TENNHOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="THANHTIEN" Type="Double" />
         </ComplexType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="tb_ChungTu">
           <Key>
             <PropertyRef Name="Khoa" />
@@ -778,6 +656,8 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="LoaiCT" Type="Int32" />
           <Property Name="SoLuong" Type="Double" />
           <Property Name="TongTien" Type="Double" />
+          <Property Name="ChuyenKhoan" Type="Boolean" />
+          <Property Name="idban" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MaCty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MaDVI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -789,8 +669,8 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="Update_By" Type="Int32" />
           <Property Name="Delete_Date" Type="DateTime" Precision="3" />
           <Property Name="Delete_By" Type="Int32" />
+          <Property Name="checkthanhtoan" Type="Boolean" />
           <NavigationProperty Name="tb_Chungtu_CT" Relationship="Self.FK_tb_Chungtu_CT_tb_ChungTu" FromRole="tb_ChungTu" ToRole="tb_Chungtu_CT" />
-          <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_ChungTu_tb_DonVi" FromRole="tb_ChungTu" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_Chungtu_CT">
           <Key>
@@ -802,15 +682,12 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="SoluongCT" Type="Double" />
           <Property Name="Dongia" Type="Double" />
           <Property Name="GiaBan" Type="Double" />
-          <Property Name="idban" Type="Int32" />
           <Property Name="Thanhtien" Type="Double" />
           <Property Name="Ngay" Type="DateTime" Precision="3" />
+          <Property Name="IdKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Chietkhau" Type="Double" />
           <Property Name="Stt" Type="Int32" />
-          <Property Name="TrangThai" Type="Boolean" />
           <NavigationProperty Name="tb_ChungTu" Relationship="Self.FK_tb_Chungtu_CT_tb_ChungTu" FromRole="tb_Chungtu_CT" ToRole="tb_ChungTu" />
-          <NavigationProperty Name="tb_HangHoa" Relationship="Self.FK_tb_Chungtu_CT_tb_HangHoa" FromRole="tb_Chungtu_CT" ToRole="tb_HangHoa" />
-          <NavigationProperty Name="tb_Qlban" Relationship="Self.FK_tb_Chungtu_CT_tb_Qlban" FromRole="tb_Chungtu_CT" ToRole="tb_Qlban" />
         </EntityType>
         <EntityType Name="tb_CongTy">
           <Key>
@@ -823,8 +700,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
-          <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_DonVi_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_DonVi" />
-          <NavigationProperty Name="tb_SYS_User" Relationship="Self.FK_tb_SYS_User_tb_CongTy" FromRole="tb_CongTy" ToRole="tb_SYS_User" />
         </EntityType>
         <EntityType Name="tb_DonVi">
           <Key>
@@ -840,9 +715,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="Disable" Type="Boolean" />
           <Property Name="Kho" Type="Boolean" />
           <Property Name="KyHieu" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="tb_ChungTu" Relationship="Self.FK_tb_ChungTu_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_ChungTu" />
-          <NavigationProperty Name="tb_CongTy" Relationship="Self.FK_tb_DonVi_tb_CongTy" FromRole="tb_DonVi" ToRole="tb_CongTy" />
-          <NavigationProperty Name="tb_SYS_User" Relationship="Self.FK_tb_SYS_User_tb_DonVi" FromRole="tb_DonVi" ToRole="tb_SYS_User" />
         </EntityType>
         <EntityType Name="tb_DonViTinh">
           <Key>
@@ -868,10 +740,17 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="Create_Date" Type="DateTime" Precision="3" />
           <Property Name="Create_By" Type="Int32" />
           <Property Name="Disable" Type="Boolean" />
-          <NavigationProperty Name="tb_Chungtu_CT" Relationship="Self.FK_tb_Chungtu_CT_tb_HangHoa" FromRole="tb_HangHoa" ToRole="tb_Chungtu_CT" />
-          <NavigationProperty Name="tb_NhaCC" Relationship="Self.FK_tb_HangHoa_tb_NhaCC" FromRole="tb_HangHoa" ToRole="tb_NhaCC" />
-          <NavigationProperty Name="tb_NhomHH" Relationship="Self.FK_tb_HangHoa_tb_NhomHH" FromRole="tb_HangHoa" ToRole="tb_NhomHH" />
-          <NavigationProperty Name="tb_XuatXu" Relationship="Self.FK_tb_HangHoa_tb_XuatXu" FromRole="tb_HangHoa" ToRole="tb_XuatXu" />
+        </EntityType>
+        <EntityType Name="tb_KhachHang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HOTEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIENTHOAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MASOTHUE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_NhaCC">
           <Key>
@@ -884,7 +763,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
-          <NavigationProperty Name="tb_HangHoa" Relationship="Self.FK_tb_HangHoa_tb_NhaCC" FromRole="tb_NhaCC" ToRole="tb_HangHoa" />
         </EntityType>
         <EntityType Name="tb_NhomHH">
           <Key>
@@ -893,7 +771,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="IdNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenNhom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
-          <NavigationProperty Name="tb_HangHoa" Relationship="Self.FK_tb_HangHoa_tb_NhomHH" FromRole="tb_NhomHH" ToRole="tb_HangHoa" />
         </EntityType>
         <EntityType Name="tb_Param">
           <Key>
@@ -913,7 +790,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="tenban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="sokhach" Type="Int32" />
           <Property Name="trangthai" Type="Boolean" />
-          <NavigationProperty Name="tb_Chungtu_CT" Relationship="Self.FK_tb_Chungtu_CT_tb_Qlban" FromRole="tb_Qlban" ToRole="tb_Chungtu_CT" />
         </EntityType>
         <EntityType Name="tb_SYS_Function">
           <Key>
@@ -981,16 +857,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
             <PropertyRef Name="Iduser" />
           </Key>
           <Property Name="Iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Passwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Passwd" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Fullname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Macty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Madvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Last_PWD_Changed" Type="DateTime" Precision="3" />
           <Property Name="Disable" Type="Boolean" />
           <Property Name="Isgroup" Type="Boolean" />
-          <NavigationProperty Name="tb_CongTy" Relationship="Self.FK_tb_SYS_User_tb_CongTy" FromRole="tb_SYS_User" ToRole="tb_CongTy" />
-          <NavigationProperty Name="tb_DonVi" Relationship="Self.FK_tb_SYS_User_tb_DonVi" FromRole="tb_SYS_User" ToRole="tb_DonVi" />
         </EntityType>
         <EntityType Name="tb_TONKHO">
           <Key>
@@ -1009,6 +883,7 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="LG_XUATNB" Type="Double" />
           <Property Name="LG_XUATSI" Type="Double" />
           <Property Name="LG_BANLE" Type="Double" />
+          <Property Name="LG_BANQUAY" Type="Double" />
           <Property Name="LG_CUOI" Type="Double" />
           <Property Name="TRIGIA" Type="Double" />
           <Property Name="TIEN_CUOI" Type="Double" />
@@ -1021,7 +896,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
-          <NavigationProperty Name="tb_HangHoa" Relationship="Self.FK_tb_HangHoa_tb_XuatXu" FromRole="tb_XuatXu" ToRole="tb_HangHoa" />
         </EntityType>
         <EntityType Name="R_CHUNGTU">
           <Key>
@@ -1153,135 +1027,15 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_ChungTu_tb_DonVi">
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_ChungTu" Type="Self.tb_ChungTu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_DonVi">
-              <PropertyRef Name="MaDvi" />
-            </Principal>
-            <Dependent Role="tb_ChungTu">
-              <PropertyRef Name="MaDVI" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_Chungtu_CT_tb_HangHoa">
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_HangHoa">
-              <PropertyRef Name="BarCode" />
-            </Principal>
-            <Dependent Role="tb_Chungtu_CT">
-              <PropertyRef Name="Barcode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_Chungtu_CT_tb_Qlban">
-          <End Role="tb_Qlban" Type="Self.tb_Qlban" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_Chungtu_CT" Type="Self.tb_Chungtu_CT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Qlban">
-              <PropertyRef Name="idban" />
-            </Principal>
-            <Dependent Role="tb_Chungtu_CT">
-              <PropertyRef Name="idban" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_DonVi_tb_CongTy">
-          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_CongTy">
-              <PropertyRef Name="MaCty" />
-            </Principal>
-            <Dependent Role="tb_DonVi">
-              <PropertyRef Name="MaCty" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_SYS_User_tb_CongTy">
-          <End Role="tb_CongTy" Type="Self.tb_CongTy" Multiplicity="1" />
-          <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_CongTy">
-              <PropertyRef Name="MaCty" />
-            </Principal>
-            <Dependent Role="tb_SYS_User">
-              <PropertyRef Name="Macty" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_SYS_User_tb_DonVi">
-          <End Role="tb_DonVi" Type="Self.tb_DonVi" Multiplicity="1" />
-          <End Role="tb_SYS_User" Type="Self.tb_SYS_User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_DonVi">
-              <PropertyRef Name="MaDvi" />
-            </Principal>
-            <Dependent Role="tb_SYS_User">
-              <PropertyRef Name="Madvi" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_NhaCC">
-          <End Role="tb_NhaCC" Type="Self.tb_NhaCC" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_NhaCC">
-              <PropertyRef Name="MaNCC" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="MaNCC" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_NhomHH">
-          <End Role="tb_NhomHH" Type="Self.tb_NhomHH" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_NhomHH">
-              <PropertyRef Name="IdNhom" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="IdNhom" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_HangHoa_tb_XuatXu">
-          <End Role="tb_XuatXu" Type="Self.tb_XuatXu" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="tb_HangHoa" Type="Self.tb_HangHoa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_XuatXu">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tb_HangHoa">
-              <PropertyRef Name="Maxuatxu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tb_ChungTu" EntityType="Self.tb_ChungTu" />
           <EntitySet Name="tb_Chungtu_CT" EntityType="Self.tb_Chungtu_CT" />
           <EntitySet Name="tb_CongTy" EntityType="Self.tb_CongTy" />
           <EntitySet Name="tb_DonVi" EntityType="Self.tb_DonVi" />
           <EntitySet Name="tb_DonViTinh" EntityType="Self.tb_DonViTinh" />
           <EntitySet Name="tb_HangHoa" EntityType="Self.tb_HangHoa" />
+          <EntitySet Name="tb_KhachHang" EntityType="Self.tb_KhachHang" />
           <EntitySet Name="tb_NhaCC" EntityType="Self.tb_NhaCC" />
           <EntitySet Name="tb_NhomHH" EntityType="Self.tb_NhomHH" />
           <EntitySet Name="tb_Param" EntityType="Self.tb_Param" />
@@ -1304,42 +1058,6 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <AssociationSet Name="FK_tb_Chungtu_CT_tb_ChungTu" Association="Self.FK_tb_Chungtu_CT_tb_ChungTu">
             <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
             <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_ChungTu_tb_DonVi" Association="Self.FK_tb_ChungTu_tb_DonVi">
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-            <End Role="tb_ChungTu" EntitySet="tb_ChungTu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_Chungtu_CT_tb_HangHoa" Association="Self.FK_tb_Chungtu_CT_tb_HangHoa">
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-            <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_Chungtu_CT_tb_Qlban" Association="Self.FK_tb_Chungtu_CT_tb_Qlban">
-            <End Role="tb_Qlban" EntitySet="tb_Qlban" />
-            <End Role="tb_Chungtu_CT" EntitySet="tb_Chungtu_CT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_DonVi_tb_CongTy" Association="Self.FK_tb_DonVi_tb_CongTy">
-            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_SYS_User_tb_CongTy" Association="Self.FK_tb_SYS_User_tb_CongTy">
-            <End Role="tb_CongTy" EntitySet="tb_CongTy" />
-            <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_SYS_User_tb_DonVi" Association="Self.FK_tb_SYS_User_tb_DonVi">
-            <End Role="tb_DonVi" EntitySet="tb_DonVi" />
-            <End Role="tb_SYS_User" EntitySet="tb_SYS_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_NhaCC" Association="Self.FK_tb_HangHoa_tb_NhaCC">
-            <End Role="tb_NhaCC" EntitySet="tb_NhaCC" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_NhomHH" Association="Self.FK_tb_HangHoa_tb_NhomHH">
-            <End Role="tb_NhomHH" EntitySet="tb_NhomHH" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_HangHoa_tb_XuatXu" Association="Self.FK_tb_HangHoa_tb_XuatXu">
-            <End Role="tb_XuatXu" EntitySet="tb_XuatXu" />
-            <End Role="tb_HangHoa" EntitySet="tb_HangHoa" />
           </AssociationSet>
           <FunctionImport Name="FN_DOANHTHU_THEOMATHANG" IsComposable="true" ReturnType="Collection(QL_CuaHangModel.FN_DOANHTHU_THEOMATHANG_Result)">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
@@ -1431,6 +1149,17 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QL_CuaHangModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QL_CuaHangModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_ChungTu">
             <EntityTypeMapping TypeName="QL_CuaHangModel.tb_ChungTu">
               <MappingFragment StoreEntitySet="tb_ChungTu">
@@ -1442,6 +1171,8 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
                 <ScalarProperty Name="LoaiCT" ColumnName="LoaiCT" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="ChuyenKhoan" ColumnName="ChuyenKhoan" />
+                <ScalarProperty Name="idban" ColumnName="idban" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
                 <ScalarProperty Name="MaCty" ColumnName="MaCty" />
                 <ScalarProperty Name="MaDVI" ColumnName="MaDVI" />
@@ -1453,6 +1184,7 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
                 <ScalarProperty Name="Update_By" ColumnName="Update_By" />
                 <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
                 <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+                <ScalarProperty Name="checkthanhtoan" ColumnName="checkthanhtoan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1465,12 +1197,11 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
                 <ScalarProperty Name="SoluongCT" ColumnName="SoluongCT" />
                 <ScalarProperty Name="Dongia" ColumnName="Dongia" />
                 <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-                <ScalarProperty Name="idban" ColumnName="idban" />
                 <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
                 <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="IdKH" ColumnName="IdKH" />
                 <ScalarProperty Name="Chietkhau" ColumnName="Chietkhau" />
                 <ScalarProperty Name="Stt" ColumnName="Stt" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1527,6 +1258,18 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
                 <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
                 <ScalarProperty Name="Create_By" ColumnName="Create_By" />
                 <ScalarProperty Name="Disable" ColumnName="Disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_KhachHang">
+            <EntityTypeMapping TypeName="QL_CuaHangModel.tb_KhachHang">
+              <MappingFragment StoreEntitySet="tb_KhachHang">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="MASOTHUE" ColumnName="MASOTHUE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1668,6 +1411,7 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
                 <ScalarProperty Name="LG_XUATNB" ColumnName="LG_XUATNB" />
                 <ScalarProperty Name="LG_XUATSI" ColumnName="LG_XUATSI" />
                 <ScalarProperty Name="LG_BANLE" ColumnName="LG_BANLE" />
+                <ScalarProperty Name="LG_BANQUAY" ColumnName="LG_BANQUAY" />
                 <ScalarProperty Name="LG_CUOI" ColumnName="LG_CUOI" />
                 <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
                 <ScalarProperty Name="TIEN_CUOI" ColumnName="TIEN_CUOI" />

@@ -18,16 +18,37 @@ namespace QL_Quan_Kho_Hang
         public FrmNhomHH()
         {
             InitializeComponent();
+        }      public FrmNhomHH(tb_SYS_User user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
         }
+        tb_SYS_User _user;
+        int _right;
         NHOMHH _nhomhh;
         bool _them;
         string _ID;
 
         private void FrmNhomHH_Load(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+                //btn_thoat.Enabled = false;
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
+
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
             _nhomhh = new NHOMHH();
             loadData();
-            showHideControl(true);
+      
             Enable(false);
             
         }
@@ -70,39 +91,80 @@ namespace QL_Quan_Kho_Hang
         {
             showHideControl(false);
             _them = false;
-        
+            txt_id.Enabled=false;
             Enable(true);
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // Check if the textbox is empty or not
+            if (string.IsNullOrWhiteSpace(txt_id.Text))
             {
-                _nhomhh.False(txt_id.Text);
+                MessageBox.Show("Bạn chưa chọn nhóm hàng hóa cần xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            loadData();
+
+            // Confirm deletion from the user
+            if (MessageBox.Show("Bạn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    // Attempt to remove the item
+                    _nhomhh.remove(txt_id.Text);
+                    // Reload data to reflect changes
+                    loadData();
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that occur during the remove operation
+                    MessageBox.Show("Không thể xóa nhóm hàng hóa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+     
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if (_them)
+            try
             {
-                tb_NhomHH nhomHH = new tb_NhomHH();
-                nhomHH.IdNhom = txt_id.Text;
-                nhomHH.TenNhom=txt_ten.Text;
-                _nhomhh.add(nhomHH);
+                if (_them)
+                {
+                    if (string.IsNullOrWhiteSpace(txt_id.Text) || string.IsNullOrWhiteSpace(txt_ten.Text))
+                    {
+                        MessageBox.Show("ID and Name must be provided.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    tb_NhomHH nhomHH = new tb_NhomHH
+                    {
+                        IdNhom = txt_id.Text,
+                        TenNhom = txt_ten.Text
+                    };
+                    _nhomhh.add(nhomHH);
+                }
+                else
+                {
+                    tb_NhomHH nhomHH = _nhomhh.getItem(_ID);
+                    if (nhomHH == null)
+                    {
+                        MessageBox.Show("Item not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    nhomHH.IdNhom = txt_id.Text;
+                    nhomHH.TenNhom = txt_ten.Text;
+                    _nhomhh.update(nhomHH);
+                }
+
+                _them = false;
+                loadData();
+                Enable(false);
+                showHideControl(true);
             }
-            else
+            catch (Exception ex)
             {
-                tb_NhomHH nhomHH = _nhomhh.getItem(_ID);
-                nhomHH.IdNhom = txt_id.Text;
-                nhomHH.TenNhom = txt_ten.Text;
-                _nhomhh.update(nhomHH);
+                MessageBox.Show("Failed to save data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            _them = false;
-            loadData();
-            Enable(false);
-            showHideControl(true);
         }
 
         private void btn_boqua_Click(object sender, EventArgs e)

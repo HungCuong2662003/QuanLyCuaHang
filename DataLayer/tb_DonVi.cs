@@ -14,13 +14,6 @@ namespace DataLayer
     
     public partial class tb_DonVi
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_DonVi()
-        {
-            this.tb_ChungTu = new HashSet<tb_ChungTu>();
-            this.tb_SYS_User = new HashSet<tb_SYS_User>();
-        }
-    
         public string MaDvi { get; set; }
         public string TenDvi { get; set; }
         public string DienThoai { get; set; }
@@ -31,11 +24,5 @@ namespace DataLayer
         public Nullable<bool> Disable { get; set; }
         public Nullable<bool> Kho { get; set; }
         public string KyHieu { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_ChungTu> tb_ChungTu { get; set; }
-        public virtual tb_CongTy tb_CongTy { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_SYS_User> tb_SYS_User { get; set; }
     }
 }

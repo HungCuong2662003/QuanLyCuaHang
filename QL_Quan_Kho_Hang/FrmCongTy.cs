@@ -18,15 +18,36 @@ namespace QL_Quan_Kho_Hang
         public FrmCongTy()
         {
             InitializeComponent();
+        }   public FrmCongTy(tb_SYS_User user, int right)
+        {
+            InitializeComponent(); this._user = user;
+            this._right = right;
         }
+        tb_SYS_User _user;
+        int _right;
         CONGTY _congty;
         bool _them;
         string _macty;
         private void FrmCongTy_Load(object sender, EventArgs e)
         {
+
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+             
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
+
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
             _congty = new CONGTY();
             loadData();
-            showHideControl(true);
+           
             Enable(false);
             txt_Macty.Enabled = false;
         }
@@ -37,12 +58,13 @@ namespace QL_Quan_Kho_Hang
         }
         void Enable(bool t)
         {
+    
             txt_ten.Enabled = t;
             txt_DT.Enabled = t;
             txt_email.Enabled = t;
             txt_diachi.Enabled = t;
             txt_Fax.Enabled = t;
-            cb_dis.Enabled = t;
+       
         }
         void _reset()
         {
@@ -51,7 +73,7 @@ namespace QL_Quan_Kho_Hang
             txt_email.Text = "";
             txt_diachi.Text = "";
             txt_Fax.Text = "";
-            cb_dis.Checked = false;
+          
         }
         void showHideControl(bool t)
         {
@@ -82,7 +104,7 @@ namespace QL_Quan_Kho_Hang
                 cty.Email=txt_email.Text;
                 cty.DiaChi=txt_diachi.Text;
                 cty.Fax=txt_Fax.Text;
-                cty.Disable=cb_dis.Checked;
+               
                 _congty.add(cty);
             }
             else
@@ -93,7 +115,7 @@ namespace QL_Quan_Kho_Hang
                 cty.Email = txt_email.Text;
                 cty.DiaChi = txt_diachi.Text;
                 cty.Fax = txt_Fax.Text;
-                cty.Disable = cb_dis.Checked;
+             
                 _congty.update(cty);
             }
             _them = false;
@@ -114,41 +136,86 @@ namespace QL_Quan_Kho_Hang
         {
             showHideControl(false);
             _them=false;
-            txt_Macty.Enabled=false;
+            txt_Macty.Enabled = false;
             Enable(true);
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-
-            if(MessageBox.Show("Bạn muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // Check if the textbox is empty or not
+            if (string.IsNullOrWhiteSpace(txt_Macty.Text))
             {
-                _congty.FalseCty(_macty);
+                MessageBox.Show("Bạn chưa chọn công ty cần xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            loadData();
+
+            // Confirm deletion from the user
+            if (MessageBox.Show("Bạn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    _congty.remove(txt_Macty.Text);
+                    loadData();
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that occur during the remove operation
+                    MessageBox.Show("Không thể xóa công ty: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+      
         }
 
         private void GV_Ds_Click(object sender, EventArgs e)
         {
-            if (GV_Ds.RowCount > 0)
+            if (GV_Ds.RowCount > 0 && GV_Ds.FocusedRowHandle >= 0)
             {
-                _macty = GV_Ds.GetFocusedRowCellValue("MaCty").ToString();
-                txt_Macty.Text = GV_Ds.GetFocusedRowCellValue("MaCty").ToString();
-                txt_ten.Text = GV_Ds.GetFocusedRowCellValue("TenCty").ToString();
-                txt_DT.Text = GV_Ds.GetFocusedRowCellValue("DienThoai").ToString();
-                txt_email.Text = GV_Ds.GetFocusedRowCellValue("Email").ToString();
-                txt_diachi.Text = GV_Ds.GetFocusedRowCellValue("DiaChi").ToString();
-                txt_Fax.Text = GV_Ds.GetFocusedRowCellValue("Fax").ToString();
-                cb_dis.Checked = bool.Parse(GV_Ds.GetFocusedRowCellValue("Disable").ToString());
+                try
+                {
+                    _macty = GV_Ds.GetFocusedRowCellValue("MaCty")?.ToString() ?? string.Empty;
+                    txt_Macty.Text = _macty;
+
+                    txt_ten.Text = GV_Ds.GetFocusedRowCellValue("TenCty")?.ToString() ?? string.Empty;
+                    txt_DT.Text = GV_Ds.GetFocusedRowCellValue("DienThoai")?.ToString() ?? string.Empty;
+                    txt_email.Text = GV_Ds.GetFocusedRowCellValue("Email")?.ToString() ?? string.Empty;
+                    txt_diachi.Text = GV_Ds.GetFocusedRowCellValue("DiaChi")?.ToString() ?? string.Empty;
+                    txt_Fax.Text = GV_Ds.GetFocusedRowCellValue("Fax")?.ToString() ?? string.Empty;
+
+                    // Safely parse the "Disable" field
+                    bool disable = false;
+                    var disableValue = GV_Ds.GetFocusedRowCellValue("Disable")?.ToString();
+                    bool.TryParse(disableValue, out disable);
+                 
+                }
+                catch (Exception ex)
+                {
+                    // Handle any potential exceptions
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
+
         }
 
         private void GV_Ds_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
-            if (e.Column.Name == "Disable" && bool.Parse(e.CellValue.ToString()) == true)
+        
+            // Kiểm tra nếu cột là "Delete_By" và giá trị của ô là 1
+            if (e.Column.FieldName == "Disable" && e.CellValue != null && e.CellValue.ToString() == "True")
             {
-                Image img = Properties.Resources.tich;
-                e.Graphics.DrawImage(img, e.Bounds.X, e.Bounds.Y);
+                Image img = Properties.Resources.tich; // Hình ảnh xóa
+
+                // Xác định kích thước của ô
+                int imgWidth = 16;  // Chiều rộng của hình ảnh
+                int imgHeight = 16; // Chiều cao của hình ảnh
+
+                // Tính toán vị trí để hình ảnh nằm giữa ô
+                int x = e.Bounds.X + (e.Bounds.Width - imgWidth) / 2;
+                int y = e.Bounds.Y + (e.Bounds.Height - imgHeight) / 2;
+
+                // Vẽ hình ảnh với kích thước xác định
+                e.Graphics.DrawImage(img, new Rectangle(x, y, imgWidth, imgHeight));
+
+                // Đánh dấu sự kiện đã được xử lý để ngăn việc vẽ lại giá trị "1"
                 e.Handled = true;
             }
         }

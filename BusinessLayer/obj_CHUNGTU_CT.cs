@@ -19,7 +19,9 @@ namespace BusinessLayer
         public Nullable<double > GiaBan { get; set; }
         public Nullable<double> Thanhtien { get; set; }
         public Nullable<int> Stt { get; set; }
-        public bool TrangThai { get; set; }
+
+        public string IdKH { get; set; }
+
         public Nullable<System.DateTime> Ngay { get; set; }
    
          

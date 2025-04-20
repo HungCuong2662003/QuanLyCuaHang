@@ -1,0 +1,55 @@
+﻿################################################################################
+# .gitignore cho dự án ASP.NET Core + Angular
+################################################################################
+
+# ===== Visual Studio =====
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ===== Build output =====
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+*.tmp
+
+# ===== Database / EF Core =====
+*.db
+*.mdf
+*.ldf
+
+# ===== Publish folders =====
+publish/
+Properties/PublishProfiles/
+
+# ===== Angular / NodeJS (nếu có FE) =====
+node_modules/
+dist/
+.angular/
+.env
+
+# ===== System files =====
+Thumbs.db
+.DS_Store
+
+# ===== Backup / Package restore =====
+*.bak
+*.zip
+*.nupkg
+*.nuget
+project.lock.json
+project.assets.json
+
+# ===== Rider / JetBrains / Resharper =====
+.idea/
+*.DotSettings.user
+
+# ===== Tệp được tạo tạm thời =====
+*.swp
+*.tmp

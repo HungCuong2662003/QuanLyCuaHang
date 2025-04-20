@@ -66,7 +66,21 @@ namespace QL_Quan_Kho_Hang
 
         private void FrmNhapmua_Load(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+                //btn_thoat.Enabled = false;
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
 
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
+    
             _congty = new CONGTY();
             _donvi = new DONVI();
             _nhACC = new NHACC();
@@ -78,8 +92,7 @@ namespace QL_Quan_Kho_Hang
             _SYSSEQUENCE = new SYS_SEQUENCE();
             _bdCHUNGTU = new BindingSource();
             _bdCHUNGTUCT = new BindingSource();
-            date_tu.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            date_den.Value = DateTime.Now;
+          
             _bdCHUNGTU.PositionChanged += _bdCHUNGTU_PositionChanged;
             loadCty();
             cbb_congty_chinhanh.SelectedIndexChanged += Cbb_congty_chinhanh_SelectedIndexChanged;
@@ -104,12 +117,15 @@ namespace QL_Quan_Kho_Hang
             cbo_donvinhap.SelectedIndexChanged += Cbo_donvinhap_SelectedIndexChanged;
             cbo_kho.SelectedIndexChanged += Cbo_kho_SelectedIndexChanged;
             cb_dis.CheckedChanged += Cb_dis_CheckedChanged;
-            showHideControl(true);
+            date_tu.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            date_den.Value = DateTime.Now;
+
             contextMenuStrip1.Enabled = false;
             txt_sophieu.Enabled = false;
 
 
         }
+
 
         private void Cb_dis_CheckedChanged(object sender, EventArgs e)
         {
@@ -120,7 +136,7 @@ namespace QL_Quan_Kho_Hang
             // Nếu CheckBox được tích, gọi getList()
             if (cb_dis.Checked)
             {
-                _lstchungTu = _chungtu.getListbycheck(2,date_tu.Value, date_den.Value.AddDays(1), cbo_kho.SelectedValue.ToString());
+                _lstchungTu = _chungtu.getListbycheck(1,date_tu.Value, date_den.Value.AddDays(1), cbo_kho.SelectedValue.ToString());
             }
             else
             {
@@ -163,6 +179,7 @@ namespace QL_Quan_Kho_Hang
             loadKho();
             loadDvi();
             loadNCC();
+            
         }
 
         private void btn_them_Click(object sender, EventArgs e)
@@ -254,10 +271,11 @@ namespace QL_Quan_Kho_Hang
                     int index = _bdCHUNGTU.Position;
 
                     // Xóa phiếu nhập dựa trên khóa và loại bỏ khỏi danh sách
-                    _chungtu.delete(current.Khoa, 1);
+                    _chungtu.remove(current.Khoa);
+                    LoadData();
 
-                    // Cập nhật giá trị cột "Delete_By" trên gridview tại hàng hiện tại
-                    gvds.SetRowCellValue(index, "Delete_By", 1);
+                    //// Cập nhật giá trị cột "Delete_By" trên gridview tại hàng hiện tại
+                    //gvds.SetRowCellValue(index, "Delete_By", _user.Iduser);
 
                     // Đảm bảo nút xóa được hiển thị sau khi xóa
                     btn_xoa.Visible = true;
@@ -278,6 +296,7 @@ namespace QL_Quan_Kho_Hang
             tabCHUNGTU.TabPages[0].PageEnabled = true;
             showHideControl(true);
             _edControl(false);
+            LoadData() ;
         }
 
         private void btn_boqua_Click(object sender, EventArgs e)
@@ -364,6 +383,8 @@ namespace QL_Quan_Kho_Hang
                     }
                     else
                     {
+
+
                         tb_HangHoa hh = _hanghoa.getItem(e.Value.ToString());
                         if (hh != null)
                         {
@@ -372,17 +393,35 @@ namespace QL_Quan_Kho_Hang
                                 List<string> s = new List<string>();
                                 if (gvchitiet.RowCount > 1)
                                 {
+                                    int currentRow = gvchitiet.FocusedRowHandle;
+                                   
+
                                     for (int i = 0; i < gvchitiet.RowCount; i++)
                                     {
-                                        s.Add(gvchitiet.GetRowCellValue(i, "Barcode").ToString());
+                                        if (i != currentRow) // Bỏ qua dòng đang nhập
+                                        {
+                                            var barcodeValue = gvchitiet.GetRowCellValue(i, "Barcode")?.ToString().Trim();
+                                            if (!string.IsNullOrEmpty(barcodeValue))
+                                            {
+                                                s.Add(barcodeValue);
+                                            }
+                                        }
                                     }
-                                    if (s.Find(x => x.Equals(e.Value.ToString())) != null)
+                              
+
+
+
+                                    string barcodeNhap = e.Value?.ToString().Trim() ?? "";
+                                    if (s.Any(x => x.Equals(barcodeNhap, StringComparison.OrdinalIgnoreCase)))
                                     {
-                                        MessageBox.Show("ma nay da co ", "loi nhap lieu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Mã này đã có trong danh sách!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
+
+
                                     else
                                     {
+                                       
                                         gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "TenHH", hh.TenHH);
                                         gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "DVT", hh.DVT);
                                         gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "SoluongCT", 1);
@@ -533,7 +572,6 @@ namespace QL_Quan_Kho_Hang
                     chungTu.Create_By = _user.Iduser;
                     chungTu.Create_Date = DateTime.Now;
                 }
-                chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/NHM/" + dvi.KyHieu;
                 chungTu.MaCty = cbb_congty_chinhanh.SelectedValue.ToString();
                 chungTu.MaDVI = cbo_donvinhap.SelectedValue.ToString();
                 if (cbo_dvincc.SelectedValue.ToString() == null)
@@ -777,6 +815,7 @@ namespace QL_Quan_Kho_Hang
                 if (current != null)
                 {
                     pkhoa = current.Khoa;
+     
                     // Kiểm tra và gán ngày nếu không null
                     if (current.Ngay.HasValue)
                     {
@@ -841,9 +880,6 @@ namespace QL_Quan_Kho_Hang
                 MessageBox.Show($"Đã xảy ra lỗi khi xuất thông tin: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-
 
         private void deleterow_Click(object sender, EventArgs e)
         {
@@ -1201,6 +1237,11 @@ namespace QL_Quan_Kho_Hang
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else
+            {
+                _lstchungTu = _chungtu.getList(1, date_tu.Value, date_den.Value.AddDays(1), cbo_kho.SelectedValue.ToString());
+                _bdCHUNGTU.DataSource = _lstchungTu;
+            }
         }
 
         private void date_tu_Leave(object sender, EventArgs e)
@@ -1226,6 +1267,12 @@ namespace QL_Quan_Kho_Hang
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            else
+            {
+                _lstchungTu = _chungtu.getList(1, date_tu.Value, date_den.Value.AddDays(1), cbo_kho.SelectedValue.ToString());
+                _bdCHUNGTU.DataSource = _lstchungTu;
+            }
+
         }
 
         private void date_den_Leave(object sender, EventArgs e)
@@ -1427,6 +1474,18 @@ namespace QL_Quan_Kho_Hang
 
         private void gvds_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
+
+            if (e.Column.FieldName == "TrangThai")
+            {
+                if (e.CellValue != null && e.CellValue.ToString() == "1")
+                {
+                    e.DisplayText = "Chưa hoàn tất";
+                }
+                else
+                {
+                    e.DisplayText = "Đã hoàn tất";
+                }
+            }
             // Kiểm tra nếu cột là "Delete_By" và giá trị của ô là 1
             if (e.Column.FieldName == "Delete_By" && e.CellValue != null && e.CellValue.ToString() == "1")
             {
@@ -1539,6 +1598,13 @@ namespace QL_Quan_Kho_Hang
             }
 
         }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+
     }
     
 }

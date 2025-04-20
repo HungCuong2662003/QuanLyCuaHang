@@ -59,6 +59,7 @@
     <Compile Include="DONVI.cs" />
     <Compile Include="DONVITINH.cs" />
     <Compile Include="errExport.cs" />
+    <Compile Include="KhachHang.cs" />
     <Compile Include="MyFunctions.cs" />
     <Compile Include="obj_barcode.cs" />
     <Compile Include="obj_CHUNGTU_CT.cs" />

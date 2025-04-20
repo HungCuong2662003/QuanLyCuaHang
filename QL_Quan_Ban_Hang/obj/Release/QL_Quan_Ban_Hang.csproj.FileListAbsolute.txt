@@ -63,6 +63,7 @@ D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\bin\Release\DevExpress.Office.v22.2.
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.csproj.AssemblyReference.cache
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.FrmBanHang_QL.resources
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Kho_Hang.FrmChietKhau.resources
+D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.FrmQLBan.resources
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.FrmTraHang.resources
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.Properties.Resources.resources
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.csproj.GenerateResource.cache
@@ -71,4 +72,3 @@ D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.csproj.
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_.A3ED0073.Up2Date
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.exe
 D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.pdb
-D:\winform\QL_Quan\QL_Quan\QL_Quan_Ban_Hang\obj\Release\QL_Quan_Ban_Hang.FrmQLBan.resources

@@ -57,17 +57,42 @@ namespace BusinessLayer
         public void FalseCty(string macty)
         {
             tb_CongTy _cty = db.tb_CongTy.FirstOrDefault(x => x.MaCty == macty);
-            _cty.Disable = true;
-            try
+            if (_cty != null)
             {
-
-                db.SaveChanges();
+                _cty.Disable = true;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi khi cập nhật trạng thái công ty: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("lỗi " + ex.Message);
+                throw new Exception("Không tìm thấy công ty với mã: " + macty);
             }
-
+        }   
+        public void remove(string macty)
+        {
+            tb_CongTy _cty = db.tb_CongTy.FirstOrDefault(x => x.MaCty == macty);
+            if (_cty != null)
+            {
+                try
+                {
+                    db.tb_CongTy.Remove(_cty);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi khi khi xóa công ty công ty: " + ex.Message);
+                }
+            }
+            else
+            {
+                throw new Exception("Không tìm thấy công ty với mã: " + macty);
+            }
         }
 
     }

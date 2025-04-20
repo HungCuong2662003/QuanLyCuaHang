@@ -20,15 +20,12 @@ namespace DataLayer
         public Nullable<double> SoluongCT { get; set; }
         public Nullable<double> Dongia { get; set; }
         public Nullable<double> GiaBan { get; set; }
-        public Nullable<int> idban { get; set; }
         public Nullable<double> Thanhtien { get; set; }
         public Nullable<System.DateTime> Ngay { get; set; }
+        public string IdKH { get; set; }
         public Nullable<double> Chietkhau { get; set; }
         public Nullable<int> Stt { get; set; }
-        public Nullable<bool> TrangThai { get; set; }
     
         public virtual tb_ChungTu tb_ChungTu { get; set; }
-        public virtual tb_HangHoa tb_HangHoa { get; set; }
-        public virtual tb_Qlban tb_Qlban { get; set; }
     }
 }

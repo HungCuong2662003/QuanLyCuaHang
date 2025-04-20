@@ -36,6 +36,15 @@ namespace QL_Quan_Kho_Hang
         List<Obj_TonKho> _lstTK;
         private void FrmTonKho_Load(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                btn_tinhton.Enabled = false;
+            }       
+
+            else if (_right == 2)
+            {
+                btn_tinhton.Enabled = true;
+            }
             _congty = new CONGTY();
             _tonkho = new TONKHO();
             _donvi = new DONVI();

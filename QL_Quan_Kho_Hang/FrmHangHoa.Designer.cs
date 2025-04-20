@@ -39,6 +39,8 @@
             this.btn_thoat = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_unslect = new DevExpress.XtraEditors.SimpleButton();
+            this.btn_select = new DevExpress.XtraEditors.SimpleButton();
             this.cbb_id = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.GC_Ds = new DevExpress.XtraGrid.GridControl();
@@ -53,8 +55,11 @@
             this.IdNhom = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Create_By_name = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Mota = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Disable = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txt_barcode = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_giaban = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txt_tentat = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -70,8 +75,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt_tenhang = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txt_giaban = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -86,6 +89,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Right;
             this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_them,
@@ -96,9 +100,9 @@
             this.btn_in,
             this.toolStripButton1,
             this.btn_thoat});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Location = new System.Drawing.Point(1218, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1289, 44);
+            this.toolStrip1.Size = new System.Drawing.Size(71, 634);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -109,7 +113,7 @@
             this.btn_them.Image = global::QL_Quan_Kho_Hang.Properties.Resources.them;
             this.btn_them.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_them.Name = "btn_them";
-            this.btn_them.Size = new System.Drawing.Size(53, 41);
+            this.btn_them.Size = new System.Drawing.Size(68, 41);
             this.btn_them.Text = "Thêm";
             this.btn_them.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_them.Click += new System.EventHandler(this.btn_them_Click);
@@ -120,7 +124,7 @@
             this.btn_sua.Image = global::QL_Quan_Kho_Hang.Properties.Resources.sua;
             this.btn_sua.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_sua.Name = "btn_sua";
-            this.btn_sua.Size = new System.Drawing.Size(40, 41);
+            this.btn_sua.Size = new System.Drawing.Size(68, 41);
             this.btn_sua.Text = "Sửa";
             this.btn_sua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_sua.Click += new System.EventHandler(this.btn_sua_Click);
@@ -131,7 +135,7 @@
             this.btn_xoa.Image = global::QL_Quan_Kho_Hang.Properties.Resources.xoa;
             this.btn_xoa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_xoa.Name = "btn_xoa";
-            this.btn_xoa.Size = new System.Drawing.Size(40, 41);
+            this.btn_xoa.Size = new System.Drawing.Size(68, 41);
             this.btn_xoa.Text = "Xóa";
             this.btn_xoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_xoa.Click += new System.EventHandler(this.btn_xoa_Click);
@@ -142,7 +146,7 @@
             this.btn_luu.Image = global::QL_Quan_Kho_Hang.Properties.Resources.luu;
             this.btn_luu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_luu.Name = "btn_luu";
-            this.btn_luu.Size = new System.Drawing.Size(40, 41);
+            this.btn_luu.Size = new System.Drawing.Size(68, 41);
             this.btn_luu.Text = "Lưu";
             this.btn_luu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_luu.Click += new System.EventHandler(this.btn_luu_Click);
@@ -153,7 +157,7 @@
             this.btn_boqua.Image = global::QL_Quan_Kho_Hang.Properties.Resources.boqua;
             this.btn_boqua.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_boqua.Name = "btn_boqua";
-            this.btn_boqua.Size = new System.Drawing.Size(62, 41);
+            this.btn_boqua.Size = new System.Drawing.Size(68, 41);
             this.btn_boqua.Text = "Bỏ qua";
             this.btn_boqua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_boqua.Click += new System.EventHandler(this.btn_boqua_Click);
@@ -164,7 +168,7 @@
             this.btn_in.Image = global::QL_Quan_Kho_Hang.Properties.Resources.print;
             this.btn_in.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_in.Name = "btn_in";
-            this.btn_in.Size = new System.Drawing.Size(58, 41);
+            this.btn_in.Size = new System.Drawing.Size(68, 41);
             this.btn_in.Text = "Export";
             this.btn_in.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_in.Click += new System.EventHandler(this.btn_in_Click);
@@ -175,7 +179,7 @@
             this.toolStripButton1.Image = global::QL_Quan_Kho_Hang.Properties.Resources.barcode;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(70, 41);
+            this.toolStripButton1.Size = new System.Drawing.Size(68, 41);
             this.toolStripButton1.Text = "Barcode";
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -186,7 +190,7 @@
             this.btn_thoat.Image = global::QL_Quan_Kho_Hang.Properties.Resources.thoat;
             this.btn_thoat.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btn_thoat.Name = "btn_thoat";
-            this.btn_thoat.Size = new System.Drawing.Size(53, 41);
+            this.btn_thoat.Size = new System.Drawing.Size(68, 41);
             this.btn_thoat.Text = "Thoát";
             this.btn_thoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_thoat.Click += new System.EventHandler(this.btn_thoat_Click);
@@ -194,7 +198,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 44);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -205,19 +209,43 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupControl1);
-            this.splitContainer1.Size = new System.Drawing.Size(1289, 590);
-            this.splitContainer1.SplitterDistance = 916;
+            this.splitContainer1.Size = new System.Drawing.Size(1218, 634);
+            this.splitContainer1.SplitterDistance = 865;
             this.splitContainer1.TabIndex = 2;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btn_unslect);
+            this.panel1.Controls.Add(this.btn_select);
             this.panel1.Controls.Add(this.cbb_id);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(916, 58);
+            this.panel1.Size = new System.Drawing.Size(865, 58);
             this.panel1.TabIndex = 1;
+            // 
+            // btn_unslect
+            // 
+            this.btn_unslect.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_unslect.Appearance.Options.UseFont = true;
+            this.btn_unslect.Location = new System.Drawing.Point(822, 12);
+            this.btn_unslect.Name = "btn_unslect";
+            this.btn_unslect.Size = new System.Drawing.Size(91, 32);
+            this.btn_unslect.TabIndex = 18;
+            this.btn_unslect.Text = "Hủy chọn";
+            this.btn_unslect.Click += new System.EventHandler(this.btn_unslect_Click);
+            // 
+            // btn_select
+            // 
+            this.btn_select.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_select.Appearance.Options.UseFont = true;
+            this.btn_select.Location = new System.Drawing.Point(726, 13);
+            this.btn_select.Name = "btn_select";
+            this.btn_select.Size = new System.Drawing.Size(91, 32);
+            this.btn_select.TabIndex = 17;
+            this.btn_select.Text = "Chọn tất cả";
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
             // cbb_id
             // 
@@ -225,7 +253,7 @@
             this.cbb_id.FormattingEnabled = true;
             this.cbb_id.Location = new System.Drawing.Point(175, 17);
             this.cbb_id.Name = "cbb_id";
-            this.cbb_id.Size = new System.Drawing.Size(635, 27);
+            this.cbb_id.Size = new System.Drawing.Size(545, 27);
             this.cbb_id.TabIndex = 0;
             this.cbb_id.SelectedIndexChanged += new System.EventHandler(this.Cbb_id_SelectedIndexChanged);
             // 
@@ -247,7 +275,7 @@
             this.GC_Ds.Location = new System.Drawing.Point(0, 58);
             this.GC_Ds.MainView = this.GV_Ds;
             this.GC_Ds.Name = "GC_Ds";
-            this.GC_Ds.Size = new System.Drawing.Size(916, 532);
+            this.GC_Ds.Size = new System.Drawing.Size(865, 488);
             this.GC_Ds.TabIndex = 2;
             this.GC_Ds.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GV_Ds});
@@ -267,8 +295,7 @@
             this.Create_Date,
             this.IdNhom,
             this.Create_By_name,
-            this.Mota,
-            this.Disable});
+            this.Mota});
             this.GV_Ds.GridControl = this.GC_Ds;
             this.GV_Ds.Name = "GV_Ds";
             this.GV_Ds.OptionsFind.AlwaysVisible = true;
@@ -399,23 +426,12 @@
             this.Mota.VisibleIndex = 5;
             this.Mota.Width = 150;
             // 
-            // Disable
-            // 
-            this.Disable.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Disable.AppearanceCell.Options.UseFont = true;
-            this.Disable.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Disable.AppearanceHeader.Options.UseFont = true;
-            this.Disable.Caption = "Disable";
-            this.Disable.FieldName = "Disable";
-            this.Disable.Name = "Disable";
-            this.Disable.Visible = true;
-            this.Disable.VisibleIndex = 6;
-            this.Disable.Width = 121;
-            // 
             // groupControl1
             // 
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
+            this.groupControl1.Controls.Add(this.txt_barcode);
+            this.groupControl1.Controls.Add(this.label2);
             this.groupControl1.Controls.Add(this.txt_giaban);
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Controls.Add(this.txt_tentat);
@@ -436,9 +452,45 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(369, 590);
+            this.groupControl1.Size = new System.Drawing.Size(349, 634);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin hàng hóa";
+            // 
+            // txt_barcode
+            // 
+            this.txt_barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_barcode.Location = new System.Drawing.Point(144, 39);
+            this.txt_barcode.Name = "txt_barcode";
+            this.txt_barcode.Size = new System.Drawing.Size(158, 26);
+            this.txt_barcode.TabIndex = 23;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.label2.Location = new System.Drawing.Point(39, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 19);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Barcode";
+            // 
+            // txt_giaban
+            // 
+            this.txt_giaban.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_giaban.Location = new System.Drawing.Point(144, 217);
+            this.txt_giaban.Name = "txt_giaban";
+            this.txt_giaban.Size = new System.Drawing.Size(158, 26);
+            this.txt_giaban.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.label1.Location = new System.Drawing.Point(39, 217);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 19);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Giá bán";
             // 
             // txt_tentat
             // 
@@ -471,9 +523,9 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(144, 266);
+            this.dateTimePicker1.Location = new System.Drawing.Point(144, 271);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(158, 26);
             this.dateTimePicker1.TabIndex = 7;
             // 
             // cb_dis
@@ -531,7 +583,7 @@
             this.txt_mota.Location = new System.Drawing.Point(144, 322);
             this.txt_mota.Multiline = true;
             this.txt_mota.Name = "txt_mota";
-            this.txt_mota.Size = new System.Drawing.Size(208, 80);
+            this.txt_mota.Size = new System.Drawing.Size(158, 80);
             this.txt_mota.TabIndex = 9;
             // 
             // label5
@@ -581,24 +633,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Tên hàng";
             // 
-            // txt_giaban
-            // 
-            this.txt_giaban.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_giaban.Location = new System.Drawing.Point(144, 217);
-            this.txt_giaban.Name = "txt_giaban";
-            this.txt_giaban.Size = new System.Drawing.Size(158, 26);
-            this.txt_giaban.TabIndex = 21;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.label1.Location = new System.Drawing.Point(39, 217);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 19);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Giá bán";
-            // 
             // FrmHangHoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -609,6 +643,7 @@
             this.Name = "FrmHangHoa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmHangHoa";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmHangHoa_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -667,12 +702,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn Create_Date;
         private DevExpress.XtraGrid.Columns.GridColumn Create_By_name;
         private DevExpress.XtraGrid.Columns.GridColumn Mota;
-        private DevExpress.XtraGrid.Columns.GridColumn Disable;
         private System.Windows.Forms.TextBox txt_tentat;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolStripButton btn_in;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.TextBox txt_giaban;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.SimpleButton btn_unslect;
+        private DevExpress.XtraEditors.SimpleButton btn_select;
+        private System.Windows.Forms.TextBox txt_barcode;
+        private System.Windows.Forms.Label label2;
     }
 }

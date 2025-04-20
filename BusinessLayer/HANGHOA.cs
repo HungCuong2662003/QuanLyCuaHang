@@ -158,17 +158,43 @@ namespace BusinessLayer
         public void Falsehh(string BarCode)
         {
             tb_HangHoa _hanghoa = db.tb_HangHoa.FirstOrDefault(x => x.BarCode == BarCode);
-            _hanghoa.Disable = true;
-            try
+            if (_hanghoa != null)
             {
-
-                db.SaveChanges();
+                _hanghoa.Disable = true;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi khi cập nhật trạng thái hàng hóa: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("lỗi delete dữ liệu" + ex.Message);
+                throw new Exception("Không tìm thấy hàng hóa với mã barcode: " + BarCode);
             }
 
+        }
+        public void remove(string BarCode)
+        {
+            tb_HangHoa _hanghoa = db.tb_HangHoa.FirstOrDefault(x => x.BarCode == BarCode);
+            if (_hanghoa != null)
+            {
+                try
+                {
+                    db.tb_HangHoa.Remove(_hanghoa);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi khi khi xóa hàng hóa: " + ex.Message);
+                }
+            }
+            else
+            {
+                throw new Exception("Không tìm thấy hàng hóa: " + BarCode);
+            }
         }
         public List<obj_barcode> getdanhmucinbarcode(string id)
         {

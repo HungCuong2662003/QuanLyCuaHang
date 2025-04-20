@@ -44,11 +44,9 @@
             this.Fax = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Email = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DiaChi = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Disable = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.txt_Macty = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cb_dis = new System.Windows.Forms.CheckBox();
             this.txt_DT = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -155,21 +153,35 @@
             // 
             // GV_Ds
             // 
+            this.GV_Ds.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GV_Ds.Appearance.HeaderPanel.Options.UseFont = true;
+            this.GV_Ds.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.GV_Ds.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.GV_Ds.Appearance.HideSelectionRow.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GV_Ds.Appearance.HideSelectionRow.Options.UseFont = true;
+            this.GV_Ds.Appearance.Row.Options.UseTextOptions = true;
+            this.GV_Ds.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.GV_Ds.Appearance.SelectedRow.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GV_Ds.Appearance.SelectedRow.Options.UseFont = true;
             this.GV_Ds.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.MaCty,
             this.TenCty,
             this.DienThoai,
             this.Fax,
             this.Email,
-            this.DiaChi,
-            this.Disable});
+            this.DiaChi});
             this.GV_Ds.GridControl = this.GC_Ds;
             this.GV_Ds.Name = "GV_Ds";
+            this.GV_Ds.RowHeight = 30;
             this.GV_Ds.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.GV_Ds_CustomDrawCell);
             this.GV_Ds.Click += new System.EventHandler(this.GV_Ds_Click);
             // 
             // MaCty
             // 
+            this.MaCty.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaCty.AppearanceCell.Options.UseFont = true;
+            this.MaCty.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaCty.AppearanceHeader.Options.UseFont = true;
             this.MaCty.Caption = "MaCty";
             this.MaCty.FieldName = "MaCty";
             this.MaCty.MaxWidth = 100;
@@ -181,6 +193,10 @@
             // 
             // TenCty
             // 
+            this.TenCty.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TenCty.AppearanceCell.Options.UseFont = true;
+            this.TenCty.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TenCty.AppearanceHeader.Options.UseFont = true;
             this.TenCty.Caption = "Tên công ty";
             this.TenCty.FieldName = "TenCty";
             this.TenCty.MaxWidth = 200;
@@ -192,6 +208,10 @@
             // 
             // DienThoai
             // 
+            this.DienThoai.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DienThoai.AppearanceCell.Options.UseFont = true;
+            this.DienThoai.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DienThoai.AppearanceHeader.Options.UseFont = true;
             this.DienThoai.Caption = "Điện thoại";
             this.DienThoai.FieldName = "DienThoai";
             this.DienThoai.MaxWidth = 200;
@@ -203,6 +223,10 @@
             // 
             // Fax
             // 
+            this.Fax.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fax.AppearanceCell.Options.UseFont = true;
+            this.Fax.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Fax.AppearanceHeader.Options.UseFont = true;
             this.Fax.Caption = "Fax";
             this.Fax.FieldName = "Fax";
             this.Fax.MaxWidth = 200;
@@ -214,6 +238,10 @@
             // 
             // Email
             // 
+            this.Email.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Email.AppearanceCell.Options.UseFont = true;
+            this.Email.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Email.AppearanceHeader.Options.UseFont = true;
             this.Email.Caption = "Email";
             this.Email.FieldName = "Email";
             this.Email.MaxWidth = 200;
@@ -225,6 +253,10 @@
             // 
             // DiaChi
             // 
+            this.DiaChi.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiaChi.AppearanceCell.Options.UseFont = true;
+            this.DiaChi.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiaChi.AppearanceHeader.Options.UseFont = true;
             this.DiaChi.Caption = "Địa chỉ";
             this.DiaChi.FieldName = "DiaChi";
             this.DiaChi.MaxWidth = 300;
@@ -234,22 +266,12 @@
             this.DiaChi.VisibleIndex = 4;
             this.DiaChi.Width = 253;
             // 
-            // Disable
-            // 
-            this.Disable.Caption = "Tình trạng";
-            this.Disable.FieldName = "Disable";
-            this.Disable.MaxWidth = 100;
-            this.Disable.MinWidth = 30;
-            this.Disable.Name = "Disable";
-            this.Disable.Visible = true;
-            this.Disable.VisibleIndex = 6;
-            this.Disable.Width = 68;
-            // 
             // groupControl1
             // 
+            this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupControl1.AppearanceCaption.Options.UseFont = true;
             this.groupControl1.Controls.Add(this.txt_Macty);
             this.groupControl1.Controls.Add(this.label2);
-            this.groupControl1.Controls.Add(this.cb_dis);
             this.groupControl1.Controls.Add(this.txt_DT);
             this.groupControl1.Controls.Add(this.label6);
             this.groupControl1.Controls.Add(this.txt_email);
@@ -269,107 +291,109 @@
             // 
             // txt_Macty
             // 
-            this.txt_Macty.Location = new System.Drawing.Point(129, 58);
+            this.txt_Macty.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Macty.Location = new System.Drawing.Point(236, 42);
             this.txt_Macty.Name = "txt_Macty";
-            this.txt_Macty.Size = new System.Drawing.Size(150, 21);
+            this.txt_Macty.Size = new System.Drawing.Size(150, 27);
             this.txt_Macty.TabIndex = 14;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 61);
+            this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(136, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(86, 19);
             this.label2.TabIndex = 13;
             this.label2.Text = "Mã công ty";
             // 
-            // cb_dis
-            // 
-            this.cb_dis.AutoSize = true;
-            this.cb_dis.Location = new System.Drawing.Point(852, 99);
-            this.cb_dis.Name = "cb_dis";
-            this.cb_dis.Size = new System.Drawing.Size(60, 17);
-            this.cb_dis.TabIndex = 12;
-            this.cb_dis.Text = "Disable";
-            this.cb_dis.UseVisualStyleBackColor = true;
-            // 
             // txt_DT
             // 
-            this.txt_DT.Location = new System.Drawing.Point(129, 141);
+            this.txt_DT.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_DT.Location = new System.Drawing.Point(236, 125);
             this.txt_DT.Name = "txt_DT";
-            this.txt_DT.Size = new System.Drawing.Size(150, 21);
+            this.txt_DT.Size = new System.Drawing.Size(150, 27);
             this.txt_DT.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 144);
+            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(136, 128);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.Size = new System.Drawing.Size(81, 19);
             this.label6.TabIndex = 10;
             this.label6.Text = "Điện thoại";
             // 
             // txt_email
             // 
-            this.txt_email.Location = new System.Drawing.Point(578, 53);
+            this.txt_email.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_email.Location = new System.Drawing.Point(685, 37);
             this.txt_email.Name = "txt_email";
-            this.txt_email.Size = new System.Drawing.Size(150, 21);
+            this.txt_email.Size = new System.Drawing.Size(150, 27);
             this.txt_email.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(478, 56);
+            this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(585, 40);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.Size = new System.Drawing.Size(48, 19);
             this.label5.TabIndex = 8;
             this.label5.Text = "Email";
             // 
             // txt_diachi
             // 
-            this.txt_diachi.Location = new System.Drawing.Point(578, 96);
+            this.txt_diachi.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_diachi.Location = new System.Drawing.Point(685, 80);
             this.txt_diachi.Name = "txt_diachi";
-            this.txt_diachi.Size = new System.Drawing.Size(150, 21);
+            this.txt_diachi.Size = new System.Drawing.Size(150, 27);
             this.txt_diachi.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(478, 99);
+            this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(585, 83);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.Size = new System.Drawing.Size(57, 19);
             this.label4.TabIndex = 6;
             this.label4.Text = "Địa chỉ";
             // 
             // txt_Fax
             // 
-            this.txt_Fax.Location = new System.Drawing.Point(578, 136);
+            this.txt_Fax.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Fax.Location = new System.Drawing.Point(685, 120);
             this.txt_Fax.Name = "txt_Fax";
-            this.txt_Fax.Size = new System.Drawing.Size(150, 21);
+            this.txt_Fax.Size = new System.Drawing.Size(150, 27);
             this.txt_Fax.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(478, 139);
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(585, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 13);
+            this.label3.Size = new System.Drawing.Size(33, 19);
             this.label3.TabIndex = 4;
             this.label3.Text = "Fax";
             // 
             // txt_ten
             // 
-            this.txt_ten.Location = new System.Drawing.Point(129, 101);
+            this.txt_ten.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_ten.Location = new System.Drawing.Point(236, 85);
             this.txt_ten.Name = "txt_ten";
-            this.txt_ten.Size = new System.Drawing.Size(150, 21);
+            this.txt_ten.Size = new System.Drawing.Size(150, 27);
             this.txt_ten.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 104);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(136, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.Size = new System.Drawing.Size(93, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên công ty";
             // 
@@ -419,14 +443,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_Fax;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox cb_dis;
         private DevExpress.XtraGrid.Columns.GridColumn TenCty;
         private DevExpress.XtraGrid.Columns.GridColumn DienThoai;
         private DevExpress.XtraGrid.Columns.GridColumn Email;
         private DevExpress.XtraGrid.Columns.GridColumn DiaChi;
         private DevExpress.XtraGrid.Columns.GridColumn Fax;
         private DevExpress.XtraGrid.Columns.GridColumn MaCty;
-        private DevExpress.XtraGrid.Columns.GridColumn Disable;
         private System.Windows.Forms.TextBox txt_Macty;
         private System.Windows.Forms.Label label2;
     }

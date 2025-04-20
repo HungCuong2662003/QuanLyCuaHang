@@ -53,20 +53,7 @@ namespace BusinessLayer
                 throw new Exception("lỗi update dữ liệu" + ex.Message);
             }
         }
-        public void Delete(string mancc)
-        {
 
-            try
-            {
-                tb_NhaCC xuatXu = db.tb_NhaCC.FirstOrDefault(x => x.MaNCC == mancc);
-                db.tb_NhaCC.Remove(xuatXu);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("lỗi add dữ liệu" + ex.Message);
-            }
-        }
         public void False(string mancc)
         {
 
@@ -79,7 +66,23 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-                throw new Exception("lỗi update dữ liệu" + ex.Message);
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
+            }
+
+        } 
+        public void remove(string mancc)
+        {
+
+            try
+            {
+                tb_NhaCC _NhomHH = db.tb_NhaCC.FirstOrDefault(x => x.MaNCC == mancc);
+
+                db.tb_NhaCC.Remove(_NhomHH);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
             }
 
         }

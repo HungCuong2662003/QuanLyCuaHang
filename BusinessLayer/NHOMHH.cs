@@ -34,23 +34,27 @@ namespace BusinessLayer
                 throw new Exception("lỗi add dữ liệu" + ex.Message);
             }
         }
-        public void update(tb_NhomHH xuatxu)
+        public void update(tb_NhomHH nhomHH)
         {
-            
             try
             {
-                tb_NhomHH _nhomhh = db.tb_NhomHH.FirstOrDefault(x => x.IdNhom == xuatxu.IdNhom);
-                _nhomhh.TenNhom = xuatxu.TenNhom;
-                _nhomhh.Disable=xuatxu.Disable;
+                tb_NhomHH _existing = db.tb_NhomHH.FirstOrDefault(x => x.IdNhom == nhomHH.IdNhom);
+                if (_existing == null)
+                {
+                    throw new Exception("No matching record found to update.");
+                }
+
+                _existing.TenNhom = nhomHH.TenNhom;
+                _existing.Disable = nhomHH.Disable;
 
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("lỗi update dữ liệu" + ex.Message);
+                throw new Exception("Error updating data: " + ex.Message, ex);
             }
         }
-        public void Delete(string id)
+        public void remove(string id)
         {
             
             try
@@ -61,7 +65,7 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-                throw new Exception("lỗi add dữ liệu" + ex.Message);
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
             }
         }
         public void False(string id)
@@ -76,7 +80,7 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-                throw new Exception("lỗi update dữ liệu" + ex.Message);
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
             }
 
         }

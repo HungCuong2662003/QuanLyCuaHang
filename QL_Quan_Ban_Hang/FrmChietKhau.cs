@@ -38,7 +38,7 @@ namespace QL_Quan_Kho_Hang
         {
             if (MyFunctions.IsNumberUsingRegex(txt_ck.Text))
             {
-                for (int i = 0; i < _gvchitiet.RowCount-1; i++)
+                for (int i = 0; i < _gvchitiet.RowCount; i++)
                 {
                     // Kiểm tra null trước khi sử dụng SetRowCellValue
                     var giaBanValue = _gvchitiet.GetRowCellValue(i, "GiaBan");

@@ -125,8 +125,7 @@
             // 
             // txt_mk
             // 
-            this.txt_mk.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txt_mk.Location = new System.Drawing.Point(279, 137);
+            this.txt_mk.Location = new System.Drawing.Point(278, 136);
             this.txt_mk.Name = "txt_mk";
             this.txt_mk.Size = new System.Drawing.Size(276, 21);
             this.txt_mk.TabIndex = 9;
@@ -257,7 +256,7 @@
             // btn_luu
             // 
             this.btn_luu.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_luu.ImageOptions.Image")));
-            this.btn_luu.Location = new System.Drawing.Point(333, 370);
+            this.btn_luu.Location = new System.Drawing.Point(326, 370);
             this.btn_luu.Name = "btn_luu";
             this.btn_luu.Size = new System.Drawing.Size(87, 45);
             this.btn_luu.TabIndex = 3;

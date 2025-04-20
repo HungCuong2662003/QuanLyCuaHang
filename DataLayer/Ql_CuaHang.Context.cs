@@ -27,12 +27,14 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tb_ChungTu> tb_ChungTu { get; set; }
         public virtual DbSet<tb_Chungtu_CT> tb_Chungtu_CT { get; set; }
         public virtual DbSet<tb_CongTy> tb_CongTy { get; set; }
         public virtual DbSet<tb_DonVi> tb_DonVi { get; set; }
         public virtual DbSet<tb_DonViTinh> tb_DonViTinh { get; set; }
         public virtual DbSet<tb_HangHoa> tb_HangHoa { get; set; }
+        public virtual DbSet<tb_KhachHang> tb_KhachHang { get; set; }
         public virtual DbSet<tb_NhaCC> tb_NhaCC { get; set; }
         public virtual DbSet<tb_NhomHH> tb_NhomHH { get; set; }
         public virtual DbSet<tb_Param> tb_Param { get; set; }

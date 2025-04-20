@@ -60,7 +60,20 @@ namespace QL_Quan_Kho_Hang
         bool _isImport;
         private void FrmXuatNB_Load(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+                //btn_thoat.Enabled = false;
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
 
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
             _congty = new CONGTY();
             _donvi = new DONVI();
             _nhACC = new NHACC();
@@ -91,8 +104,8 @@ namespace QL_Quan_Kho_Hang
             tabCHUNGTU.SelectedTabPage = xtra_ds;
             xuatthongtin();
             cbo_dvi.SelectedIndexChanged += Cbo_dvi_SelectedIndexChanged;
-            cb_dis.CheckedChanged += Cb_dis_CheckedChanged; ;
-            showHideControl(true);
+            cb_dis.CheckedChanged += Cb_dis_CheckedChanged; 
+         
             contextMenuStrip1.Enabled = false;
             txt_sophieu.Enabled = false;
 
@@ -174,7 +187,7 @@ namespace QL_Quan_Kho_Hang
         //}
         void loaddonvinhap()
         {
-            cbo_dvinhap.DataSource =_donvi.getItemListKho(cbb_congty_chinhanh.SelectedValue.ToString(), false);
+            cbo_dvinhap.DataSource =_donvi.getItemListKho(cbb_congty_chinhanh.SelectedValue.ToString(), true);
             cbo_dvinhap.DisplayMember = "TenDvi";
             cbo_dvinhap.ValueMember = "MaDvi";
         }
@@ -225,15 +238,29 @@ namespace QL_Quan_Kho_Hang
                                 List<string> s = new List<string>();
                                 if (gvchitiet.RowCount > 1)
                                 {
+
+                                    int currentRow = gvchitiet.FocusedRowHandle;
+
+
                                     for (int i = 0; i < gvchitiet.RowCount; i++)
                                     {
-                                        s.Add(gvchitiet.GetRowCellValue(i, "Barcode").ToString());
+                                        if (i != currentRow) // Bỏ qua dòng đang nhập
+                                        {
+                                            var barcodeValue = gvchitiet.GetRowCellValue(i, "Barcode")?.ToString().Trim();
+                                            if (!string.IsNullOrEmpty(barcodeValue))
+                                            {
+                                                s.Add(barcodeValue);
+                                            }
+                                        }
                                     }
-                                    if (s.Find(x => x.Equals(e.Value.ToString())) != null)
+
+                                    string barcodeNhap = e.Value?.ToString().Trim() ?? "";
+                                    if (s.Any(x => x.Equals(barcodeNhap, StringComparison.OrdinalIgnoreCase)))
                                     {
-                                        MessageBox.Show("ma nay da co ", "loi nhap lieu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Mã này đã có trong danh sách!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
+
                                     else
                                     {
                                         gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "TenHH", hh.TenHH);
@@ -367,11 +394,11 @@ namespace QL_Quan_Kho_Hang
                 }
 
                 // Kiểm tra và lấy đối tượng chuỗi hệ thống nếu có
-                _seq = _SYSSEQUENCE.getitem("NNB@" + DateTime.Today.Year.ToString() + "@" + dvi.KyHieu);
+                _seq = _SYSSEQUENCE.getitem("XNB@" + DateTime.Today.Year.ToString() + "@" + dvi.KyHieu);
                 if (_seq == null)
                 {
                     _seq = new tb_SYS_SEQUENCE();
-                    _seq.Name = "NNB@" + DateTime.Now.Year.ToString() + "@" + dvi.KyHieu;
+                    _seq.Name = "XNB@" + DateTime.Now.Year.ToString() + "@" + dvi.KyHieu;
                     _seq.value = 1;
                     _SYSSEQUENCE.add(_seq);
                 }
@@ -382,12 +409,12 @@ namespace QL_Quan_Kho_Hang
                     chungTu.LoaiCT = 2;
                     chungTu.Khoa = Guid.NewGuid();
                     chungTu.Ngay = date_ngay.Value;
-                    chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/NNB/" + dvi.KyHieu;
+                    chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/XNB/" + dvi.KyHieu;
                     chungTu.Create_By = _user.Iduser;
                     chungTu.Create_Date = DateTime.Now;
                 }
 
-                chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/NNB/" + dvi.KyHieu;
+                chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/XNB/" + dvi.KyHieu;
                 chungTu.MaCty = cbb_congty_chinhanh.SelectedValue.ToString();
                 chungTu.MaDVI = cbo_donvixuat.SelectedValue.ToString();
                 if (cbo_dvinhap.SelectedValue.ToString() == null)
@@ -782,10 +809,9 @@ namespace QL_Quan_Kho_Hang
                     int index = _bdCHUNGTU.Position;
 
                     // Xóa phiếu nhập dựa trên khóa và loại bỏ khỏi danh sách
-                    _chungtu.delete(current.Khoa, 1);
+                    _chungtu.remove(current.Khoa);
 
-                    // Cập nhật giá trị cột "Delete_By" trên gridview tại hàng hiện tại
-                    gvds.SetRowCellValue(index, "Delete_By", 1);
+                 
 
                     // Đảm bảo nút xóa được hiển thị sau khi xóa
                     btn_xoa.Visible = true;
@@ -853,7 +879,8 @@ namespace QL_Quan_Kho_Hang
                 Thongtin.ConnectionInfo.UserID = myFunctions._us;
 
                 Thongtin.ConnectionInfo.Password = myFunctions._pw;
-
+                doc.PrintOptions.PaperSize = PaperSize.DefaultPaperSize; // Hoặc PaperSize.PaperA4
+                doc.PrintOptions.ApplyPageMargins(new PageMargins(10, 10, 10, 10)); // Điều chỉnh lề hợp lý
                 doc.Database.Tables[0].ApplyLogOnInfo(Thongtin);
 
 
@@ -884,6 +911,17 @@ namespace QL_Quan_Kho_Hang
         }
         private void gvds_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                if (e.CellValue != null && e.CellValue.ToString() == "1")
+                {
+                    e.DisplayText = "Chưa hoàn tất";
+                }
+                else
+                {
+                    e.DisplayText = "Đã hoàn tất";
+                }
+            }
             // Kiểm tra nếu cột là "Delete_By" và giá trị của ô là 1
             if (e.Column.FieldName == "Delete_By" && e.CellValue != null && e.CellValue.ToString() == "1")
             {

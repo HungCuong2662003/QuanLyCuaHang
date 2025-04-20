@@ -95,6 +95,9 @@
     <Compile Include="sp_helpdiagrams_Result.cs">
       <DependentUpon>Ql_CuaHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>Ql_CuaHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_ChungTu.cs">
       <DependentUpon>Ql_CuaHang.tt</DependentUpon>
     </Compile>
@@ -111,6 +114,9 @@
       <DependentUpon>Ql_CuaHang.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_HangHoa.cs">
+      <DependentUpon>Ql_CuaHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_KhachHang.cs">
       <DependentUpon>Ql_CuaHang.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_NhaCC.cs">

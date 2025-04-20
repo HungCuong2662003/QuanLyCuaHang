@@ -279,7 +279,7 @@ namespace QL_Quan_Kho_Hang
                         _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "TenHH", hh.TenHH);
                         _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "SoluongCT", 1);
                         _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "Dongia", hh.DonGia);
-                        _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "GiaBan", hh.GiaBan);
+                        _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "GiaBan", hh.GiaBan);         
                         _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "Chietkhau", 0);
                         _gvchitiet.SetRowCellValue(_gvchitiet.FocusedRowHandle, "Thanhtien", hh.GiaBan);
                     }

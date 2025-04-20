@@ -18,16 +18,36 @@ namespace QL_Quan_Kho_Hang
         public FrmNhaCC()
         {
             InitializeComponent();
+        }  public FrmNhaCC(tb_SYS_User user, int right)
+        {
+            InitializeComponent(); this._user = user;
+            this._right = right;
         }
+        tb_SYS_User _user;
+        int _right;
         NHACC _nhacc;
         bool _them;
         string mancc;
 
         private void FrmNhaCC_Load(object sender, EventArgs e)
         {
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+                //btn_thoat.Enabled = false;
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
+
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
             _nhacc = new NHACC();
             loadData();
-            showHideControl(true);
+          
             Enable(false);
             txt_mancc.Enabled = false;
         }
@@ -40,12 +60,13 @@ namespace QL_Quan_Kho_Hang
         }
         void Enable(bool t)
         {
+        
             txt_tenncc.Enabled = t;
             txt_dt.Enabled = t;
             txt_mail.Enabled = t;
             txt_fax.Enabled = t;
             txt_diachi.Enabled = t;
-            cb_dis.Enabled = t;
+     
             txt_tenncc.Enabled = t;
         }
         void _reset()
@@ -57,7 +78,7 @@ namespace QL_Quan_Kho_Hang
             txt_mail.Text = "";
             txt_fax.Text = "";
             txt_diachi.Text = "";
-            cb_dis.Text = "";
+         
             txt_tenncc.Text = "";
 
         }
@@ -85,17 +106,34 @@ namespace QL_Quan_Kho_Hang
 
             showHideControl(false);
             _them = false;
-            txt_mancc.Enabled = false;
+            txt_mancc.Enabled=false;
             Enable(true);
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // Check if the textbox is empty or not
+            if (string.IsNullOrWhiteSpace(txt_mancc.Text))
             {
-                _nhacc.False(mancc);
+                MessageBox.Show("Bạn chưa chọn nhà cung cấp cần xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
-            loadData();
+
+            // Confirm deletion from the user
+            if (MessageBox.Show("Bạn muốn xóa?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    _nhacc.remove(txt_mancc.Text);
+              
+                    loadData();
+                }
+                catch (Exception ex)
+                {
+                    // Handle any errors that occur during the remove operation
+                    MessageBox.Show("Không thể xóa nhà cung cấp: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
@@ -115,7 +153,7 @@ namespace QL_Quan_Kho_Hang
                 Nhacc.Email = txt_mail.Text;
                 Nhacc.Fax = txt_fax.Text;
                 Nhacc.DiaChi = txt_dt.Text;
-                Nhacc.Disable = cb_dis.Checked;
+             
                 _nhacc.add(Nhacc);
             }
             else
@@ -127,7 +165,7 @@ namespace QL_Quan_Kho_Hang
                 Nhacc.Email = txt_mail.Text;
                 Nhacc.Fax = txt_fax.Text;
                 Nhacc.DiaChi = txt_dt.Text;
-                Nhacc.Disable = cb_dis.Checked;
+         
                 _nhacc.update(Nhacc);
             }
             _them = false;
@@ -152,20 +190,37 @@ namespace QL_Quan_Kho_Hang
 
         private void GV_Ds_Click(object sender, EventArgs e)
         {
-            if (GV_Ds.RowCount > 0)
+            if (GV_Ds.RowCount > 0 && GV_Ds.FocusedRowHandle >= 0)
             {
-                mancc = GV_Ds.GetFocusedRowCellValue("MaNCC").ToString();
-                txt_mancc.Text = GV_Ds.GetFocusedRowCellValue("MaNCC").ToString();
-                txt_tenncc.Text = GV_Ds.GetFocusedRowCellValue("TenNCC").ToString();
-                txt_dt.Text = GV_Ds.GetFocusedRowCellValue("DienThoai").ToString();
-                txt_mail.Text = GV_Ds.GetFocusedRowCellValue("Email").ToString();
-                txt_fax.Text = GV_Ds.GetFocusedRowCellValue("Fax").ToString();
-                txt_diachi.Text = GV_Ds.GetFocusedRowCellValue("DiaChi").ToString();
-                cb_dis.Checked = bool.Parse(GV_Ds.GetFocusedRowCellValue("Disable").ToString());
+                try
+                {
+                    mancc = GV_Ds.GetFocusedRowCellValue("MaNCC")?.ToString() ?? string.Empty;
+                    txt_mancc.Text = mancc;
 
+                    txt_tenncc.Text = GV_Ds.GetFocusedRowCellValue("TenNCC")?.ToString() ?? string.Empty;
+                    txt_dt.Text = GV_Ds.GetFocusedRowCellValue("DienThoai")?.ToString() ?? string.Empty;
+                    txt_mail.Text = GV_Ds.GetFocusedRowCellValue("Email")?.ToString() ?? string.Empty;
+                    txt_fax.Text = GV_Ds.GetFocusedRowCellValue("Fax")?.ToString() ?? string.Empty;
+                    txt_diachi.Text = GV_Ds.GetFocusedRowCellValue("DiaChi")?.ToString() ?? string.Empty;
+
+                    // Safely parse the "Disable" field. Default to false if the value is invalid or null.
+                    bool disable = false;
+                    var disableValue = GV_Ds.GetFocusedRowCellValue("Disable")?.ToString();
+                    if (!string.IsNullOrEmpty(disableValue))
+                    {
+                        bool.TryParse(disableValue, out disable);
+                    }
+                   
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception (e.g., log it)
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
+
         }
 
-       
+
     }
 }

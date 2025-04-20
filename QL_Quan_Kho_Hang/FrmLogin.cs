@@ -67,10 +67,9 @@ namespace QL_Quan_Kho_Hang
            
             if (user.Passwd.Equals(pass))
             {
+                this.Hide();
                 MainForm mainForm = new MainForm(user);
                 mainForm.ShowDialog();
-                this.Hide();
-
             }
             else
             {

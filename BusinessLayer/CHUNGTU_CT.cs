@@ -19,10 +19,10 @@ namespace BusinessLayer
             return db.tb_Chungtu_CT.FirstOrDefault(x => x.Khoa == khoa);
         }
 
-        public tb_Chungtu_CT getItembyban(int idban)
-        {
-            return db.tb_Chungtu_CT.FirstOrDefault(x => x.idban == idban && x.TrangThai == false);
-        }
+        //public tb_Chungtu_CT getItembyban(int idban)
+        //{
+        //    return db.tb_Chungtu_CT.FirstOrDefault(x => x.idban == idban && x.TrangThai == false);
+        //}
 
         public List<obj_CHUNGTU_CT> getlistbykhoafull(Guid khoa)
         {
@@ -44,44 +44,14 @@ namespace BusinessLayer
                 obj.Thanhtien = item.Thanhtien;
                 obj.Stt = item.Stt;
                 obj.Ngay = item.Ngay;
-                lsCT.Add(obj);
-
-            }
-            return lsCT;    
-        }     
-        public List<obj_CHUNGTU_CT> getlistbyBan(int ban)
-        {
-            var lst=db.tb_Chungtu_CT.Where(x=>x.idban==ban && x.TrangThai==false).OrderBy(x => x.Khoa).ThenBy(x => x.Ngay).ToList();
-            List<obj_CHUNGTU_CT> lsCT = new List<obj_CHUNGTU_CT>();
-            obj_CHUNGTU_CT obj;
-            foreach (var item in lst)
-            {
-                obj = new obj_CHUNGTU_CT();
-                obj.Khoa= item.Khoa;
-                obj.KhoaCT = item.KhoaCT;
-                obj.Barcode = item.Barcode;
-                var h=db.tb_HangHoa.FirstOrDefault(x=>x.BarCode==item.Barcode);
-                obj.TenHH = h.TenHH;
-                obj.DVT = h.DVT;
-                obj.SoluongCT = item.SoluongCT;
-                obj.Dongia = item.Dongia;
-                obj.GiaBan = item.GiaBan;
-                obj.Thanhtien = item.Thanhtien;
-                obj.Stt = item.Stt;
-                obj.Ngay = item.Ngay;
-                if (item.TrangThai.HasValue)
-                {
-                    obj.TrangThai = item.TrangThai.Value;
-                }
-                else
-                {
-                    obj.TrangThai = false; // hoặc một giá trị mặc định khác nếu cần
-                }
+                obj.Chietkhau = item.Chietkhau;
+                obj.IdKH = item.IdKH;
                 lsCT.Add(obj);
 
             }
             return lsCT;    
         }
+
         public tb_Chungtu_CT add(tb_Chungtu_CT chungtuct)
         {
             try
@@ -105,6 +75,8 @@ namespace BusinessLayer
             _chungtuct.Dongia=chungtuct.Dongia;
             _chungtuct.GiaBan=chungtuct.GiaBan;
             _chungtuct.Thanhtien = chungtuct.Thanhtien;
+            _chungtuct.Chietkhau=chungtuct.Chietkhau;
+            _chungtuct.IdKH=chungtuct.IdKH;
             _chungtuct.Ngay=chungtuct.Ngay;
             try
             {

@@ -69,15 +69,43 @@ namespace BusinessLayer
         public void FalseCty(string madv)
         {
             tb_DonVi _dvi = db.tb_DonVi.FirstOrDefault(x => x.MaDvi == madv);
-            _dvi.Disable = true;
-            try
+            if (_dvi != null)
             {
-
-                db.SaveChanges();
+                _dvi.Disable = true;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi update dữ liệu: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("lỗi update dữ liệu" + ex.Message);
+                throw new Exception("Không tìm thấy đơn vị với mã: " + madv);
+            }
+
+        }     
+        public void remove(string madv)
+        {
+            tb_DonVi _dvi = db.tb_DonVi.FirstOrDefault(x => x.MaDvi == madv);
+            if (_dvi != null)
+            {
+             
+                try
+                {
+                    db.tb_DonVi.Remove(_dvi);
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Lỗi delete dữ liệu: " + ex.Message);
+                }
+            }
+            else
+            {
+                throw new Exception("Không tìm thấy đơn vị với mã: " + madv);
             }
 
         }

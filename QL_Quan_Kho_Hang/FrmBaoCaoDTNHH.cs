@@ -101,6 +101,7 @@ namespace QL_Quan_Kho_Hang
 
         private void date_tu_Leave(object sender, EventArgs e)
         {
+            loadCHART();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,6 +121,7 @@ namespace QL_Quan_Kho_Hang
 
         private void date_den_Leave(object sender, EventArgs e)
         {
+            loadCHART();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -144,7 +146,7 @@ namespace QL_Quan_Kho_Hang
 
                 // Tải file báo cáo từ thư mục Reports
                 string reportPath = System.Windows.Forms.Application.StartupPath + "\\Reports\\" + "SP_DOANHTHU_THEONHOMHANG" + ".rpt";
-
+           
                 // Kiểm tra tệp báo cáo có tồn tại không
                 if (!System.IO.File.Exists(reportPath))
                 {
@@ -163,10 +165,11 @@ namespace QL_Quan_Kho_Hang
                 Thongtin.ConnectionInfo.UserID = myFunctions._us;
                 Thongtin.ConnectionInfo.Password = myFunctions._pw;
                 doc.Database.Tables[0].ApplyLogOnInfo(Thongtin);
+                doc.PrintOptions.PaperSize = PaperSize.DefaultPaperSize; // Hoặc PaperSize.PaperA4
+                doc.PrintOptions.ApplyPageMargins(new PageMargins(10, 10, 10, 10)); // Điều chỉnh lề hợp lý
+                                                                                    // Thiết lập giá trị tham số cho báo cáo dựa trên điều kiện
 
-                // Thiết lập giá trị tham số cho báo cáo dựa trên điều kiện
-      
-                    doc.SetParameterValue("@NGAYD", date_tu.Value);
+                doc.SetParameterValue("@NGAYD", date_tu.Value);
                     doc.SetParameterValue("@NGAYC", date_den.Value);
 
 

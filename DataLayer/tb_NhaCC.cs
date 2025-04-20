@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class tb_NhaCC
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_NhaCC()
-        {
-            this.tb_HangHoa = new HashSet<tb_HangHoa>();
-        }
-    
         public string MaNCC { get; set; }
         public string TenNCC { get; set; }
         public string DienThoai { get; set; }
@@ -27,8 +21,5 @@ namespace DataLayer
         public string Fax { get; set; }
         public string DiaChi { get; set; }
         public Nullable<bool> Disable { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_HangHoa> tb_HangHoa { get; set; }
     }
 }

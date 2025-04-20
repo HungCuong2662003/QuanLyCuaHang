@@ -186,26 +186,26 @@
             this.mn_chixem,
             this.mn_xoaquyen});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(136, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
             // 
             // mn_toanquyen
             // 
             this.mn_toanquyen.Name = "mn_toanquyen";
-            this.mn_toanquyen.Size = new System.Drawing.Size(135, 22);
+            this.mn_toanquyen.Size = new System.Drawing.Size(180, 22);
             this.mn_toanquyen.Text = "Toàn quyền";
             this.mn_toanquyen.Click += new System.EventHandler(this.mn_toanquyen_Click);
             // 
             // mn_chixem
             // 
             this.mn_chixem.Name = "mn_chixem";
-            this.mn_chixem.Size = new System.Drawing.Size(135, 22);
+            this.mn_chixem.Size = new System.Drawing.Size(180, 22);
             this.mn_chixem.Text = "Chỉ xem";
             this.mn_chixem.Click += new System.EventHandler(this.mn_chixem_Click);
             // 
             // mn_xoaquyen
             // 
             this.mn_xoaquyen.Name = "mn_xoaquyen";
-            this.mn_xoaquyen.Size = new System.Drawing.Size(135, 22);
+            this.mn_xoaquyen.Size = new System.Drawing.Size(180, 22);
             this.mn_xoaquyen.Text = "Xóa quyền";
             this.mn_xoaquyen.Click += new System.EventHandler(this.mn_xoaquyen_Click);
             // 

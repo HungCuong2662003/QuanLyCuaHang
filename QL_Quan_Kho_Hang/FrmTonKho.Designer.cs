@@ -35,6 +35,8 @@
             this.tabTK = new DevExpress.XtraTab.XtraTabControl();
             this.xtra_ktonkho = new DevExpress.XtraTab.XtraTabPage();
             this.pagetonkho = new DevExpress.XtraEditors.SplitContainerControl();
+            this.cbo_dvi = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbb_congty_chinhanh = new System.Windows.Forms.ComboBox();
             this.text = new System.Windows.Forms.Label();
             this.date_ky = new System.Windows.Forms.DateTimePicker();
@@ -53,8 +55,7 @@
             this.TRIGIA = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TIEN_CUOI = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.cbo_dvi = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.LG_BANQUAY = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabTK)).BeginInit();
             this.tabTK.SuspendLayout();
@@ -161,6 +162,25 @@
             this.pagetonkho.SplitterPosition = 65;
             this.pagetonkho.TabIndex = 2;
             // 
+            // cbo_dvi
+            // 
+            this.cbo_dvi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbo_dvi.FormattingEnabled = true;
+            this.cbo_dvi.Location = new System.Drawing.Point(841, 23);
+            this.cbo_dvi.Name = "cbo_dvi";
+            this.cbo_dvi.Size = new System.Drawing.Size(170, 28);
+            this.cbo_dvi.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(751, 27);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Đơn vị ";
+            // 
             // cbb_congty_chinhanh
             // 
             this.cbb_congty_chinhanh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -223,6 +243,7 @@
             this.LG_NHAPNB,
             this.LG_XUATSI,
             this.LG_BANLE,
+            this.LG_BANQUAY,
             this.LG_CUOI,
             this.TRIGIA,
             this.TIEN_CUOI});
@@ -351,7 +372,7 @@
             this.LG_CUOI.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "LG_CUOI", "SUM={0:0.##}")});
             this.LG_CUOI.Visible = true;
-            this.LG_CUOI.VisibleIndex = 8;
+            this.LG_CUOI.VisibleIndex = 9;
             // 
             // TRIGIA
             // 
@@ -367,7 +388,7 @@
             this.TRIGIA.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TRIGIA", "SUM={0:0.##}")});
             this.TRIGIA.Visible = true;
-            this.TRIGIA.VisibleIndex = 9;
+            this.TRIGIA.VisibleIndex = 10;
             // 
             // TIEN_CUOI
             // 
@@ -383,31 +404,24 @@
             this.TIEN_CUOI.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TIEN_CUOI", "SUM={0:0.##}")});
             this.TIEN_CUOI.Visible = true;
-            this.TIEN_CUOI.VisibleIndex = 10;
+            this.TIEN_CUOI.VisibleIndex = 11;
             // 
             // gridView2
             // 
             this.gridView2.GridControl = this.gctk;
             this.gridView2.Name = "gridView2";
             // 
-            // cbo_dvi
+            // LG_BANQUAY
             // 
-            this.cbo_dvi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbo_dvi.FormattingEnabled = true;
-            this.cbo_dvi.Location = new System.Drawing.Point(841, 23);
-            this.cbo_dvi.Name = "cbo_dvi";
-            this.cbo_dvi.Size = new System.Drawing.Size(170, 28);
-            this.cbo_dvi.TabIndex = 13;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(751, 27);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 20);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Đơn vị ";
+            this.LG_BANQUAY.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LG_BANQUAY.AppearanceCell.Options.UseFont = true;
+            this.LG_BANQUAY.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LG_BANQUAY.AppearanceHeader.Options.UseFont = true;
+            this.LG_BANQUAY.Caption = "LG BÁN QUẦY";
+            this.LG_BANQUAY.FieldName = "LG_BANQUAY";
+            this.LG_BANQUAY.Name = "LG_BANQUAY";
+            this.LG_BANQUAY.Visible = true;
+            this.LG_BANQUAY.VisibleIndex = 8;
             // 
             // FrmTonKho
             // 
@@ -469,5 +483,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn TIEN_CUOI;
         private System.Windows.Forms.ComboBox cbo_dvi;
         private System.Windows.Forms.Label label8;
+        private DevExpress.XtraGrid.Columns.GridColumn LG_BANQUAY;
     }
 }

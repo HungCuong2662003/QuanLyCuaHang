@@ -50,6 +50,7 @@ D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.FrmPhanQu
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.FrmShowGR.resources
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.FrmUser.resources
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.Frm_showmember.resources
+D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.MainFormUser.resources
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.Properties.Resources.resources
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.csproj.GenerateResource.cache
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.exe.licenses
@@ -57,4 +58,3 @@ D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.csproj.Co
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANA.DEE53093.Up2Date
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.exe
 D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.pdb
-D:\winform\QL_Quan\QL_Quan\USERMANAGERMENT\obj\Release\USERMANAGERMENT.MainFormUser.resources

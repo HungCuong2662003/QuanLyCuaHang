@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class tb_HangHoa
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_HangHoa()
-        {
-            this.tb_Chungtu_CT = new HashSet<tb_Chungtu_CT>();
-        }
-    
         public string BarCode { get; set; }
         public string TenHH { get; set; }
         public string TenTat { get; set; }
@@ -33,11 +27,5 @@ namespace DataLayer
         public Nullable<System.DateTime> Create_Date { get; set; }
         public Nullable<int> Create_By { get; set; }
         public Nullable<bool> Disable { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_Chungtu_CT> tb_Chungtu_CT { get; set; }
-        public virtual tb_NhaCC tb_NhaCC { get; set; }
-        public virtual tb_NhomHH tb_NhomHH { get; set; }
-        public virtual tb_XuatXu tb_XuatXu { get; set; }
     }
 }

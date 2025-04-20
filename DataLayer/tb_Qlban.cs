@@ -14,18 +14,9 @@ namespace DataLayer
     
     public partial class tb_Qlban
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_Qlban()
-        {
-            this.tb_Chungtu_CT = new HashSet<tb_Chungtu_CT>();
-        }
-    
         public int idban { get; set; }
         public string tenban { get; set; }
         public Nullable<int> sokhach { get; set; }
         public Nullable<bool> trangthai { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_Chungtu_CT> tb_Chungtu_CT { get; set; }
     }
 }

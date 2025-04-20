@@ -38,27 +38,27 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(54, 55);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(143, 18);
+            this.labelControl1.Size = new System.Drawing.Size(139, 20);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Công ty - Chi nhánh";
             // 
             // labelControl2
             // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(54, 109);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(128, 18);
+            this.labelControl2.Size = new System.Drawing.Size(119, 20);
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "Đơn vị trực thuộc";
             // 
             // btn_luu
             // 
-            this.btn_luu.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_luu.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_luu.Appearance.Options.UseFont = true;
             this.btn_luu.Location = new System.Drawing.Point(239, 183);
             this.btn_luu.Name = "btn_luu";
@@ -69,7 +69,7 @@
             // 
             // btn_thoat
             // 
-            this.btn_thoat.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_thoat.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_thoat.Appearance.Options.UseFont = true;
             this.btn_thoat.Location = new System.Drawing.Point(349, 183);
             this.btn_thoat.Name = "btn_thoat";
@@ -80,18 +80,20 @@
             // 
             // cbo_congty
             // 
+            this.cbo_congty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbo_congty.FormattingEnabled = true;
             this.cbo_congty.Location = new System.Drawing.Point(222, 55);
             this.cbo_congty.Name = "cbo_congty";
-            this.cbo_congty.Size = new System.Drawing.Size(241, 21);
+            this.cbo_congty.Size = new System.Drawing.Size(241, 28);
             this.cbo_congty.TabIndex = 6;
             // 
             // cbo_dvi
             // 
+            this.cbo_dvi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbo_dvi.FormattingEnabled = true;
             this.cbo_dvi.Location = new System.Drawing.Point(222, 106);
             this.cbo_dvi.Name = "cbo_dvi";
-            this.cbo_dvi.Size = new System.Drawing.Size(241, 21);
+            this.cbo_dvi.Size = new System.Drawing.Size(241, 28);
             this.cbo_dvi.TabIndex = 7;
             this.cbo_dvi.SelectedIndexChanged += new System.EventHandler(this.cbo_dvi_SelectedIndexChanged);
             // 

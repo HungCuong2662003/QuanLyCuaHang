@@ -21,13 +21,38 @@ namespace QL_Quan_Ban_Hang
         public FrmQLBan()
         {
             InitializeComponent();
+        }       
+        public FrmQLBan(tb_SYS_User user, int right)
+        {
+            InitializeComponent();
+            this._user = user;
+            this._right = right;
         }
+
+        tb_SYS_User _user;
+        int _right;
 
         private void FrmQLBan_Load(object sender, EventArgs e)
         {
+       
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+             
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
+
+            }
+            else if (_right == 2)
+            {
+                showHideControl(true);
+            }
+  
             _qlban = new QLban();
             loadData();
-            showHideControl(true);
+    
             Enable(false);
             
         }

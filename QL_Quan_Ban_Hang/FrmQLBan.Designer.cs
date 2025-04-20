@@ -42,10 +42,10 @@
             this.tenban = new DevExpress.XtraGrid.Columns.GridColumn();
             this.trangthai = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.check_dis = new System.Windows.Forms.CheckBox();
             this.txt_tenban = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cb_dis = new System.Windows.Forms.CheckBox();
-            this.check_dis = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GC_Ds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GV_Ds)).BeginInit();
@@ -206,6 +206,17 @@
             this.groupControl1.TabIndex = 3;
             this.groupControl1.Text = "Thông  tin ";
             // 
+            // check_dis
+            // 
+            this.check_dis.AutoSize = true;
+            this.check_dis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.check_dis.Location = new System.Drawing.Point(465, 59);
+            this.check_dis.Name = "check_dis";
+            this.check_dis.Size = new System.Drawing.Size(79, 23);
+            this.check_dis.TabIndex = 15;
+            this.check_dis.Text = "Disable";
+            this.check_dis.UseVisualStyleBackColor = true;
+            // 
             // txt_tenban
             // 
             this.txt_tenban.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -234,17 +245,6 @@
             this.cb_dis.Text = "Disable";
             this.cb_dis.UseVisualStyleBackColor = true;
             // 
-            // check_dis
-            // 
-            this.check_dis.AutoSize = true;
-            this.check_dis.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.check_dis.Location = new System.Drawing.Point(465, 59);
-            this.check_dis.Name = "check_dis";
-            this.check_dis.Size = new System.Drawing.Size(79, 23);
-            this.check_dis.TabIndex = 15;
-            this.check_dis.Text = "Disable";
-            this.check_dis.UseVisualStyleBackColor = true;
-            // 
             // FrmQLBan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,6 +254,7 @@
             this.Controls.Add(this.GC_Ds);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FrmQLBan";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmQLBan";
             this.Load += new System.EventHandler(this.FrmQLBan_Load);
             this.toolStrip1.ResumeLayout(false);

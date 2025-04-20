@@ -23,8 +23,5 @@ namespace DataLayer
         public Nullable<System.DateTime> Last_PWD_Changed { get; set; }
         public Nullable<bool> Disable { get; set; }
         public Nullable<bool> Isgroup { get; set; }
-    
-        public virtual tb_CongTy tb_CongTy { get; set; }
-        public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

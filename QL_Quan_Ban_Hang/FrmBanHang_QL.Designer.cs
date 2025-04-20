@@ -48,16 +48,24 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleterow = new System.Windows.Forms.ToolStripMenuItem();
             this.deletect = new System.Windows.Forms.ToolStripMenuItem();
+            this.chk_CK = new System.Windows.Forms.CheckBox();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcchitiet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvchitiet)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
+            this.splitContainerControl1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
+            this.splitContainerControl1.Panel2.SuspendLayout();
+            this.splitContainerControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_barcode
             // 
             this.txt_barcode.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_barcode.Location = new System.Drawing.Point(26, 515);
+            this.txt_barcode.Location = new System.Drawing.Point(25, 89);
             this.txt_barcode.Name = "txt_barcode";
             this.txt_barcode.Size = new System.Drawing.Size(247, 40);
             this.txt_barcode.TabIndex = 1;
@@ -68,7 +76,7 @@
             this.btn_In.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_In.Appearance.Options.UseFont = true;
             this.btn_In.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_In.ImageOptions.Image")));
-            this.btn_In.Location = new System.Drawing.Point(404, 514);
+            this.btn_In.Location = new System.Drawing.Point(493, 91);
             this.btn_In.Name = "btn_In";
             this.btn_In.Size = new System.Drawing.Size(164, 41);
             this.btn_In.TabIndex = 2;
@@ -77,10 +85,12 @@
             // 
             // btn_tra
             // 
+            this.btn_tra.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_tra.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_tra.Appearance.Options.UseFont = true;
             this.btn_tra.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_tra.ImageOptions.Image")));
-            this.btn_tra.Location = new System.Drawing.Point(847, 514);
+            this.btn_tra.Location = new System.Drawing.Point(915, 91);
             this.btn_tra.Name = "btn_tra";
             this.btn_tra.Size = new System.Drawing.Size(164, 41);
             this.btn_tra.TabIndex = 3;
@@ -89,10 +99,12 @@
             // 
             // btn_chietkhau
             // 
+            this.btn_chietkhau.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_chietkhau.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_chietkhau.Appearance.Options.UseFont = true;
             this.btn_chietkhau.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btn_chietkhau.ImageOptions.Image")));
-            this.btn_chietkhau.Location = new System.Drawing.Point(626, 515);
+            this.btn_chietkhau.Location = new System.Drawing.Point(693, 92);
             this.btn_chietkhau.Name = "btn_chietkhau";
             this.btn_chietkhau.Size = new System.Drawing.Size(164, 41);
             this.btn_chietkhau.TabIndex = 4;
@@ -103,7 +115,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(100, 482);
+            this.label1.Location = new System.Drawing.Point(99, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 19);
             this.label1.TabIndex = 6;
@@ -112,7 +124,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::QL_Quan_Ban_Hang.Properties.Resources.tải_xuống__9_;
-            this.pictureBox1.Location = new System.Drawing.Point(104, 562);
+            this.pictureBox1.Location = new System.Drawing.Point(103, 136);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(85, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -121,11 +133,11 @@
             // 
             // gcchitiet
             // 
-            this.gcchitiet.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gcchitiet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gcchitiet.Location = new System.Drawing.Point(0, 0);
             this.gcchitiet.MainView = this.gvchitiet;
             this.gcchitiet.Name = "gcchitiet";
-            this.gcchitiet.Size = new System.Drawing.Size(1108, 459);
+            this.gcchitiet.Size = new System.Drawing.Size(1091, 401);
             this.gcchitiet.TabIndex = 8;
             this.gcchitiet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvchitiet});
@@ -133,6 +145,8 @@
             // 
             // gvchitiet
             // 
+            this.gvchitiet.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvchitiet.Appearance.Row.Options.UseFont = true;
             this.gvchitiet.ColumnPanelRowHeight = 40;
             this.gvchitiet.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.Barcode,
@@ -180,7 +194,7 @@
             this.TenHH.FieldName = "TenHH";
             this.TenHH.Name = "TenHH";
             this.TenHH.Visible = true;
-            this.TenHH.VisibleIndex = 1;
+            this.TenHH.VisibleIndex = 2;
             // 
             // SoluongCT
             // 
@@ -200,7 +214,7 @@
             this.SoluongCT.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SoluongCT", "{0:N0}")});
             this.SoluongCT.Visible = true;
-            this.SoluongCT.VisibleIndex = 2;
+            this.SoluongCT.VisibleIndex = 1;
             // 
             // DVT
             // 
@@ -244,7 +258,7 @@
             this.Chietkhau.AppearanceCell.Options.UseFont = true;
             this.Chietkhau.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Chietkhau.AppearanceHeader.Options.UseFont = true;
-            this.Chietkhau.Caption = "Chiết khấu";
+            this.Chietkhau.Caption = "Chiết khấu (%)";
             this.Chietkhau.FieldName = "Chietkhau";
             this.Chietkhau.Name = "Chietkhau";
             this.Chietkhau.Visible = true;
@@ -294,29 +308,67 @@
             this.deletect.Text = "Xóa chi tiết";
             this.deletect.Click += new System.EventHandler(this.deletect_Click);
             // 
+            // chk_CK
+            // 
+            this.chk_CK.AutoSize = true;
+            this.chk_CK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_CK.Location = new System.Drawing.Point(306, 98);
+            this.chk_CK.Name = "chk_CK";
+            this.chk_CK.Size = new System.Drawing.Size(164, 27);
+            this.chk_CK.TabIndex = 18;
+            this.chk_CK.Text = "Chuyển khoản";
+            this.chk_CK.UseVisualStyleBackColor = true;
+            // 
+            // splitContainerControl1
+            // 
+            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl1.Horizontal = false;
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControl1.Name = "splitContainerControl1";
+            // 
+            // splitContainerControl1.Panel1
+            // 
+            this.splitContainerControl1.Panel1.Controls.Add(this.chk_CK);
+            this.splitContainerControl1.Panel1.Controls.Add(this.txt_barcode);
+            this.splitContainerControl1.Panel1.Controls.Add(this.btn_In);
+            this.splitContainerControl1.Panel1.Controls.Add(this.label1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.btn_tra);
+            this.splitContainerControl1.Panel1.Controls.Add(this.btn_chietkhau);
+            this.splitContainerControl1.Panel1.Controls.Add(this.pictureBox1);
+            this.splitContainerControl1.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControl1.Panel2
+            // 
+            this.splitContainerControl1.Panel2.Controls.Add(this.gcchitiet);
+            this.splitContainerControl1.Panel2.Text = "Panel2";
+            this.splitContainerControl1.Size = new System.Drawing.Size(1091, 621);
+            this.splitContainerControl1.SplitterPosition = 210;
+            this.splitContainerControl1.TabIndex = 19;
+            // 
             // FrmBanHang_QL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1108, 621);
+            this.ClientSize = new System.Drawing.Size(1091, 621);
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.gcchitiet);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btn_chietkhau);
-            this.Controls.Add(this.btn_tra);
-            this.Controls.Add(this.btn_In);
-            this.Controls.Add(this.txt_barcode);
+            this.Controls.Add(this.splitContainerControl1);
             this.Name = "FrmBanHang_QL";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmBanHang_QL";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmBanHang_QL_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcchitiet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvchitiet)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
+            this.splitContainerControl1.Panel1.ResumeLayout(false);
+            this.splitContainerControl1.Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
+            this.splitContainerControl1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
+            this.splitContainerControl1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -339,5 +391,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleterow;
         private System.Windows.Forms.ToolStripMenuItem deletect;
+        private System.Windows.Forms.CheckBox chk_CK;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
     }
 }

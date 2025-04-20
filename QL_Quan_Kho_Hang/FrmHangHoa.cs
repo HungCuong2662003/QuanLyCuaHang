@@ -43,6 +43,20 @@ namespace QL_Quan_Kho_Hang
 
         private void FrmHangHoa_Load(object sender, EventArgs e)
         {
+          
+            if (_right == 1)
+            {
+                btn_them.Enabled = false;
+                btn_sua.Enabled = false;
+                btn_xoa.Enabled = false;
+                //btn_thoat.Enabled = false;
+                btn_luu.Enabled = false;
+                btn_boqua.Enabled = false;
+
+            }else if(_right == 2)
+            {
+                showHideControl(true);
+            }
             _nhacc=new NHACC();
             _donvitinh=new DONVITINH();
             _nhomhh=new NHOMHH();
@@ -50,8 +64,37 @@ namespace QL_Quan_Kho_Hang
             _hanghoa=new HANGHOA();
             _SYS_SEQUENCE = new SYS_SEQUENCE();
 
-           
-            showHideControl(true);
+
+            // Thêm cột "Chọn" vào GridView
+            DevExpress.XtraGrid.Columns.GridColumn colCheckBox = new DevExpress.XtraGrid.Columns.GridColumn
+            {
+                Caption = "Chọn",
+                FieldName = "IsSelected", // Tên trường dữ liệu
+                Visible = true,
+                UnboundType = DevExpress.Data.UnboundColumnType.Boolean // Kiểu dữ liệu Boolean
+               
+            };
+            // Đặt font chữ cho dữ liệu trong cột
+            colCheckBox.AppearanceCell.Font = new Font("Tahoma", 12); // Font chữ và kích thước 12
+            colCheckBox.AppearanceCell.Options.UseFont = true;
+
+            // Đặt font chữ cho header của cột
+            colCheckBox.AppearanceHeader.Font = new Font("Tahoma", 12); // Font chữ và kích thước 12, in đậm
+            colCheckBox.AppearanceHeader.Options.UseFont = true;
+            // Tạo RepositoryItemCheckEdit cho cột
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit checkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            GV_Ds.GridControl.RepositoryItems.Add(checkEdit); // Thêm RepositoryItem vào GridControl
+            colCheckBox.ColumnEdit = checkEdit;
+
+            // Cho phép chỉnh sửa cột
+            colCheckBox.OptionsColumn.AllowEdit = true;
+            colCheckBox.OptionsColumn.ReadOnly = false;
+
+            // Thêm cột vào GridView
+            GV_Ds.Columns.Add(colCheckBox);
+
+            // Xử lý sự kiện CustomUnboundColumnData
+            GV_Ds.CustomUnboundColumnData += GV_Ds_CustomUnboundColumnData;
             Enable(false);
             cbb_id.Enabled = true;
             loadnhom();
@@ -66,6 +109,25 @@ namespace QL_Quan_Kho_Hang
 
         }
 
+        private void GV_Ds_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            if (e.Column.FieldName == "IsSelected") // Kiểm tra cột "IsSelected"
+            {
+                var rowData = e.Row as Obj_HangHoa; // Lấy đối tượng hàng hóa từ hàng hiện tại
+                if (rowData != null)
+                {
+                    if (e.IsGetData) // Khi GridView yêu cầu dữ liệu
+                    {
+                        e.Value = rowData.IsSelected; // Trả về giá trị checkbox
+                    }
+                    else if (e.IsSetData) // Khi người dùng thay đổi giá trị checkbox
+                    {
+                        rowData.IsSelected = (bool)e.Value; // Cập nhật giá trị trong danh sách
+                    }
+                }
+            }
+        }
+
         private void Cbb_id_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadData();
@@ -74,17 +136,32 @@ namespace QL_Quan_Kho_Hang
         void loadData()
         {
 
+            //try
+            //{
+            //    GC_Ds.DataSource = _hanghoa.getlistbyNHOM_Full(cbb_id.SelectedValue.ToString());
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Bắt lỗi và hiển thị thông báo
+            //    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            //_lsthh = _hanghoa.getlistbyNHOM_Full(cbb_id.SelectedValue.ToString());
             try
             {
-                GC_Ds.DataSource = _hanghoa.getlistbyNHOM_Full(cbb_id.SelectedValue.ToString());
-               
+                // Cập nhật dữ liệu từ cơ sở dữ liệu vào danh sách _lsthh
+                _lsthh = _hanghoa.getlistbyNHOM_Full(cbb_id.SelectedValue.ToString());
+
+                // Gán lại nguồn dữ liệu cho GridControl
+                GC_Ds.DataSource = _lsthh;
+                GV_Ds.RefreshData();
             }
             catch (Exception ex)
             {
                 // Bắt lỗi và hiển thị thông báo
                 MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            _lsthh = _hanghoa.getlistbyNHOM_Full(cbb_id.SelectedValue.ToString());
         }
 
         void loadnhom()
@@ -129,6 +206,7 @@ namespace QL_Quan_Kho_Hang
         }
         void _reset()
         {
+            txt_barcode.Text = "";
             txt_tenhang.Text = "";
             txt_tentat.Text = "";
             cbb_dvt.Text = "";
@@ -169,11 +247,44 @@ namespace QL_Quan_Kho_Hang
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //if (MessageBox.Show("Bạn muốn xóa?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //{
+            //    _hanghoa.Falsehh(_barcode);
+            //}
+            //loadData();
+            // Lấy danh sách các hàng được chọn
+            // Lọc danh sách các hàng được chọn
+            // Cập nhật trạng thái từ GridView
+            GV_Ds.PostEditor();
+            GV_Ds.UpdateCurrentRow();
+            var selectedRows = _lsthh.Where(row => row.IsSelected).ToList();
+
+            if (selectedRows.Count > 0)
             {
-                _hanghoa.Falsehh(_barcode);
+                // Xác nhận trước khi xóa
+                if (MessageBox.Show($"Bạn có chắc muốn xóa {selectedRows.Count} hàng đã chọn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    foreach (var row in selectedRows)
+                    {
+                        _hanghoa.remove(row.BarCode);
+                     
+                        // Xóa hàng khỏi danh sách
+                        _lsthh.Remove(row);
+                    }
+                    MessageBox.Show("Đã xóa thành công");
+
+                    // Cập nhật lại dữ liệu trong GridView
+                    GC_Ds.DataSource = null; // Clear nguồn dữ liệu cũ
+                    GC_Ds.DataSource = _lsthh; // Gán lại danh sách đã cập nhật
+                    GV_Ds.RefreshData();
+                }
             }
-            loadData();
+            else
+            {
+                // Hiển thị thông báo nếu không có hàng nào được chọn
+                MessageBox.Show("Vui lòng chọn ít nhất một hàng để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
         tb_SYS_SEQUENCE _seq;
@@ -199,7 +310,7 @@ namespace QL_Quan_Kho_Hang
                 // Tạo chuỗi mã vạch theo định dạng mong muốn
                 string barcodeText = $"{idNhom}{year}{serialNumber}";
 
-                hangHoa.BarCode = barcodeText;
+                hangHoa.BarCode = txt_barcode.Text;
 
                 //hangHoa.BarCode = BARCODE.buildEan13(DateTime.Now.Year.ToString() + cbb_id.SelectedValue.ToString() + _seq.value.Value.ToString("0000000"));
          
@@ -230,7 +341,8 @@ namespace QL_Quan_Kho_Hang
             }
             else
             {
-                tb_HangHoa hangHoa = _hanghoa.getItem(_barcode);     
+                tb_HangHoa hangHoa = _hanghoa.getItem(_barcode);  
+                hangHoa.BarCode= txt_barcode.Text;
                 hangHoa.TenHH = txt_tenhang.Text;
                 hangHoa.TenTat = txt_tentat.Text;
                 hangHoa.IdNhom = cbb_id.SelectedValue.ToString();
@@ -441,5 +553,30 @@ namespace QL_Quan_Kho_Hang
         {
 
         }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            selectAll(true);
+            MessageBox.Show("Đã  chọn tất cả các hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btn_unslect_Click(object sender, EventArgs e)
+        {
+            selectAll(false);
+            MessageBox.Show("Đã hủy chọn tất cả các hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void selectAll(bool check)
+        {
+            foreach (var row in _lsthh)
+            {
+                row.IsSelected = check; // Đặt IsSelected về false
+            }
+
+            // Cập nhật lại dữ liệu trong GridView
+            GC_Ds.DataSource = null; // Xóa nguồn dữ liệu hiện tại
+            GC_Ds.DataSource = _lsthh; // Gán lại danh sách cập nhật
+            GV_Ds.RefreshData(); // Làm mới GridView
+        }
+
     }
 }

@@ -141,7 +141,7 @@ namespace USERMANAGERMENT
         public void loadUser(string macty, string madvi)
         {
             _sysuser = new SYS_USER();
-
+        
             if (string.IsNullOrEmpty(_macty) || _madvi == "~")
             {
                 // Nếu madvi rỗng hoặc là "~", tải toàn bộ người dùng
@@ -154,6 +154,7 @@ namespace USERMANAGERMENT
                 gc_user.DataSource = _sysuser.GetAllbyDVI(macty, madvi);
                 gv_user.OptionsBehavior.Editable = false;
             }
+            gv_user.RefreshData();
         }
 
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)

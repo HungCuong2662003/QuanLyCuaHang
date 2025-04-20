@@ -64,7 +64,7 @@ namespace USERMANAGERMENT
                 bool checkUser = _sysuser.checkuserexits(_macty, _madvi, txt_tendangnhap.Text.Trim());
                 if (checkUser)
                 {
-                    MessageBox.Show("Nhóm đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Người dùng đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txt_tendangnhap.SelectAll();
                     txt_hovaten.Focus();
                     return;
@@ -79,6 +79,7 @@ namespace USERMANAGERMENT
                 _tb_user.Madvi = _madvi;
                 _tb_user.Last_PWD_Changed = DateTime.Now;
                 _sysuser.add(_tb_user);
+                MessageBox.Show("Đã lưu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -93,24 +94,26 @@ namespace USERMANAGERMENT
                 _tb_user.Madvi = _madvi;
                 _tb_user.Last_PWD_Changed = DateTime.Now;
                 _sysuser.update(_tb_user);
+                MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             objMain.loadUser(_macty, _madvi);
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if (txt_tendangnhap .Text.Trim() == "")
+            // Kiểm tra tên đăng nhập có trống hoặc chỉ chứa khoảng trắng không
+            if (string.IsNullOrWhiteSpace(txt_tendangnhap.Text))
             {
                 MessageBox.Show("Chưa nhập tên người dùng. Nhập tên không dấu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_tendangnhap.SelectAll();
                 txt_tendangnhap.Focus();
                 return;
             }
-            if (!txt_mk.Text.Equals(txt_mk1.Text))
+
+            // Kiểm tra mật khẩu có trùng khớp và không chỉ chứa khoảng trắng
+            if (string.IsNullOrWhiteSpace(txt_mk.Text) || !txt_mk.Text.Trim().Equals(txt_mk1.Text.Trim()))
             {
-                MessageBox.Show("Mật khẩu không khớp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txt_tendangnhap.SelectAll();
-                txt_tendangnhap.Focus();
+                MessageBox.Show("Mật khẩu không hợp lệ hoặc không khớp", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txt_mk.Focus();
                 return;
             }
             savedata();
@@ -146,5 +149,7 @@ namespace USERMANAGERMENT
             _sysgroup.remove(_IdUser, int.Parse(gv_thanhvien.GetFocusedRowCellValue("Iduser").ToString()));
             loadGRbyUser(_IdUser);
         }
+
+  
     }
 }

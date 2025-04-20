@@ -51,31 +51,35 @@
             this.xr_gia,
             this.xr_name,
             this.xrBarcode});
-            this.Detail.HeightF = 131.25F;
-            this.Detail.MultiColumn.ColumnCount = 5;
-            this.Detail.MultiColumn.ColumnWidth = 120F;
+            this.Detail.HeightF = 129.0834F;
+            this.Detail.MultiColumn.ColumnCount = 4;
+            this.Detail.MultiColumn.ColumnWidth = 320F;
             this.Detail.MultiColumn.Layout = DevExpress.XtraPrinting.ColumnLayout.AcrossThenDown;
-            this.Detail.MultiColumn.Mode = DevExpress.XtraReports.UI.MultiColumnMode.UseColumnWidth;
+            this.Detail.MultiColumn.Mode = DevExpress.XtraReports.UI.MultiColumnMode.UseColumnCount;
             this.Detail.Name = "Detail";
             // 
             // xr_gia
             // 
-            this.xr_gia.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 81.33332F);
+            this.xr_gia.Font = new DevExpress.Drawing.DXFont("Arial", 12F);
+            this.xr_gia.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 102.3334F);
             this.xr_gia.Multiline = true;
             this.xr_gia.Name = "xr_gia";
             this.xr_gia.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xr_gia.SizeF = new System.Drawing.SizeF(124.5833F, 23F);
+            this.xr_gia.SizeF = new System.Drawing.SizeF(144.5834F, 22.99999F);
+            this.xr_gia.StylePriority.UseFont = false;
             this.xr_gia.StylePriority.UseTextAlignment = false;
             this.xr_gia.Text = "xr_gia";
             this.xr_gia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xr_name
             // 
-            this.xr_name.LocationFloat = new DevExpress.Utils.PointFloat(10.00004F, 0F);
+            this.xr_name.Font = new DevExpress.Drawing.DXFont("Arial", 12F);
+            this.xr_name.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 0F);
             this.xr_name.Multiline = true;
             this.xr_name.Name = "xr_name";
             this.xr_name.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xr_name.SizeF = new System.Drawing.SizeF(124.5833F, 23F);
+            this.xr_name.SizeF = new System.Drawing.SizeF(144.5834F, 23F);
+            this.xr_name.StylePriority.UseFont = false;
             this.xr_name.StylePriority.UseTextAlignment = false;
             this.xr_name.Text = "xr_name";
             this.xr_name.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -83,10 +87,10 @@
             // xrBarcode
             // 
             this.xrBarcode.AutoModule = true;
-            this.xrBarcode.LocationFloat = new DevExpress.Utils.PointFloat(10.00001F, 22.99999F);
+            this.xrBarcode.LocationFloat = new DevExpress.Utils.PointFloat(12.5833F, 22.99999F);
             this.xrBarcode.Name = "xrBarcode";
-            this.xrBarcode.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
-            this.xrBarcode.SizeF = new System.Drawing.SizeF(124.5833F, 58.33334F);
+            this.xrBarcode.Padding = new DevExpress.XtraPrinting.PaddingInfo(9, 9, 0, 0, 100F);
+            this.xrBarcode.SizeF = new System.Drawing.SizeF(139.9167F, 69.70833F);
             this.xrBarcode.StylePriority.UseTextAlignment = false;
             this.xrBarcode.Symbology = code128Generator1;
             this.xrBarcode.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -108,8 +112,8 @@
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
+        private DevExpress.XtraReports.UI.XRBarCode xrBarcode;
         private DevExpress.XtraReports.UI.XRLabel xr_gia;
         private DevExpress.XtraReports.UI.XRLabel xr_name;
-        private DevExpress.XtraReports.UI.XRBarCode xrBarcode;
     }
 }

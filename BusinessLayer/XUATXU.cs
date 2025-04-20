@@ -49,20 +49,7 @@ namespace BusinessLayer
                 throw new Exception("lỗi update dữ liệu" + ex.Message);
             }
         }
-        public void Delete(int id)
-        {
-            
-            try
-            {
-                tb_XuatXu xuatXu = db.tb_XuatXu.FirstOrDefault(x => x.ID == id);
-                db.tb_XuatXu.Remove(xuatXu);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("lỗi add dữ liệu" + ex.Message);
-            }
-        }
+
         public void False(int id)
         {
           
@@ -74,7 +61,22 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-                throw new Exception("lỗi update dữ liệu" + ex.Message);
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
+            }
+
+        }    
+        public void remove(int id)
+        {
+          
+            try
+            {
+                tb_XuatXu _XuatXu = db.tb_XuatXu.FirstOrDefault(x => x.ID == id);
+                db.tb_XuatXu.Remove(_XuatXu);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("lỗi delete dữ liệu" + ex.Message);
             }
 
         }

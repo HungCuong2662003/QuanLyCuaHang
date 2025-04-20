@@ -15,27 +15,67 @@ namespace BusinessLayer
         {
             db = Entities.CreateEntities();
         }
+
         public List<tb_ChungTu> getItem()
         {
-            return db.tb_ChungTu.ToList();
+            return db.tb_ChungTu.OrderByDescending(x => x.SoChungTu).ToList();
         }
         public tb_ChungTu getItem(Guid khoa)
 
         {
-
             return db.tb_ChungTu.FirstOrDefault(x => x.Khoa == khoa);
         }
         public tb_ChungTu getItem(string sct)
         {
             return db.tb_ChungTu.FirstOrDefault(x => x.SoChungTu == sct);
         }
-        public List<tb_ChungTu> getList(int lct, DateTime tungay, DateTime denngay, string madvi)
+        public List<tb_ChungTu> getList(int lct, DateTime tungay, DateTime denngay, string madvi )
         {
       
             // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
             return db.tb_ChungTu.Where(x => x.Ngay >= tungay
                                              && x.Ngay <= denngay
-                                             && x.MaDVI == madvi && x.LoaiCT==lct).ToList();
+                                             && x.MaDVI == madvi && x.LoaiCT==lct).OrderByDescending(x=>x.SoChungTu).ToList();
+        }      
+        public List<tb_ChungTu> getList(int lct, DateTime tungay, DateTime denngay, string madvi, bool ck)
+        {
+      
+            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
+            return db.tb_ChungTu.Where(x => x.Ngay >= tungay
+                                             && x.Ngay <= denngay
+                                             && x.MaDVI == madvi && x.LoaiCT==lct && x.ChuyenKhoan == ck).OrderByDescending(x=>x.SoChungTu).ToList();
+        }
+        public List<tb_ChungTu> getListbydonhang(int lct, DateTime tungay, DateTime denngay, string madvi,int idban, bool ck)
+        {
+
+            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
+            return db.tb_ChungTu.Where(x => x.Ngay >= tungay
+                                             && x.Ngay <= denngay
+                                             && x.MaDVI == madvi && x.LoaiCT == lct && x.idban== idban && x.ChuyenKhoan==ck).OrderByDescending(x => x.SoChungTu).ToList();
+        }
+        public List<tb_ChungTu> getListDonhang( DateTime tungay, DateTime denngay, string madvi)
+        {
+
+            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
+            return db.tb_ChungTu.Where(x => x.Ngay >= tungay
+                                             && x.Ngay <= denngay
+                                             && x.MaDVI == madvi && (x.LoaiCT == 4 || x.LoaiCT == 5)).OrderByDescending(x => x.SoChungTu).ToList();
+        }
+        public List<tb_ChungTu> getListbyban(int idban)
+        {
+
+            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
+            return db.tb_ChungTu.Where(x => x.idban==idban && x.checkthanhtoan==false).OrderByDescending(x => x.SoChungTu).ToList();
+        }
+        
+        
+        public List<tb_ChungTu> getphieunhap(int lct, DateTime tungay, DateTime denngay, string madvi)
+        {
+      
+            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
+            return db.tb_ChungTu.Where(x => x.Ngay >= tungay
+                                             && x.Ngay <= denngay
+                                             && x.MaDVI2 == madvi && x.LoaiCT==lct && x.TrangThai==2).OrderByDescending(x => x.SoChungTu).ToList();
         }
         public List<tb_ChungTu> getListbycheck(int lct,DateTime tungay, DateTime denngay, string madvi)
         {
@@ -43,7 +83,7 @@ namespace BusinessLayer
             // Lọc dữ liệu từ cơ sở dữ liệu dựa trên các điều kiện
             return db.tb_ChungTu.Where(x => x.Ngay >= tungay
                                              && x.Ngay <= denngay
-                                             && x.MaDVI == madvi && x.Delete_By!=null && x.LoaiCT==lct ).ToList();
+                                             && x.MaDVI == madvi && x.Delete_By!=null && x.LoaiCT==lct ).OrderByDescending(x => x.SoChungTu).ToList();
         }
 
         public tb_ChungTu add(tb_ChungTu ctu)
@@ -88,6 +128,8 @@ namespace BusinessLayer
             _ctu.Update_By = ctu.Update_By;
             _ctu.Delete_Date = ctu.Delete_Date;
             _ctu.Delete_By = ctu.Delete_By;
+            _ctu.idban = ctu.idban;
+            _ctu.checkthanhtoan=ctu.checkthanhtoan;
 
             try
             {
@@ -132,6 +174,23 @@ namespace BusinessLayer
             catch (Exception ex)
             {
                 throw new Exception("lỗi delete dữ liệu" + ex.Message);
+            }
+
+        }
+        public void remove(Guid khoa)
+        {
+            tb_ChungTu _ctu = db.tb_ChungTu.FirstOrDefault(x => x.Khoa == khoa);
+            try
+            {
+                // Xóa bản ghi khỏi DbSet
+                db.tb_ChungTu.Remove(_ctu);
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi khi xóa dữ liệu: " + ex.Message);
             }
 
         }

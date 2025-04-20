@@ -27,5 +27,17 @@ namespace BusinessLayer
             lst.AddRange(collect);
             return lst;
         }
+        public static List<TRANGTHAI> getListCT()
+        {
+            List<TRANGTHAI> lst = new List<TRANGTHAI>();
+            TRANGTHAI[] collect = new TRANGTHAI[2]
+            {
+                new TRANGTHAI(1, "Chưa hoàn tất") ,
+                new TRANGTHAI(2,"Đã hoàn tất")
+            };
+            lst.AddRange(collect);
+            return lst;
+        }
+
     }
 }

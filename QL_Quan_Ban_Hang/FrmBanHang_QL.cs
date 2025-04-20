@@ -189,16 +189,13 @@ namespace QL_Quan_Ban_Hang
                     _seq.value = 1;
                     _sequence.add(_seq);
                 }
-
-                    chungTu.LoaiCT = 4;
-                    chungTu.Khoa = Guid.NewGuid();
-                    chungTu.Ngay = DateTime.Now;    
-                    chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/BLE/" + dvi.KyHieu;
-                    chungTu.Create_By = _user.Iduser;
-                    chungTu.Create_Date = DateTime.Now;
-
-
-
+                chungTu.LoaiCT = 4;
+                chungTu.Khoa = Guid.NewGuid();
+                chungTu.Ngay = DateTime.Now;
+                chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/BLE/" + dvi.KyHieu;
+                chungTu.Create_By = _user.Iduser;
+                chungTu.Create_Date = DateTime.Now;
+                chungTu.ChuyenKhoan = chk_CK.Checked;
                 chungTu.MaCty = MyFunctions._macty;
                 chungTu.MaDVI = madvi;
                 chungTu.MaDVI2 = "NCC1";
@@ -280,6 +277,7 @@ namespace QL_Quan_Ban_Hang
                             // Giá trị mặc định hoặc bỏ qua dòng
                             throw new Exception("Barcode không được để trống.");
                         }
+                        string khachhang = gvchitiet.GetRowCellValue(i, "Barcode").ToString();
 
                         // Số lượng CT
                         _ct.SoluongCT = double.Parse(gvchitiet.GetRowCellValue(i, "SoluongCT").ToString());
@@ -385,6 +383,8 @@ namespace QL_Quan_Ban_Hang
 
                     doc.Database.Tables[0].ApplyLogOnInfo(Thongtin);
 
+                    doc.PrintOptions.PaperSize = PaperSize.DefaultPaperSize; // Hoặc PaperSize.PaperA4
+                    doc.PrintOptions.ApplyPageMargins(new PageMargins(10, 10, 10, 10)); // Điều chỉnh lề hợp lý
 
                     TextObject txtObject = (TextObject)doc.ReportDefinition.ReportObjects["txt_bangchu"];
                     txtObject.Text = docchu.NumberToText(THANHTIEN);
@@ -530,9 +530,10 @@ namespace QL_Quan_Ban_Hang
                             MessageBox.Show("Giá bán không hợp lệ hoặc chưa được nhập.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-
+                        double _chietkhau = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "Chietkhau").ToString());
+            
                         // Tính thành tiền và gán giá trị
-                        gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _trigiatt * _soluong);
+                        gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _trigiatt * _soluong * (1 - _chietkhau / 100));
 
                         // Cập nhật tổng hợp
                         gvchitiet.UpdateTotalSummary();
@@ -553,7 +554,22 @@ namespace QL_Quan_Ban_Hang
             {
                 double _soluong = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "SoluongCT").ToString());
                 double _dongia = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "GiaBan").ToString());
-                gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _dongia * _soluong);
+                double _chietkhau = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "Chietkhau").ToString());
+           
+                gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _dongia * _soluong * (1 - _chietkhau / 100));
+
+                // Cập nhật tổng cộng
+                gvchitiet.UpdateTotalSummary();
+
+            }
+            if (e.Column.FieldName == "Chietkhau")
+            {
+                double _soluong = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "SoluongCT").ToString());
+                double _dongia = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "GiaBan").ToString());
+                double _chietkhau = double.Parse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "Chietkhau").ToString());
+             
+                gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _dongia * _soluong* (1 - _chietkhau / 100));
+
 
                 // Cập nhật tổng cộng
                 gvchitiet.UpdateTotalSummary();

@@ -18,6 +18,7 @@ using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using CrystalDecisions.Windows.Forms;
 using DevExpress.XtraEditors.TextEditController.Win32;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace QL_Quan_Kho_Hang
 {
@@ -43,6 +44,7 @@ namespace QL_Quan_Kho_Hang
         CHUNGTU _chungtu;
         CHUNGTU_CT _chungtuct;
         BindingSource _bdCHUNGTUCT;
+        BindingSource _bdCHUNGTU;
         Guid pkhoa;
       
         List<obj_CHUNGTU_CT> lstChungtuCT;
@@ -53,10 +55,12 @@ namespace QL_Quan_Kho_Hang
         bool _isImport;
         string idBan;
         bool _them;
-
-
+        List<tb_ChungTu> _lstchungTu;
+        Guid _khoa;
+        bool _sua = false;
         private void MainForm_Load(object sender, EventArgs e)
         {
+
             _func = new Sys_FUNC();
             _hanghoa = new HANGHOA();
             _donvi = new DONVI();
@@ -65,16 +69,22 @@ namespace QL_Quan_Kho_Hang
             _chungtu = new CHUNGTU();
             _chungtuct= new CHUNGTU_CT();
             _bdCHUNGTUCT = new BindingSource();
+            _bdCHUNGTU = new BindingSource();
             _sys_group =new SYS_GROUP();
             _SYS_Right = new SYS_RIGHT();
             lstChungtuCT= new List<obj_CHUNGTU_CT> ();
+           
             leftmenu();
             showTable();
-           
-  
-         
+            _bdCHUNGTU.PositionChanged += _bdCHUNGTU_PositionChanged;
 
         }
+
+        private void _bdCHUNGTU_PositionChanged(object sender, EventArgs e)
+        {
+           xuatthongtin();
+        }
+
         void leftmenu()
         {
             try
@@ -173,7 +183,7 @@ namespace QL_Quan_Kho_Hang
                     gc_item.Caption = t.tenban;
                     gc_item.Value = t.idban;
 
-                    var danhsach = _chungtuct.getlistbyBan(t.idban);
+                    var danhsach = _chungtu.getListbyban(t.idban);
                     if (danhsach.Count == 0)
                     {
                         //ban xanh
@@ -202,75 +212,7 @@ namespace QL_Quan_Kho_Hang
 
         }
 
-        void refreshGalleryItems()
-        {
-            try
-            {
-                // Xóa toàn bộ các nhóm và mục hiện tại trong GalleryControl
-                GControl.Gallery.Groups.Clear();
-
-                // Tạo một nhóm mới trong GalleryControl
-                var galleryItemGroup = new GalleryItemGroup();
-
-                // Lấy danh sách bàn mới nhất từ cơ sở dữ liệu
-                var lstable = _QLban.getALL(); // Giả sử `getALL` là phương thức lấy toàn bộ danh sách bàn
-
-                // Thêm từng bàn vào GalleryControl
-                foreach (var t in lstable)
-                {
-                    var galleryItem = new GalleryItem();
-                    galleryItem.Caption = t.tenban;
-                    galleryItem.Value = t.idban;
-
-                    // Kiểm tra nếu bàn trống hoặc có khách
-                    var danhsach = _chungtuct.getlistbyBan(t.idban);
-                    if (danhsach.Count == 0)
-                    {
-                        // Bàn trống - dùng hình ảnh xanh
-                        galleryItem.ImageOptions.Image = imageList1.Images[0];
-                    }
-                    else
-                    {
-                        // Bàn có khách - dùng hình ảnh đỏ
-                        galleryItem.ImageOptions.Image = imageList1.Images[1];
-                    }
-
-                    galleryItemGroup.Items.Add(galleryItem);
-                }
-
-                // Thêm nhóm mới vào GalleryControl và làm mới
-                GControl.Gallery.Groups.Add(galleryItemGroup);
-                GControl.Refresh(); // Làm mới GalleryControl để hiển thị các bàn mới
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Đã xảy ra lỗi load table: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        void LoadPkhoa()
-        {
-            try
-            {
-                var lastChungTu = _chungtuct.getItembyban(int.Parse(idBan));
-                if (lastChungTu != null && lastChungTu.Khoa.HasValue)
-                {
-                    pkhoa = lastChungTu.Khoa.Value;
-                }
-                else
-                {
-                    pkhoa = Guid.Empty;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Đã xảy ra lỗi load khóa: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
-        }
-
-
+        
         private void btn_thoat_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -311,7 +253,9 @@ namespace QL_Quan_Kho_Hang
                                 try
                                 {
                                    MainFormUser frm = new MainFormUser();
+                                    this.Hide();
                                     frm.ShowDialog();
+                                    this.Show();
                                 }
                                 catch (Exception ex)
                                 {
@@ -322,35 +266,42 @@ namespace QL_Quan_Kho_Hang
 
                         case "CONGTY":
                             {
-                                FrmCongTy frm = new FrmCongTy();
-
+                                FrmCongTy frm = new FrmCongTy(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "DONVI":
                             {
-                                FrmDonVi frm = new FrmDonVi();
+                                FrmDonVi frm = new FrmDonVi(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "XUATXU":
                             {
-                                Frmxuatxu frm = new Frmxuatxu();
-
+                                Frmxuatxu frm = new Frmxuatxu(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "NHOMHH":
                             {
-                                FrmNhomHH frm = new FrmNhomHH();
-
+                                FrmNhomHH frm = new FrmNhomHH(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "NHACC":
                             {
-                                FrmNhaCC frm = new FrmNhaCC();
+                                FrmNhaCC frm = new FrmNhaCC(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "HANGHOA":
@@ -365,38 +316,99 @@ namespace QL_Quan_Kho_Hang
                         case "NHAPMUA":
                             {
                                 FrmNhapmua frm = new FrmNhapmua(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "XUATNB":
                             {
                                 FrmXuatNB frm = new FrmXuatNB(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }
+                        case "NHAPNOIBO":
+                            {
+                                FrmNhapNB frm = new FrmNhapNB(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
 
                         case "BANHANGQUANLY":
                             {
                                 FrmBanHang_QL frm = new FrmBanHang_QL(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "TONKHOCTY":
                             {
                                 FrmTonKho frm = new FrmTonKho(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                         case "DOANHTHUNHH":
                             {
                                 FrmBaoCaoDTNHH frm = new FrmBaoCaoDTNHH(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
                                 break;
                             } 
                         case "DOANHTHUMH":
                             {
                                 FrmBaoCaoDTMH frm = new FrmBaoCaoDTMH(_user, _right.UserRight.Value);
+                                this.Hide();
                                 frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }
+                        case "BANSI":
+                            {
+                                FrmBanSi frm = new FrmBanSi(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }
+                        case "BACKUP":
+                            {
+                                Frmbackup frm = new Frmbackup(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }
+                        case "RETORE":
+                            {
+                                FrmRetore frm = new FrmRetore(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }
+                        case "QLDONHANG":
+                            {
+                                FrmQLDonHang frm = new FrmQLDonHang(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
+                                break;
+                            }  
+                        case "BAN":
+                            {
+                             
+                                FrmQLBan frm = new FrmQLBan(_user, _right.UserRight.Value);
+                                this.Hide();
+                                frm.ShowDialog();
+                                this.Show();
                                 break;
                             }
                     }
@@ -451,28 +463,75 @@ namespace QL_Quan_Kho_Hang
            
         }
         //btn_thanhtoan
-        private void btn_thanhtoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //private void btn_thanhtoan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Gọi trực tiếp hàm btn_In_Click với sender là null và EventArgs.Empty
+        //        btn_In_Click(null, EventArgs.Empty);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Đã xảy ra lỗi lưu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+          
+        //}
+ 
+
+        void refreshGalleryItems()
         {
             try
             {
-                // Gọi trực tiếp hàm btn_In_Click với sender là null và EventArgs.Empty
-                btn_In_Click(null, EventArgs.Empty);
+                // Xóa toàn bộ các nhóm và mục hiện tại trong GalleryControl
+                GControl.Gallery.Groups.Clear();
+
+                // Tạo một nhóm mới trong GalleryControl
+                var galleryItemGroup = new GalleryItemGroup();
+
+                // Lấy danh sách bàn mới nhất từ cơ sở dữ liệu
+                var lstable = _QLban.getALL(); // Giả sử `getALL` là phương thức lấy toàn bộ danh sách bàn
+
+                // Thêm từng bàn vào GalleryControl
+                foreach (var t in lstable)
+                {
+                    var galleryItem = new GalleryItem();
+                    galleryItem.Caption = t.tenban;
+                    galleryItem.Value = t.idban;
+
+                    // Kiểm tra nếu bàn trống hoặc có khách
+                    var danhsach = _chungtu.getListbyban(t.idban);
+                    if (danhsach.Count == 0)
+                    {
+                        // Bàn trống - dùng hình ảnh xanh
+                        galleryItem.ImageOptions.Image = imageList1.Images[0];
+                    }
+                    else
+                    {
+                        // Bàn có khách - dùng hình ảnh đỏ
+                        galleryItem.ImageOptions.Image = imageList1.Images[1];
+                    }
+
+                    galleryItemGroup.Items.Add(galleryItem);
+                }
+
+                // Thêm nhóm mới vào GalleryControl và làm mới
+                GControl.Gallery.Groups.Add(galleryItemGroup);
+                GControl.Refresh(); // Làm mới GalleryControl để hiển thị các bàn mới
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi lưu: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Đã xảy ra lỗi load table: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-          
         }
- 
-        private void ql_ban_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        void refesGvds()
         {
-            FrmQLBan frm = new FrmQLBan();
-            frm.ShowDialog();
-            refreshGalleryItems();
+
+            gcds.RefreshDataSource();
+            gvds.RefreshData();
+            _bdCHUNGTU.DataSource = _chungtu.getListbyban(int.Parse(idBan));
+            gcds.DataSource = _bdCHUNGTU;
         }
-
-
+        //thay doi ban
         private void GControl_Gallery_ItemClick(object sender, GalleryItemClickEventArgs e)
         {
             try
@@ -480,14 +539,14 @@ namespace QL_Quan_Kho_Hang
                 idBan = e.Item.Value.ToString();
 
                 // Gọi phương thức load dữ liệu chi tiết cho bàn vừa click
+                refreshGalleryItems();
+                refesGvds();
+                _bdCHUNGTU.Position = 0; // Đặt lại vị trí, hoặc bạn có thể điều chỉnh vị trí dựa theo điều kiện cụ thể
                 xuatthongtin();
-                LoadPkhoa();
-                _bdCHUNGTUCT.DataSource = _chungtuct.getlistbyBan(int.Parse(idBan));
-                gcchitiet.DataSource = _bdCHUNGTUCT;
+                tabCHUNGTU.SelectedTabPage = xtra_ds;
 
 
-                // Thêm một dòng mới
-                gvchitiet.AddNewRow();
+                tabCHUNGTU.SelectedTabPage = xtra_ds;
             }
             catch (Exception ex)
             {
@@ -498,7 +557,7 @@ namespace QL_Quan_Kho_Hang
 
         }
 
-        void chungtu_info(tb_ChungTu chungTu)
+        void chungtu_info(tb_ChungTu chungTu,bool trangthai)
         {
 
             try
@@ -530,6 +589,7 @@ namespace QL_Quan_Kho_Hang
                     _seq.value = 1;
                     _sequence.add(_seq);
                 }
+            
                 if (_them)
                 {
                     chungTu.LoaiCT = 5;
@@ -539,11 +599,12 @@ namespace QL_Quan_Kho_Hang
                     chungTu.Create_By = _user.Iduser;
                     chungTu.Create_Date = DateTime.Now;
                 }
-
-                chungTu.SoChungTu = _seq.value.Value.ToString("000000") + @"/" + DateTime.Today.Year.ToString().Substring(2, 2) + @"/BQA/" + dvi.KyHieu;
                 chungTu.MaCty = MyFunctions._macty;
                 chungTu.MaDVI = madvi;
                 chungTu.MaDVI2 = "NCC1";
+                chungTu.ChuyenKhoan = chk_CK.Checked;
+                chungTu.idban = int.Parse(idBan);
+                chungTu.checkthanhtoan = trangthai;
 
                 // Kiểm tra và chuyển đổi trạng thái thành boolean
                 chungTu.TrangThai = 2;
@@ -591,7 +652,7 @@ namespace QL_Quan_Kho_Hang
             }
         }
 
-        void chuntuCT_info(tb_ChungTu chungTu, bool trangthai)
+        void chuntuCT_info(tb_ChungTu chungTu)
         {
             _chungtuct.deleteALL(chungTu.Khoa);
             for (int i = 0; i < gvchitiet.RowCount; i++)
@@ -610,6 +671,7 @@ namespace QL_Quan_Kho_Hang
                         _ct.Khoa = chungTu.Khoa;
                         _ct.Stt = i + 1;
                         _ct.Ngay = DateTime.Now;
+                        
 
                         // Kiểm tra null cho từng giá trị và gán giá trị mặc định nếu null
                         string barcode = gvchitiet.GetRowCellValue(i, "Barcode").ToString();
@@ -655,8 +717,8 @@ namespace QL_Quan_Kho_Hang
                         {
                             throw new Exception("Thành tiền không hợp lệ.");
                         }
-                        _ct.TrangThai = trangthai;
-                        _ct.idban = int.Parse(idBan);
+                       
+
                         // Thêm bản ghi vào cơ sở dữ liệu
                         _chungtuct.add(_ct);
                     }
@@ -672,14 +734,33 @@ namespace QL_Quan_Kho_Hang
         {
             try
             {
-                _bdCHUNGTUCT.DataSource = _chungtuct.getlistbyBan(int.Parse(idBan));
-                gcchitiet.DataSource = _bdCHUNGTUCT;
-                gvchitiet.RefreshData();
+                // Lấy chứng từ hiện tại từ BindingSource
+                tb_ChungTu current = (tb_ChungTu)_bdCHUNGTU.Current;
+
+                if (current != null)
+                {
+                    pkhoa = current.Khoa;
+                 
+                    // Gán danh sách chi tiết chứng từ
+                 
+                    _bdCHUNGTUCT.DataSource = _chungtuct.getlistbykhoafull(current.Khoa);
+                    gcchitiet.DataSource = _bdCHUNGTUCT;
+                    gvchitiet.OptionsBehavior.Editable = false;
+  
+                    // Cập nhật cột "Stt" cho mỗi hàng
+                    for (int i = 0; i < gvchitiet.RowCount; i++)
+                    {
+                        gvchitiet.SetRowCellValue(i, "Stt", i + 1);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
+                // Hiển thị thông báo lỗi nếu có vấn đề xảy ra
                 MessageBox.Show($"Đã xảy ra lỗi khi xuất thông tin: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
 
@@ -688,20 +769,11 @@ namespace QL_Quan_Kho_Hang
         private void luuthongtin(bool trangthai)
         {
             
-            var danhsach = _chungtuct.getlistbyBan(int.Parse(idBan));
-       
-            if (danhsach.Count == 0)
-            {
-                _them = true;
-            }
-            else
-            {
-                _them = false;
-            }
+            
             try
             {
                 err = "";
-                tb_ChungTu ctu;
+                tb_ChungTu ctu  = new tb_ChungTu();
 
                 // Kiểm tra nếu không có chi tiết
                 if (gvchitiet.RowCount == 0)
@@ -720,45 +792,55 @@ namespace QL_Quan_Kho_Hang
                 }
 
                 // Xử lý logic thêm mới
+          
                 if (_them)
                 {
-                    ctu = new tb_ChungTu();
-                    chungtu_info(ctu);
-
-
+                   
+                    chungtu_info(ctu, trangthai);
                     // Thêm chứng từ
                     var resultCtu = _chungtu.add(ctu);
                     pkhoa = resultCtu.Khoa;
                     _sequence.update(_seq);
 
                     // Thêm thông tin chi tiết
-                    chuntuCT_info(resultCtu, trangthai);
+                    chuntuCT_info(resultCtu);
 
                 }
                 else
                 {
+                    
                     // Xử lý logic cập nhật
-                    tb_Chungtu_CT check = _chungtuct.getItembyban(int.Parse(idBan));
-                    StringBuilder sb = new StringBuilder();
+                    //tb_Chungtu_CT check = _chungtuct.getItembyban(int.Parse(idBan));
+                    //StringBuilder sb = new StringBuilder();
 
-                  
-                    string temp=check.Khoa.ToString();
-          
-                    ctu = _chungtu.getItem(Guid.Parse(temp));
-                    // Lặp qua từng thuộc tính của đối tượng `check`
-                    foreach (var property in ctu.GetType().GetProperties())
+
+                    //string temp=check.Khoa.ToString();
+
+                    //ctu = _chungtu.getItem(Guid.Parse(temp));
+                    //// Lặp qua từng thuộc tính của đối tượng `check`
+                    //foreach (var property in ctu.GetType().GetProperties())
+                    //{
+                    //    sb.AppendLine($"{property.Name}: {property.GetValue(ctu)}");
+                    //}
+
+                    //pkhoa= Guid.Parse(temp);
+
+                    // Xử lý logic cập nhật
+                    ctu = _chungtu.getItem(pkhoa);
+                
+                    if (ctu == null)
                     {
-                        sb.AppendLine($"{property.Name}: {property.GetValue(ctu)}");
+                        MessageBox.Show("Không tìm thấy chứng từ để cập nhật.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
-                    pkhoa= Guid.Parse(temp);
-               
-                    chungtu_info(ctu);
+                    chungtu_info(ctu, trangthai);
 
                     // Cập nhật chứng từ
                     var resultCtu = _chungtu.update(ctu);
 
-                    chuntuCT_info(resultCtu, trangthai);
+                    // Cập nhật thông tin chi tiết
+                    chuntuCT_info(resultCtu);
                 }
 
                 // Hiển thị thông tin sau khi lưu thành công
@@ -803,8 +885,9 @@ namespace QL_Quan_Kho_Hang
                 luuthongtin(false);
                 lstChungtuCT = new List<obj_CHUNGTU_CT>();
                 gcchitiet.DataSource = lstChungtuCT;
-                xuatthongtin();
+                tabCHUNGTU.SelectedTabPage = xtra_ds;
                 refreshGalleryItems();
+               
             }
             catch (Exception ex)
             {
@@ -814,28 +897,7 @@ namespace QL_Quan_Kho_Hang
 
         }
 
-        private void btn_In_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (gvchitiet.RowCount == 0)
-                {
-
-                    MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                luuthongtin(true);
-                lstChungtuCT = new List<obj_CHUNGTU_CT>();
-                gcchitiet.DataSource = lstChungtuCT;
-                XuatReport("Ban_le", "Phiếu nhập mua");
-                refreshGalleryItems();
-            }
-            catch (Exception ex) {
-                MessageBox.Show($"Đã xảy ra lỗi in: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
-
-        }
+   
 
         private void gvchitiet_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
@@ -861,15 +923,28 @@ namespace QL_Quan_Kho_Hang
                                 List<string> s = new List<string>();
                                 if (gvchitiet.RowCount > 1)
                                 {
-                                    for (int i = 0; i < gvchitiet.RowCount-1; i++)
+                                    int currentRow = gvchitiet.FocusedRowHandle;
+
+
+                                    for (int i = 0; i < gvchitiet.RowCount; i++)
                                     {
-                                        s.Add(gvchitiet.GetRowCellValue(i, "Barcode").ToString());
+                                        if (i != currentRow) // Bỏ qua dòng đang nhập
+                                        {
+                                            var barcodeValue = gvchitiet.GetRowCellValue(i, "Barcode")?.ToString().Trim();
+                                            if (!string.IsNullOrEmpty(barcodeValue))
+                                            {
+                                                s.Add(barcodeValue);
+                                            }
+                                        }
                                     }
-                                    if (s.Find(x => x.Equals(e.Value.ToString())) != null)
+
+                                    string barcodeNhap = e.Value?.ToString().Trim() ?? "";
+                                    if (s.Any(x => x.Equals(barcodeNhap, StringComparison.OrdinalIgnoreCase)))
                                     {
-                                        MessageBox.Show("ma nay da duoc nhap ", "loi nhap lieu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Mã này đã có trong danh sách!", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         return;
                                     }
+
                                     else
                                     {
                                         gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "TenHH", hh.TenHH);
@@ -1001,6 +1076,44 @@ namespace QL_Quan_Kho_Hang
                         MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                if (e.Column.FieldName == "Chietkhau")
+                {
+                    try
+                    {
+                        // Lấy giá trị số lượng
+                        if (!double.TryParse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "SoluongCT")?.ToString(), out double _soluong) || _soluong <= 0)
+                        {
+                            MessageBox.Show("Số lượng không hợp lệ hoặc bằng 0.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        // Lấy giá trị giá bán
+                        if (!double.TryParse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "GiaBan")?.ToString(), out double _dongia) || _dongia < 0)
+                        {
+                            MessageBox.Show("Giá bán không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        // Lấy giá trị chiết khấu
+                        if (!double.TryParse(gvchitiet.GetRowCellValue(gvchitiet.FocusedRowHandle, "Chietkhau")?.ToString(), out double _chietkhau) || _chietkhau < 0 || _chietkhau > 100)
+                        {
+                            MessageBox.Show("Chiết khấu không hợp lệ. Vui lòng nhập giá trị từ 0 đến 100.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        // Tính thành tiền
+                        double _thanhtien = _dongia * _soluong * (1 - _chietkhau / 100);
+                        gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Thanhtien", _thanhtien);
+
+                        // Cập nhật tổng cộng
+                        gvchitiet.UpdateTotalSummary();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
 
                 gvchitiet.RefreshData();
 
@@ -1074,15 +1187,50 @@ namespace QL_Quan_Kho_Hang
             }
         }
 
+        private void btn_In_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (gvchitiet.RowCount == 0)
+                {
 
+                    MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (pkhoa == Guid.Empty)
+                {
+                    _them = true;
+                }
+                else
+                {
+                    _them = false;
+                }
+                luuthongtin(true);
+                lstChungtuCT = new List<obj_CHUNGTU_CT>();
+                gcchitiet.DataSource = lstChungtuCT;
+
+           
+                XuatReport("Ban_le", "Phiếu bán quầy");
+                refreshGalleryItems();
+                refesGvds();
+                tabCHUNGTU.SelectedTabPage = xtra_ds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi in: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
         private void XuatReport(string _reportName, string _tieude)
         {
+  
             try
             {
                 if (pkhoa != null)
                 {
 
-                    //MessageBox.Show(pkhoa.ToString());
+              
                     Form frm = new Form();
                     CrystalReportViewer Crv = new CrystalReportViewer();
                     Crv.ShowGroupTreeButton = false;
@@ -1106,11 +1254,9 @@ namespace QL_Quan_Kho_Hang
                     Thongtin.ConnectionInfo.UserID = myFunctions._us;
 
                     Thongtin.ConnectionInfo.Password = myFunctions._pw;
-                    //MessageBox.Show(Thongtin.ConnectionInfo.ServerName);
-                    //MessageBox.Show(Thongtin.ConnectionInfo.DatabaseName);
-                    //MessageBox.Show(Thongtin.ConnectionInfo.UserID);
-                    //MessageBox.Show(Thongtin.ConnectionInfo.Password);
-
+         
+                    doc.PrintOptions.PaperSize = PaperSize.DefaultPaperSize; // Hoặc PaperSize.PaperA4
+                    doc.PrintOptions.ApplyPageMargins(new PageMargins(10, 10, 10, 10)); // Điều chỉnh lề hợp lý
                     doc.Database.Tables[0].ApplyLogOnInfo(Thongtin);
 
                     var thanhtien = _chungtu.getItem(pkhoa);
@@ -1253,6 +1399,198 @@ namespace QL_Quan_Kho_Hang
         {
             FrmBaoCao frm = new FrmBaoCao(_user);
             frm.ShowDialog();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chk_CK_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void gvds_DoubleClick(object sender, EventArgs e)
+        {
+            if (gvds.RowCount > 0)
+            {
+                tabCHUNGTU.SelectedTabPage = xtra_ct;
+            }
+        }
+
+        private void btn_them_Click(object sender, EventArgs e)
+        {
+            _sua = false;
+            pkhoa =Guid.Empty;
+            var danhsach = _chungtu.getListbyban(int.Parse(idBan));
+            if (danhsach.Count < 4)
+            {
+                _them = true;
+            }
+            else
+            {
+                _them = false;
+                MessageBox.Show("Chỉ cho phép thêm tối đa 4 hóa đơn");
+                return;
+            }
+            // Đặt lại nguồn dữ liệu
+            _bdCHUNGTUCT.DataSource = _chungtuct.getlistbykhoafull(_khoa);
+            gcchitiet.DataSource = _bdCHUNGTUCT;
+
+            // Thêm một dòng mới
+            gvchitiet.AddNewRow();
+
+            // Chuyển đến tab chứa chi tiết
+            tabCHUNGTU.SelectedTabPage = xtra_ct;
+
+            // Kích hoạt chế độ chỉnh sửa
+            gvchitiet.OptionsBehavior.Editable = true;
+            contextMenuStrip1.Enabled = true;
+        }
+
+
+        private void gvds_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            if (!gvds.IsGroupRow(e.RowHandle))
+            {
+                if (e.Info.IsRowIndicator)
+                {
+                    if (e.RowHandle < 0)
+                    {
+                        e.Info.ImageIndex = 0;
+                        e.Info.DisplayText = string.Empty;
+                    }
+                    else
+                    {
+                        e.Info.ImageIndex = -1;
+                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                    }
+
+                    SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, e.Appearance.Font);
+                    Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                    BeginInvoke(new MethodInvoker(delegate { cal(_Width, gvds); }));
+                }
+            }
+            else
+            {
+                e.Info.ImageIndex = -1;
+                e.Info.DisplayText = string.Format("[{0}]", (e.RowHandle + 1));
+                SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, e.Appearance.Font);
+                Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                BeginInvoke(new MethodInvoker(delegate { cal(_Width, gvds); }));
+            }
+        }
+        bool cal(int _Width, GridView _View)
+        {
+            _View.IndicatorWidth = _View.IndicatorWidth < _Width ? _Width : _View.IndicatorWidth;
+            return true;
+        }
+
+        private void gvds_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            if (e.Column.FieldName == "TrangThai")
+            {
+                if (e.CellValue != null && e.CellValue.ToString() == "1")
+                {
+                    e.DisplayText = "Chưa hoàn tất";
+                }
+                else
+                {
+                    e.DisplayText = "Đã hoàn tất";
+                }
+            }
+            // Kiểm tra nếu cột là "Delete_By" và giá trị của ô là 1
+            if (e.Column.FieldName == "Delete_By" && e.CellValue != null && e.CellValue.ToString() == "1")
+            {
+                Image img = Properties.Resources.xoa; // Hình ảnh xóa
+
+                // Xác định kích thước của ô
+                int imgWidth = 16;  // Chiều rộng của hình ảnh
+                int imgHeight = 16; // Chiều cao của hình ảnh
+
+                // Tính toán vị trí để hình ảnh nằm giữa ô
+                int x = e.Bounds.X + (e.Bounds.Width - imgWidth) / 2;
+                int y = e.Bounds.Y + (e.Bounds.Height - imgHeight) / 2;
+
+                // Vẽ hình ảnh với kích thước xác định
+                e.Graphics.DrawImage(img, new Rectangle(x, y, imgWidth, imgHeight));
+
+                // Đánh dấu sự kiện đã được xử lý để ngăn việc vẽ lại giá trị "1"
+                e.Handled = true;
+            }
+        }
+
+        private void gvds_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column.FieldName == "Stt")
+            {
+                // Hiển thị số thứ tự tự động tăng theo thứ tự hàng
+                e.DisplayText = (e.ListSourceRowIndex + 1).ToString();
+            }
+            if (e.Column.FieldName == "TrangThai") // Tên cột "Trạng thái"
+            {
+                if (e.Value != null)
+                {
+                    int trangThai = Convert.ToInt32(e.Value);
+                    if (trangThai == 1)
+                    {
+                        e.DisplayText = "chưa hoàn thành"; // Hiển thị "chưa hoàn thành" nếu giá trị là 1
+                    }
+                    else if (trangThai == 0)
+                    {
+                        e.DisplayText = "đã hoàn thành"; // Hiển thị "đã hoàn thành" nếu giá trị là 0
+                    }
+                }
+            }
+        }
+
+        private void btnsua_Click(object sender, EventArgs e)
+        {
+                tb_ChungTu current = (tb_ChungTu)_bdCHUNGTU.Current;
+        
+                    _them = false;
+                    _sua = true;
+   
+                    tabCHUNGTU.SelectedTabPage = xtra_ct;
+                    //tabCHUNGTU.TabPages[0].PageEnabled = false;
+                    gvchitiet.OptionsBehavior.Editable = true;
+                    contextMenuStrip1.Enabled = true;
+                    //cbo_donvinhap.Enabled = false;
+
+                    if (gvchitiet.RowCount == 0)
+                    {
+                        List<V_Chungtu_CT> _lstChiTiet = new List<V_Chungtu_CT>();
+                        _bdCHUNGTU.DataSource = _lstChiTiet;
+                        gcchitiet.DataSource = _bdCHUNGTU;
+                        gvchitiet.AddNewRow();
+                        gvchitiet.SetRowCellValue(gvchitiet.FocusedRowHandle, "Stt", 1);
+                    }
+                
+          
+            
+        }
+
+        private void BTN_XOA_Click(object sender, EventArgs e)
+        {
+            // Xác nhận trước khi xóa
+            if (MessageBox.Show("Bạn có chắc muốn hủy phiếu nhập này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                // Lấy phiếu nhập hiện tại
+                tb_ChungTu current = (tb_ChungTu)_bdCHUNGTU.Current;
+                int index = _bdCHUNGTU.Position;
+
+                // Xóa phiếu nhập dựa trên khóa và loại bỏ khỏi danh sách
+                _chungtu.remove(current.Khoa);
+                refesGvds();
+                xuatthongtin();
+               
+            }
+            return;
+        }
+
+        private void toolStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
 
         //private void btn_thembill_Click(object sender, EventArgs e)

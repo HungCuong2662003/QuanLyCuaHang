@@ -25,5 +25,6 @@ namespace BusinessLayer
         public int Create_By { get; set; }
         public string Create_By_name { get; set; }
         public Nullable<bool> Disable { get; set; }
+        public bool IsSelected { get; set; }=false;
     }
 }

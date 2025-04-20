@@ -28,6 +28,8 @@ namespace DataLayer
         public Nullable<int> LoaiCT { get; set; }
         public Nullable<double> SoLuong { get; set; }
         public Nullable<double> TongTien { get; set; }
+        public Nullable<bool> ChuyenKhoan { get; set; }
+        public Nullable<int> idban { get; set; }
         public string GhiChu { get; set; }
         public string MaCty { get; set; }
         public string MaDVI { get; set; }
@@ -39,9 +41,9 @@ namespace DataLayer
         public Nullable<int> Update_By { get; set; }
         public Nullable<System.DateTime> Delete_Date { get; set; }
         public Nullable<int> Delete_By { get; set; }
+        public Nullable<bool> checkthanhtoan { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Chungtu_CT> tb_Chungtu_CT { get; set; }
-        public virtual tb_DonVi tb_DonVi { get; set; }
     }
 }

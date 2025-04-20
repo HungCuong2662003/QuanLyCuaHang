@@ -14,17 +14,8 @@ namespace DataLayer
     
     public partial class tb_XuatXu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_XuatXu()
-        {
-            this.tb_HangHoa = new HashSet<tb_HangHoa>();
-        }
-    
         public int ID { get; set; }
         public string Ten { get; set; }
         public Nullable<bool> Disable { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_HangHoa> tb_HangHoa { get; set; }
     }
 }

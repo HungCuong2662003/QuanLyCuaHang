@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QL_CuaHangModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tb_ChungTu">
       <EntityTypeMapping TypeName="QL_CuaHangModel.tb_ChungTu">
         <MappingFragment StoreEntitySet="tb_ChungTu">
@@ -12,6 +23,8 @@
           <ScalarProperty Name="LoaiCT" ColumnName="LoaiCT" />
           <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
           <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="ChuyenKhoan" ColumnName="ChuyenKhoan" />
+          <ScalarProperty Name="idban" ColumnName="idban" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
           <ScalarProperty Name="MaCty" ColumnName="MaCty" />
           <ScalarProperty Name="MaDVI" ColumnName="MaDVI" />
@@ -23,6 +36,7 @@
           <ScalarProperty Name="Update_By" ColumnName="Update_By" />
           <ScalarProperty Name="Delete_Date" ColumnName="Delete_Date" />
           <ScalarProperty Name="Delete_By" ColumnName="Delete_By" />
+          <ScalarProperty Name="checkthanhtoan" ColumnName="checkthanhtoan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -35,12 +49,11 @@
           <ScalarProperty Name="SoluongCT" ColumnName="SoluongCT" />
           <ScalarProperty Name="Dongia" ColumnName="Dongia" />
           <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
-          <ScalarProperty Name="idban" ColumnName="idban" />
           <ScalarProperty Name="Thanhtien" ColumnName="Thanhtien" />
           <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+          <ScalarProperty Name="IdKH" ColumnName="IdKH" />
           <ScalarProperty Name="Chietkhau" ColumnName="Chietkhau" />
           <ScalarProperty Name="Stt" ColumnName="Stt" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -97,6 +110,18 @@
           <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
           <ScalarProperty Name="Create_By" ColumnName="Create_By" />
           <ScalarProperty Name="Disable" ColumnName="Disable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_KhachHang">
+      <EntityTypeMapping TypeName="QL_CuaHangModel.tb_KhachHang">
+        <MappingFragment StoreEntitySet="tb_KhachHang">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+          <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+          <ScalarProperty Name="MASOTHUE" ColumnName="MASOTHUE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -238,6 +263,7 @@
           <ScalarProperty Name="LG_XUATNB" ColumnName="LG_XUATNB" />
           <ScalarProperty Name="LG_XUATSI" ColumnName="LG_XUATSI" />
           <ScalarProperty Name="LG_BANLE" ColumnName="LG_BANLE" />
+          <ScalarProperty Name="LG_BANQUAY" ColumnName="LG_BANQUAY" />
           <ScalarProperty Name="LG_CUOI" ColumnName="LG_CUOI" />
           <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
           <ScalarProperty Name="TIEN_CUOI" ColumnName="TIEN_CUOI" />
