@@ -13,12 +13,20 @@ namespace BusinessLayer
         public BaocaodoanhthuNHH()
         {
             db = Entities.CreateEntities();
+            // Force refresh để đảm bảo sử dụng stored procedure mới
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
         }
         public List<Obj_report_nhh> DoanhThuTheoNhomHangHoa(DateTime tu_ngay, DateTime den_ngay, bool tm,bool ck)
         {
+            // Debug: Log parameters
+            System.Diagnostics.Debug.WriteLine($"DoanhThuTheoNhomHangHoa: tu_ngay={tu_ngay}, den_ngay={den_ngay}, tm={tm}, ck={ck}");
 
             List<Obj_report_nhh> lstDoanhThuNhom = new List<Obj_report_nhh>();
             var lstNhom = db.FN_DOANHTHU_THEONHOMHANG(tu_ngay, den_ngay,tm,ck).ToList();
+            
+            // Debug: Log result count
+            System.Diagnostics.Debug.WriteLine($"DoanhThuTheoNhomHangHoa result count: {lstNhom.Count}");
 
             foreach (var item in lstNhom)
             {
@@ -34,9 +42,14 @@ namespace BusinessLayer
         }
         public List<Obj_report_nhh> DoanhThuTheoMH(DateTime tu_ngay, DateTime den_ngay, bool tm, bool ck)
         {
+            // Debug: Log parameters
+            System.Diagnostics.Debug.WriteLine($"DoanhThuTheoMH: tu_ngay={tu_ngay}, den_ngay={den_ngay}, tm={tm}, ck={ck}");
 
             List<Obj_report_nhh> lstDoanhThuNhom = new List<Obj_report_nhh>();
             var lstNhom =db.SP_DOANHTHU_THEOMATHANG (tu_ngay, den_ngay,tm,ck).ToList();
+            
+            // Debug: Log result count
+            System.Diagnostics.Debug.WriteLine($"DoanhThuTheoMH result count: {lstNhom.Count}");
 
             foreach (var item in lstNhom)
             {

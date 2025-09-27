@@ -229,6 +229,7 @@
             this.ckb_tm.TabIndex = 8;
             this.ckb_tm.Text = "Tiền mặt";
             this.ckb_tm.UseVisualStyleBackColor = true;
+            this.ckb_tm.CheckedChanged += new System.EventHandler(this.ckb_tm_CheckedChanged);
             // 
             // ckb_ck
             // 
@@ -240,6 +241,7 @@
             this.ckb_ck.TabIndex = 4;
             this.ckb_ck.Text = "Chuyển khoản";
             this.ckb_ck.UseVisualStyleBackColor = true;
+            this.ckb_ck.CheckedChanged += new System.EventHandler(this.ckb_ck_CheckedChanged);
             // 
             // FrmBaoCaoDTNHH
             // 

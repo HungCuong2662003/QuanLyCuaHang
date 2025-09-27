@@ -412,6 +412,8 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
         <Function Name="FN_DOANHTHU_THEOMATHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NGAYD" Type="datetime" Mode="In" />
           <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+          <Parameter Name="TM" Type="bit" Mode="In" />
+          <Parameter Name="CK" Type="bit" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -426,6 +428,8 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
         <Function Name="FN_DOANHTHU_THEONHOMHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NGAYD" Type="datetime" Mode="In" />
           <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+          <Parameter Name="TM" Type="bit" Mode="In" />
+          <Parameter Name="CK" Type="bit" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -456,10 +460,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
         <Function Name="SP_DOANHTHU_THEOMATHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NGAYD" Type="datetime" Mode="In" />
           <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+          <Parameter Name="TM" Type="bit" Mode="In" />
+          <Parameter Name="CK" Type="bit" Mode="In" />
         </Function>
         <Function Name="SP_DOANHTHU_THEONHOMHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NGAYD" Type="datetime" Mode="In" />
           <Parameter Name="NGAYC" Type="datetime" Mode="In" />
+          <Parameter Name="TM" Type="bit" Mode="In" />
+          <Parameter Name="CK" Type="bit" Mode="In" />
         </Function>
         <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -1062,10 +1070,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <FunctionImport Name="FN_DOANHTHU_THEOMATHANG" IsComposable="true" ReturnType="Collection(QL_CuaHangModel.FN_DOANHTHU_THEOMATHANG_Result)">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
             <Parameter Name="NGAYC" Mode="In" Type="DateTime" />
+            <Parameter Name="TM" Mode="In" Type="Boolean" />
+            <Parameter Name="CK" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="FN_DOANHTHU_THEONHOMHANG" IsComposable="true" ReturnType="Collection(QL_CuaHangModel.FN_DOANHTHU_THEONHOMHANG_Result)">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
             <Parameter Name="NGAYC" Mode="In" Type="DateTime" />
+            <Parameter Name="TM" Mode="In" Type="Boolean" />
+            <Parameter Name="CK" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="REP_TONKHO_DVI">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
@@ -1087,10 +1099,14 @@ warning 6002: The table/view 'QL_CuaHang.dbo.v_user_not_in_group' does not have 
           <FunctionImport Name="SP_DOANHTHU_THEOMATHANG" ReturnType="Collection(QL_CuaHangModel.SP_DOANHTHU_THEOMATHANG_Result)">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
             <Parameter Name="NGAYC" Mode="In" Type="DateTime" />
+            <Parameter Name="TM" Mode="In" Type="Boolean" />
+            <Parameter Name="CK" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_DOANHTHU_THEONHOMHANG" ReturnType="Collection(QL_CuaHangModel.SP_DOANHTHU_THEONHOMHANG_Result)">
             <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
             <Parameter Name="NGAYC" Mode="In" Type="DateTime" />
+            <Parameter Name="TM" Mode="In" Type="Boolean" />
+            <Parameter Name="CK" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="sp_dropdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />

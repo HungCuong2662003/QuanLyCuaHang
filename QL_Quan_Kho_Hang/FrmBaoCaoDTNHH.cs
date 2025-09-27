@@ -48,7 +48,7 @@ namespace QL_Quan_Kho_Hang
         {
             chartdoanhthu.Series.Clear();
             Series series = new Series("Doanh thu theo nhóm hàng ", ViewType.Pie3D);
-            var lst = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm,ckb_ck);
+            var lst = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm.Checked,ckb_ck.Checked);
             foreach (var item in lst) {
                 series.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
             }
@@ -56,7 +56,7 @@ namespace QL_Quan_Kho_Hang
             series.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu1.Series.Clear();
             Series series1 = new Series("Doanh thu theo nhóm hàng ", ViewType.Area3D);
-            var lst1 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm, ckb_ck);
+            var lst1 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst1)
             {
                 series1.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
@@ -65,7 +65,7 @@ namespace QL_Quan_Kho_Hang
             series1.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu2.Series.Clear();
             Series series2 = new Series("Doanh thu theo nhóm hàng ", ViewType.Bar);
-            var lst2 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm, ckb_ck);
+            var lst2 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst2)
             {
                 series2.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
@@ -74,7 +74,7 @@ namespace QL_Quan_Kho_Hang
             series2.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu3.Series.Clear();
             Series series3 = new Series("Doanh thu theo nhóm hàng ", ViewType.RadarLine);
-            var lst3 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm, ckb_ck);
+            var lst3 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst3)
             {
                 series3.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
@@ -129,6 +129,38 @@ namespace QL_Quan_Kho_Hang
             }
         }
 
+        private void ckb_tm_CheckedChanged(object sender, EventArgs e)
+        {
+            // Logic: Nếu không chọn gì thì truyền true cả 2
+            bool tm = ckb_tm.Checked;
+            bool ck = ckb_ck.Checked;
+            
+            // Nếu cả 2 đều false thì đổi thành true cả 2
+            if (!tm && !ck)
+            {
+                tm = true;
+                ck = true;
+            }
+            
+            loadCHART();
+        }
+
+        private void ckb_ck_CheckedChanged(object sender, EventArgs e)
+        {
+            // Logic: Nếu không chọn gì thì truyền true cả 2
+            bool tm = ckb_tm.Checked;
+            bool ck = ckb_ck.Checked;
+            
+            // Nếu cả 2 đều false thì đổi thành true cả 2
+            if (!tm && !ck)
+            {
+                tm = true;
+                ck = true;
+            }
+            
+            loadCHART();
+        }
+
         private void btn_Export_Click(object sender, EventArgs e)
         {
             try
@@ -170,7 +202,21 @@ namespace QL_Quan_Kho_Hang
                                                                                     // Thiết lập giá trị tham số cho báo cáo dựa trên điều kiện
 
                 doc.SetParameterValue("@NGAYD", date_tu.Value);
-                    doc.SetParameterValue("@NGAYC", date_den.Value);
+                doc.SetParameterValue("@NGAYC", date_den.Value);
+                
+                // Logic: Nếu không chọn gì thì truyền true cả 2
+                bool tm = ckb_tm.Checked;
+                bool ck = ckb_ck.Checked;
+                
+                // Nếu cả 2 đều false thì đổi thành true cả 2
+                if (!tm && !ck)
+                {
+                    tm = true;
+                    ck = true;
+                }
+                
+                doc.SetParameterValue("@TM", tm);
+                doc.SetParameterValue("@CK", ck);
 
 
                 // Cấu hình Crystal Report Viewer

@@ -33,26 +33,26 @@ namespace QL_Quan_Kho_Hang
         tb_SYS_User _user;
         int _right;
         BaocaodoanhthuNHH _report;
-        ThongKeNgay _thongKeNgay;
         private void FrmBaoCaoDTMH_Load(object sender, EventArgs e)
         {
             _report = new BaocaodoanhthuNHH();
-            _thongKeNgay = new ThongKeNgay();
             date_tu.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             date_den.Value = DateTime.Now;
             
-            // Thiết lập checkbox mặc định
-            chkTienMat.Checked = true;
-            chkChuyenKhoan.Checked = true;
+            // Thêm event handler thủ công để đảm bảo
+            this.ckb_ck.CheckedChanged += new System.EventHandler(this.ckb_ck_CheckedChanged);
+            this.ckb_tm.CheckedChanged += new System.EventHandler(this.ckb_tm_CheckedChanged);
             
             loadCHART();
-            LoadThongKeNgay();
         }
         void loadCHART()
         {
+            // Debug: Kiểm tra giá trị checkbox
+            System.Diagnostics.Debug.WriteLine($"loadCHART: ckb_tm.Checked = {ckb_tm.Checked}, ckb_ck.Checked = {ckb_ck.Checked}");
+            
             chartdoanhthu.Series.Clear();
             Series series = new Series("Doanh thu theo nhóm hàng ", ViewType.Pie3D);
-            var lst = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value);
+            var lst = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value,ckb_tm.Checked,ckb_ck.Checked);
             foreach (var item in lst)
             {
                 series.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
@@ -61,7 +61,7 @@ namespace QL_Quan_Kho_Hang
             series.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu1.Series.Clear();
             Series series1 = new Series("Doanh thu theo nhóm hàng ", ViewType.Area3D);
-            var lst1 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value);
+            var lst1 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst1)
             {
                 series1.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
@@ -70,7 +70,7 @@ namespace QL_Quan_Kho_Hang
             series1.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu2.Series.Clear();
             Series series2 = new Series("Doanh thu theo nhóm hàng ", ViewType.Bar);
-            var lst2 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value);
+            var lst2 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst2)
             {
                 series2.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
@@ -79,7 +79,7 @@ namespace QL_Quan_Kho_Hang
             series2.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu3.Series.Clear();
             Series series3 = new Series("Doanh thu theo nhóm hàng ", ViewType.RadarLine);
-            var lst3 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value);
+            var lst3 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst3)
             {
                 series3.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
@@ -88,50 +88,9 @@ namespace QL_Quan_Kho_Hang
             series3.Label.TextPattern = "{A}: {VP: p0}";
         }
 
-        void LoadThongKeNgay()
-        {
-            try
-            {
-                DateTime ngay = date_den.Value.Date;
-                bool? loaiThanhToan = null;
-                string madvi = MyFunctions._madvi ?? "dvi1";
-
-                // Xác định loại thanh toán cần lọc
-                if (chkTienMat.Checked && !chkChuyenKhoan.Checked)
-                {
-                    loaiThanhToan = false; // Chỉ tiền mặt
-                }
-                else if (!chkTienMat.Checked && chkChuyenKhoan.Checked)
-                {
-                    loaiThanhToan = true; // Chỉ chuyển khoản
-                }
-
-                // Lấy thống kê tổng quan
-                var thongKe = _thongKeNgay.GetThongKeNgay(ngay, loaiThanhToan, madvi);
-                
-                // Hiển thị thống kê
-                DisplayThongKe(thongKe);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải thống kê: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void DisplayThongKe(Obj_ThongKeNgay thongKe)
-        {
-            // Hiển thị thông tin thống kê trong MessageBox
-            string thongTin = $"=== THỐNG KÊ NGÀY {thongKe.Ngay:dd/MM/yyyy} ===\n\n" +
-                               $"💰 Tiền mặt: {thongKe.TongTienMat:N0} VNĐ ({thongKe.SoHoaDonTienMat} hóa đơn)\n" +
-                               $"🏦 Chuyển khoản: {thongKe.TongTienChuyenKhoan:N0} VNĐ ({thongKe.SoHoaDonChuyenKhoan} hóa đơn)\n" +
-                               $"📊 Tổng cộng: {thongKe.TongTien:N0} VNĐ ({thongKe.SoHoaDon} hóa đơn)";
-            
-            MessageBox.Show(thongTin, "Thống kê ngày", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
         private void date_tu_ValueChanged(object sender, EventArgs e)
         {
             loadCHART();
-            LoadThongKeNgay();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -152,7 +111,6 @@ namespace QL_Quan_Kho_Hang
         private void date_den_ValueChanged(object sender, EventArgs e)
         {
             loadCHART();
-            LoadThongKeNgay();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -168,6 +126,38 @@ namespace QL_Quan_Kho_Hang
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private void ckb_tm_CheckedChanged(object sender, EventArgs e)
+        {
+            // Logic: Nếu không chọn gì thì truyền true cả 2
+            bool tm = ckb_tm.Checked;
+            bool ck = ckb_ck.Checked;
+            
+            // Nếu cả 2 đều false thì đổi thành true cả 2
+            if (!tm && !ck)
+            {
+                tm = true;
+                ck = true;
+            }
+            
+            loadCHART();
+        }
+
+        private void ckb_ck_CheckedChanged(object sender, EventArgs e)
+        {
+            // Logic: Nếu không chọn gì thì truyền true cả 2
+            bool tm = ckb_tm.Checked;
+            bool ck = ckb_ck.Checked;
+            
+            // Nếu cả 2 đều false thì đổi thành true cả 2
+            if (!tm && !ck)
+            {
+                tm = true;
+                ck = true;
+            }
+            
+            loadCHART();
         }
 
         private void btn_Export_Click(object sender, EventArgs e)
@@ -199,6 +189,9 @@ namespace QL_Quan_Kho_Hang
                 // Nếu tệp tồn tại, tải báo cáo
                 doc.Load(reportPath);
 
+                // Debug: Hiển thị thông tin kết nối
+                MessageBox.Show($"Server: {myFunctions._srv}\nDatabase: {myFunctions._db}\nUser: {myFunctions._us}", "Connection Info");
+                
                 // Thiết lập thông tin kết nối cơ sở dữ liệu
                 Thongtin = doc.Database.Tables[0].LogOnInfo;
                 Thongtin.ConnectionInfo.ServerName = myFunctions._srv;
@@ -210,9 +203,22 @@ namespace QL_Quan_Kho_Hang
                 doc.PrintOptions.PaperSize = PaperSize.DefaultPaperSize; // Hoặc PaperSize.PaperA4
                 doc.PrintOptions.ApplyPageMargins(new PageMargins(10, 10, 10, 10)); // Điều chỉnh lề hợp lý
                 // Thiết lập giá trị tham số cho báo cáo dựa trên điều kiện
-
                 doc.SetParameterValue("@NGAYD", date_tu.Value);
                 doc.SetParameterValue("@NGAYC", date_den.Value);
+                
+                // Logic: Nếu không chọn gì thì truyền true cả 2
+                bool tm = ckb_tm.Checked;
+                bool ck = ckb_ck.Checked;
+                
+                // Nếu cả 2 đều false thì đổi thành true cả 2
+                if (!tm && !ck)
+                {
+                    tm = true;
+                    ck = true;
+                }
+                
+                doc.SetParameterValue("@TM", tm);
+                doc.SetParameterValue("@CK", ck);
 
 
                 // Cấu hình Crystal Report Viewer
@@ -245,37 +251,5 @@ namespace QL_Quan_Kho_Hang
             this.Close();
         }
 
-        private void chkTienMat_CheckedChanged(object sender, EventArgs e)
-        {
-            // Nếu bỏ chọn cả hai thì tự động chọn lại
-            if (!chkTienMat.Checked && !chkChuyenKhoan.Checked)
-            {
-                chkTienMat.Checked = true;
-                chkChuyenKhoan.Checked = true;
-            }
-            else
-            {
-                LoadThongKeNgay();
-            }
-        }
-
-        private void chkChuyenKhoan_CheckedChanged(object sender, EventArgs e)
-        {
-            // Nếu bỏ chọn cả hai thì tự động chọn lại
-            if (!chkTienMat.Checked && !chkChuyenKhoan.Checked)
-            {
-                chkTienMat.Checked = true;
-                chkChuyenKhoan.Checked = true;
-            }
-            else
-            {
-                LoadThongKeNgay();
-            }
-        }
-
-        private void btnThongKeNgay_Click(object sender, EventArgs e)
-        {
-            LoadThongKeNgay();
-        }
     }
 }

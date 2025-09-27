@@ -56,17 +56,20 @@ namespace DataLayer
         public virtual DbSet<v_user_not_in_group> v_user_not_in_group { get; set; }
     
         [DbFunction("Entities", "FN_DOANHTHU_THEOMATHANG")]
-        public virtual IQueryable<FN_DOANHTHU_THEOMATHANG_Result> FN_DOANHTHU_THEOMATHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC)
+        public virtual IQueryable<FN_DOANHTHU_THEOMATHANG_Result> FN_DOANHTHU_THEOMATHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, bool tm, bool ck)
         {
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :
                 new ObjectParameter("NGAYD", typeof(System.DateTime));
-    
+
             var nGAYCParameter = nGAYC.HasValue ?
                 new ObjectParameter("NGAYC", nGAYC) :
                 new ObjectParameter("NGAYC", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_DOANHTHU_THEOMATHANG_Result>("[Entities].[FN_DOANHTHU_THEOMATHANG](@NGAYD, @NGAYC)", nGAYDParameter, nGAYCParameter);
+
+            var tmParameter = new ObjectParameter("TM", tm);
+            var ckParameter = new ObjectParameter("CK", ck);
+
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_DOANHTHU_THEOMATHANG_Result>("[Entities].[FN_DOANHTHU_THEOMATHANG](@NGAYD, @NGAYC, @TM, @CK)", nGAYDParameter, nGAYCParameter, tmParameter, ckParameter);
         }
     
         [DbFunction("Entities", "FN_DOANHTHU_THEONHOMHANG")]
@@ -75,12 +78,15 @@ namespace DataLayer
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :
                 new ObjectParameter("NGAYD", typeof(System.DateTime));
-    
+
             var nGAYCParameter = nGAYC.HasValue ?
                 new ObjectParameter("NGAYC", nGAYC) :
                 new ObjectParameter("NGAYC", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_DOANHTHU_THEONHOMHANG_Result>("[Entities].[FN_DOANHTHU_THEONHOMHANG](@NGAYD, @NGAYC)", nGAYDParameter, nGAYCParameter);
+
+            var tmParameter = new ObjectParameter("TM", tm);
+            var ckParameter = new ObjectParameter("CK", ck);
+
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_DOANHTHU_THEONHOMHANG_Result>("[Entities].[FN_DOANHTHU_THEONHOMHANG](@NGAYD, @NGAYC, @TM, @CK)", nGAYDParameter, nGAYCParameter, tmParameter, ckParameter);
         }
     
         public virtual int REP_TONKHO_DVI(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, string mADVI)
@@ -147,25 +153,31 @@ namespace DataLayer
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :
                 new ObjectParameter("NGAYD", typeof(System.DateTime));
-    
+
             var nGAYCParameter = nGAYC.HasValue ?
                 new ObjectParameter("NGAYC", nGAYC) :
                 new ObjectParameter("NGAYC", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DOANHTHU_THEOMATHANG_Result>("SP_DOANHTHU_THEOMATHANG", nGAYDParameter, nGAYCParameter);
+
+            var tmParameter = new ObjectParameter("TM", tm);
+            var ckParameter = new ObjectParameter("CK", ck);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DOANHTHU_THEOMATHANG_Result>("SP_DOANHTHU_THEOMATHANG", nGAYDParameter, nGAYCParameter, tmParameter, ckParameter);
         }
     
-        public virtual ObjectResult<SP_DOANHTHU_THEONHOMHANG_Result> SP_DOANHTHU_THEONHOMHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC)
+        public virtual ObjectResult<SP_DOANHTHU_THEONHOMHANG_Result> SP_DOANHTHU_THEONHOMHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, bool tm, bool ck)
         {
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :
                 new ObjectParameter("NGAYD", typeof(System.DateTime));
-    
+
             var nGAYCParameter = nGAYC.HasValue ?
                 new ObjectParameter("NGAYC", nGAYC) :
                 new ObjectParameter("NGAYC", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DOANHTHU_THEONHOMHANG_Result>("SP_DOANHTHU_THEONHOMHANG", nGAYDParameter, nGAYCParameter);
+
+            var tmParameter = new ObjectParameter("TM", tm);
+            var ckParameter = new ObjectParameter("CK", ck);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DOANHTHU_THEONHOMHANG_Result>("SP_DOANHTHU_THEONHOMHANG", nGAYDParameter, nGAYCParameter, tmParameter, ckParameter);
         }
     
         public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
