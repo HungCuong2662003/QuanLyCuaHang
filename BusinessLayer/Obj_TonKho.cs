@@ -21,6 +21,7 @@ namespace BusinessLayer
         public Nullable<double> LG_XUATNB { get; set; }
         public Nullable<double> LG_XUATSI { get; set; }
         public Nullable<double> LG_BANLE { get; set; }
+        public Nullable<double> LG_BANQUAY { get; set; }
         public Nullable<double> LG_CUOI { get; set; }
         public Nullable<double> TRIGIA { get; set; }
         public Nullable<double> TIEN_CUOI { get; set; }

@@ -395,6 +395,7 @@
             this.navMain.TabIndex = 0;
             this.navMain.Text = "navBarControl1";
             this.navMain.LinkClicked += new DevExpress.XtraNavBar.NavBarLinkEventHandler(this.navMain_LinkClicked);
+            this.navMain.Click += new System.EventHandler(this.navMain_Click);
             // 
             // navBarGroup1
             // 

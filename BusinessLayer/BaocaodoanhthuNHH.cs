@@ -14,11 +14,11 @@ namespace BusinessLayer
         {
             db = Entities.CreateEntities();
         }
-        public List<Obj_report_nhh> DoanhThuTheoNhomHangHoa(DateTime tu_ngay, DateTime den_ngay)
+        public List<Obj_report_nhh> DoanhThuTheoNhomHangHoa(DateTime tu_ngay, DateTime den_ngay, bool tm,bool ck)
         {
 
             List<Obj_report_nhh> lstDoanhThuNhom = new List<Obj_report_nhh>();
-            var lstNhom = db.FN_DOANHTHU_THEONHOMHANG(tu_ngay, den_ngay).ToList();
+            var lstNhom = db.FN_DOANHTHU_THEONHOMHANG(tu_ngay, den_ngay,tm,ck).ToList();
 
             foreach (var item in lstNhom)
             {
@@ -32,11 +32,11 @@ namespace BusinessLayer
             return lstDoanhThuNhom;
 
         }
-        public List<Obj_report_nhh> DoanhThuTheoMH(DateTime tu_ngay, DateTime den_ngay)
+        public List<Obj_report_nhh> DoanhThuTheoMH(DateTime tu_ngay, DateTime den_ngay, bool tm, bool ck)
         {
 
             List<Obj_report_nhh> lstDoanhThuNhom = new List<Obj_report_nhh>();
-            var lstNhom =db.SP_DOANHTHU_THEOMATHANG (tu_ngay, den_ngay).ToList();
+            var lstNhom =db.SP_DOANHTHU_THEOMATHANG (tu_ngay, den_ngay,tm,ck).ToList();
 
             foreach (var item in lstNhom)
             {

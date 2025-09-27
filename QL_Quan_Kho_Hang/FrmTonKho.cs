@@ -206,9 +206,10 @@ namespace QL_Quan_Kho_Hang
                 sheet.Cells[2, 6].value = "Lượng xuất nội bộ ";
                 sheet.Cells[2, 7].value = "Lượng xuất sỉ";
                 sheet.Cells[2, 8].value = "Lượng bán lẻ";
-                sheet.Cells[2, 9].value = "Lượng tồn cuối";
-                sheet.Cells[2, 10].value = "Đơn giá";
-                sheet.Cells[2, 11].value = "Thành tiền";
+                sheet.Cells[2, 9].value = "Lượng bán quầy";
+                sheet.Cells[2, 10].value = "Lượng tồn cuối";
+                sheet.Cells[2, 11].value = "Đơn giá";
+                sheet.Cells[2, 12].value = "Thành tiền";
                 //xuat data
                 _lstTK = _tonkho.GetTonKhoCty(cbb_congty_chinhanh.SelectedValue.ToString(), date_ky.Value.Year, date_ky.Value.Month);
                 for (int i = 1; i <= _lstTK.Count; i++)
@@ -220,7 +221,8 @@ namespace QL_Quan_Kho_Hang
                     sheet.Cells[i + 2, 5].value = _lstTK.ElementAt(i - 1).LG_NHAPMUA;
                     sheet.Cells[i + 2, 6].value = _lstTK.ElementAt(i - 1).LG_XUATNB;
                     sheet.Cells[i + 2, 7].value = _lstTK.ElementAt(i - 1).LG_XUATSI;
-                    sheet.Cells[i + 2, 8].value = _lstTK.ElementAt(i - 1).LG_BANLE;
+                    sheet.Cells[i + 2, 8].value = _lstTK.ElementAt(i - 1).LG_BANLE;  
+                    sheet.Cells[i + 2, 8].value = _lstTK.ElementAt(i - 1).LG_BANQUAY;
                     sheet.Cells[i + 2, 9].value = _lstTK.ElementAt(i - 1).LG_CUOI;
                     sheet.Cells[i + 2, 10].value = _lstTK.ElementAt(i - 1).TRIGIA;
                     sheet.Cells[i + 2, 11].value = _lstTK.ElementAt(i - 1).TIEN_CUOI;
@@ -270,5 +272,9 @@ namespace QL_Quan_Kho_Hang
             }
         }
 
+        private void btn_thoat_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

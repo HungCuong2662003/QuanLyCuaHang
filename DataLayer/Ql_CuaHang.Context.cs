@@ -70,7 +70,7 @@ namespace DataLayer
         }
     
         [DbFunction("Entities", "FN_DOANHTHU_THEONHOMHANG")]
-        public virtual IQueryable<FN_DOANHTHU_THEONHOMHANG_Result> FN_DOANHTHU_THEONHOMHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC)
+        public virtual IQueryable<FN_DOANHTHU_THEONHOMHANG_Result> FN_DOANHTHU_THEONHOMHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, bool tm, bool ck)
         {
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :
@@ -142,7 +142,7 @@ namespace DataLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
-        public virtual ObjectResult<SP_DOANHTHU_THEOMATHANG_Result> SP_DOANHTHU_THEOMATHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC)
+        public virtual ObjectResult<SP_DOANHTHU_THEOMATHANG_Result> SP_DOANHTHU_THEOMATHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC, bool tm, bool ck)
         {
             var nGAYDParameter = nGAYD.HasValue ?
                 new ObjectParameter("NGAYD", nGAYD) :

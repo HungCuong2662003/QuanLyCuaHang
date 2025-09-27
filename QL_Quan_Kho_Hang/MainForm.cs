@@ -1593,6 +1593,11 @@ namespace QL_Quan_Kho_Hang
 
         }
 
+        private void navMain_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //private void btn_thembill_Click(object sender, EventArgs e)
         //{
         //    _bdCHUNGTUCT.DataSource = _chungtuct.getlistbykhoafull(_khoa);

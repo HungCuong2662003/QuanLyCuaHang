@@ -42,6 +42,8 @@
             this.chartdoanhthu2 = new DevExpress.XtraCharts.ChartControl();
             this.chartdoanhthu1 = new DevExpress.XtraCharts.ChartControl();
             this.chartdoanhthu = new DevExpress.XtraCharts.ChartControl();
+            this.ckb_ck = new System.Windows.Forms.CheckBox();
+            this.ckb_tm = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
@@ -64,7 +66,7 @@
             this.btn_thoat});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(926, 44);
+            this.toolStrip1.Size = new System.Drawing.Size(1133, 44);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -99,6 +101,8 @@
             // 
             // splitContainerControl1.Panel1
             // 
+            this.splitContainerControl1.Panel1.Controls.Add(this.ckb_ck);
+            this.splitContainerControl1.Panel1.Controls.Add(this.ckb_tm);
             this.splitContainerControl1.Panel1.Controls.Add(this.date_den);
             this.splitContainerControl1.Panel1.Controls.Add(this.label2);
             this.splitContainerControl1.Panel1.Controls.Add(this.date_tu);
@@ -109,7 +113,7 @@
             // 
             this.splitContainerControl1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(926, 511);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1133, 511);
             this.splitContainerControl1.SplitterPosition = 66;
             this.splitContainerControl1.TabIndex = 4;
             // 
@@ -118,7 +122,7 @@
             this.date_den.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.date_den.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_den.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.date_den.Location = new System.Drawing.Point(612, 20);
+            this.date_den.Location = new System.Drawing.Point(819, 20);
             this.date_den.Name = "date_den";
             this.date_den.Size = new System.Drawing.Size(150, 26);
             this.date_den.TabIndex = 7;
@@ -130,7 +134,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(551, 25);
+            this.label2.Location = new System.Drawing.Point(758, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 20);
             this.label2.TabIndex = 6;
@@ -172,17 +176,17 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(926, 435);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1133, 435);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // chartdoanhthu3
             // 
             this.chartdoanhthu3.AccessibleName = "";
             this.chartdoanhthu3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartdoanhthu3.Location = new System.Drawing.Point(466, 220);
+            this.chartdoanhthu3.Location = new System.Drawing.Point(569, 220);
             this.chartdoanhthu3.Name = "chartdoanhthu3";
             this.chartdoanhthu3.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartdoanhthu3.Size = new System.Drawing.Size(457, 212);
+            this.chartdoanhthu3.Size = new System.Drawing.Size(561, 212);
             this.chartdoanhthu3.TabIndex = 3;
             // 
             // chartdoanhthu2
@@ -192,17 +196,17 @@
             this.chartdoanhthu2.Location = new System.Drawing.Point(3, 220);
             this.chartdoanhthu2.Name = "chartdoanhthu2";
             this.chartdoanhthu2.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartdoanhthu2.Size = new System.Drawing.Size(457, 212);
+            this.chartdoanhthu2.Size = new System.Drawing.Size(560, 212);
             this.chartdoanhthu2.TabIndex = 2;
             // 
             // chartdoanhthu1
             // 
             this.chartdoanhthu1.AccessibleName = "";
             this.chartdoanhthu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartdoanhthu1.Location = new System.Drawing.Point(466, 3);
+            this.chartdoanhthu1.Location = new System.Drawing.Point(569, 3);
             this.chartdoanhthu1.Name = "chartdoanhthu1";
             this.chartdoanhthu1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartdoanhthu1.Size = new System.Drawing.Size(457, 211);
+            this.chartdoanhthu1.Size = new System.Drawing.Size(561, 211);
             this.chartdoanhthu1.TabIndex = 1;
             // 
             // chartdoanhthu
@@ -212,14 +216,36 @@
             this.chartdoanhthu.Location = new System.Drawing.Point(3, 3);
             this.chartdoanhthu.Name = "chartdoanhthu";
             this.chartdoanhthu.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.chartdoanhthu.Size = new System.Drawing.Size(457, 211);
+            this.chartdoanhthu.Size = new System.Drawing.Size(560, 211);
             this.chartdoanhthu.TabIndex = 0;
+            // 
+            // ckb_ck
+            // 
+            this.ckb_ck.AutoSize = true;
+            this.ckb_ck.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckb_ck.Location = new System.Drawing.Point(587, 22);
+            this.ckb_ck.Name = "ckb_ck";
+            this.ckb_ck.Size = new System.Drawing.Size(124, 23);
+            this.ckb_ck.TabIndex = 9;
+            this.ckb_ck.Text = "Chuyển khoản";
+            this.ckb_ck.UseVisualStyleBackColor = true;
+            // 
+            // ckb_tm
+            // 
+            this.ckb_tm.AutoSize = true;
+            this.ckb_tm.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckb_tm.Location = new System.Drawing.Point(345, 23);
+            this.ckb_tm.Name = "ckb_tm";
+            this.ckb_tm.Size = new System.Drawing.Size(87, 23);
+            this.ckb_tm.TabIndex = 10;
+            this.ckb_tm.Text = "Tiền mặt";
+            this.ckb_tm.UseVisualStyleBackColor = true;
             // 
             // FrmBaoCaoDTMH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 555);
+            this.ClientSize = new System.Drawing.Size(1133, 555);
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "FrmBaoCaoDTMH";
@@ -260,5 +286,7 @@
         private DevExpress.XtraCharts.ChartControl chartdoanhthu2;
         private DevExpress.XtraCharts.ChartControl chartdoanhthu1;
         private DevExpress.XtraCharts.ChartControl chartdoanhthu;
+        private System.Windows.Forms.CheckBox ckb_ck;
+        private System.Windows.Forms.CheckBox ckb_tm;
     }
 }

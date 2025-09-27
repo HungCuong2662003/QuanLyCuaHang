@@ -33,12 +33,20 @@ namespace QL_Quan_Kho_Hang
         tb_SYS_User _user;
         int _right;
         BaocaodoanhthuNHH _report;
+        ThongKeNgay _thongKeNgay;
         private void FrmBaoCaoDTMH_Load(object sender, EventArgs e)
         {
             _report = new BaocaodoanhthuNHH();
+            _thongKeNgay = new ThongKeNgay();
             date_tu.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             date_den.Value = DateTime.Now;
+            
+            // Thiết lập checkbox mặc định
+            chkTienMat.Checked = true;
+            chkChuyenKhoan.Checked = true;
+            
             loadCHART();
+            LoadThongKeNgay();
         }
         void loadCHART()
         {
@@ -79,9 +87,51 @@ namespace QL_Quan_Kho_Hang
             chartdoanhthu3.Series.Add(series3);
             series3.Label.TextPattern = "{A}: {VP: p0}";
         }
+
+        void LoadThongKeNgay()
+        {
+            try
+            {
+                DateTime ngay = date_den.Value.Date;
+                bool? loaiThanhToan = null;
+                string madvi = MyFunctions._madvi ?? "dvi1";
+
+                // Xác định loại thanh toán cần lọc
+                if (chkTienMat.Checked && !chkChuyenKhoan.Checked)
+                {
+                    loaiThanhToan = false; // Chỉ tiền mặt
+                }
+                else if (!chkTienMat.Checked && chkChuyenKhoan.Checked)
+                {
+                    loaiThanhToan = true; // Chỉ chuyển khoản
+                }
+
+                // Lấy thống kê tổng quan
+                var thongKe = _thongKeNgay.GetThongKeNgay(ngay, loaiThanhToan, madvi);
+                
+                // Hiển thị thống kê
+                DisplayThongKe(thongKe);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải thống kê: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DisplayThongKe(Obj_ThongKeNgay thongKe)
+        {
+            // Hiển thị thông tin thống kê trong MessageBox
+            string thongTin = $"=== THỐNG KÊ NGÀY {thongKe.Ngay:dd/MM/yyyy} ===\n\n" +
+                               $"💰 Tiền mặt: {thongKe.TongTienMat:N0} VNĐ ({thongKe.SoHoaDonTienMat} hóa đơn)\n" +
+                               $"🏦 Chuyển khoản: {thongKe.TongTienChuyenKhoan:N0} VNĐ ({thongKe.SoHoaDonChuyenKhoan} hóa đơn)\n" +
+                               $"📊 Tổng cộng: {thongKe.TongTien:N0} VNĐ ({thongKe.SoHoaDon} hóa đơn)";
+            
+            MessageBox.Show(thongTin, "Thống kê ngày", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void date_tu_ValueChanged(object sender, EventArgs e)
         {
             loadCHART();
+            LoadThongKeNgay();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -102,6 +152,7 @@ namespace QL_Quan_Kho_Hang
         private void date_den_ValueChanged(object sender, EventArgs e)
         {
             loadCHART();
+            LoadThongKeNgay();
             if (date_tu.Value > date_den.Value)
             {
                 MessageBox.Show("Ngày không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -192,6 +243,39 @@ namespace QL_Quan_Kho_Hang
         private void btn_thoat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void chkTienMat_CheckedChanged(object sender, EventArgs e)
+        {
+            // Nếu bỏ chọn cả hai thì tự động chọn lại
+            if (!chkTienMat.Checked && !chkChuyenKhoan.Checked)
+            {
+                chkTienMat.Checked = true;
+                chkChuyenKhoan.Checked = true;
+            }
+            else
+            {
+                LoadThongKeNgay();
+            }
+        }
+
+        private void chkChuyenKhoan_CheckedChanged(object sender, EventArgs e)
+        {
+            // Nếu bỏ chọn cả hai thì tự động chọn lại
+            if (!chkTienMat.Checked && !chkChuyenKhoan.Checked)
+            {
+                chkTienMat.Checked = true;
+                chkChuyenKhoan.Checked = true;
+            }
+            else
+            {
+                LoadThongKeNgay();
+            }
+        }
+
+        private void btnThongKeNgay_Click(object sender, EventArgs e)
+        {
+            LoadThongKeNgay();
         }
     }
 }

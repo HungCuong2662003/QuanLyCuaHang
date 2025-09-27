@@ -116,6 +116,7 @@
             this.btn_thoat.Size = new System.Drawing.Size(53, 64);
             this.btn_thoat.Text = "Thoát";
             this.btn_thoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btn_thoat.Click += new System.EventHandler(this.btn_thoat_Click);
             // 
             // tabTK
             // 
@@ -417,7 +418,7 @@
             this.LG_BANQUAY.AppearanceCell.Options.UseFont = true;
             this.LG_BANQUAY.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LG_BANQUAY.AppearanceHeader.Options.UseFont = true;
-            this.LG_BANQUAY.Caption = "LG BÁN QUẦY";
+            this.LG_BANQUAY.Caption = "LG_BANQUAY";
             this.LG_BANQUAY.FieldName = "LG_BANQUAY";
             this.LG_BANQUAY.Name = "LG_BANQUAY";
             this.LG_BANQUAY.Visible = true;

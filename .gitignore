@@ -16,6 +16,7 @@ obj/
 *.log
 *.pdb
 *.tmp
+*.resources
 
 # Publish output
 publish/

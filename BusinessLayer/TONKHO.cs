@@ -57,7 +57,8 @@ namespace BusinessLayer
                 tonKho.LG_NHAPNB = item.LG_NHAPNB;
                 tonKho.LG_XUATNB = item.LG_XUATNB;
                 tonKho.LG_XUATSI = item.LG_XUATSI;
-                tonKho.LG_BANLE = item.LG_BANLE;
+                tonKho.LG_BANLE = item.LG_BANLE; 
+                tonKho.LG_BANQUAY = item.LG_BANQUAY;
                 tonKho.LG_CUOI = item.LG_CUOI;
                 tonKho.TRIGIA = item.TRIGIA;
                 tonKho.TIEN_CUOI = item.TIEN_CUOI;
@@ -91,6 +92,7 @@ namespace BusinessLayer
                 tonKho.LG_XUATNB = item.LG_XUATNB;
                 tonKho.LG_XUATSI = item.LG_XUATSI;
                 tonKho.LG_BANLE = item.LG_BANLE;
+                tonKho.LG_BANQUAY = item.LG_BANQUAY;
                 tonKho.LG_CUOI = item.LG_CUOI;
                 tonKho.TRIGIA = item.TRIGIA;
                 tonKho.TIEN_CUOI = item.TIEN_CUOI;

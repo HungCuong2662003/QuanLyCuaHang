@@ -48,7 +48,7 @@ namespace QL_Quan_Kho_Hang
         {
             chartdoanhthu.Series.Clear();
             Series series = new Series("Doanh thu theo nhóm hàng ", ViewType.Pie3D);
-            var lst = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value);
+            var lst = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm,ckb_ck);
             foreach (var item in lst) {
                 series.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
             }
@@ -56,7 +56,7 @@ namespace QL_Quan_Kho_Hang
             series.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu1.Series.Clear();
             Series series1 = new Series("Doanh thu theo nhóm hàng ", ViewType.Area3D);
-            var lst1 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value);
+            var lst1 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm, ckb_ck);
             foreach (var item in lst1)
             {
                 series1.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
@@ -65,7 +65,7 @@ namespace QL_Quan_Kho_Hang
             series1.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu2.Series.Clear();
             Series series2 = new Series("Doanh thu theo nhóm hàng ", ViewType.Bar);
-            var lst2 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value);
+            var lst2 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm, ckb_ck);
             foreach (var item in lst2)
             {
                 series2.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
@@ -74,7 +74,7 @@ namespace QL_Quan_Kho_Hang
             series2.Label.TextPattern = "{A}: {VP: p0}";
             chartdoanhthu3.Series.Clear();
             Series series3 = new Series("Doanh thu theo nhóm hàng ", ViewType.RadarLine);
-            var lst3 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value);
+            var lst3 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm, ckb_ck);
             foreach (var item in lst3)
             {
                 series3.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
