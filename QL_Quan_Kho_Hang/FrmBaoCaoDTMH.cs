@@ -55,7 +55,9 @@ namespace QL_Quan_Kho_Hang
             var lst = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value,ckb_tm.Checked,ckb_ck.Checked);
             foreach (var item in lst)
             {
-                series.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tenhh = string.IsNullOrWhiteSpace(item.tenhh) ? "Không xác định" : item.tenhh;
+                series.Points.Add(new SeriesPoint(tenhh, item.thanhtien));
             }
             chartdoanhthu.Series.Add(series);
             series.Label.TextPattern = "{A}: {VP: p0}";
@@ -64,7 +66,9 @@ namespace QL_Quan_Kho_Hang
             var lst1 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst1)
             {
-                series1.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tenhh = string.IsNullOrWhiteSpace(item.tenhh) ? "Không xác định" : item.tenhh;
+                series1.Points.Add(new SeriesPoint(tenhh, item.thanhtien));
             }
             chartdoanhthu1.Series.Add(series1);
             series1.Label.TextPattern = "{A}: {VP: p0}";
@@ -73,7 +77,9 @@ namespace QL_Quan_Kho_Hang
             var lst2 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst2)
             {
-                series2.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tenhh = string.IsNullOrWhiteSpace(item.tenhh) ? "Không xác định" : item.tenhh;
+                series2.Points.Add(new SeriesPoint(tenhh, item.thanhtien));
             }
             chartdoanhthu2.Series.Add(series2);
             series2.Label.TextPattern = "{A}: {VP: p0}";
@@ -82,7 +88,9 @@ namespace QL_Quan_Kho_Hang
             var lst3 = _report.DoanhThuTheoMH(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst3)
             {
-                series3.Points.Add(new SeriesPoint(item.tenhh, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tenhh = string.IsNullOrWhiteSpace(item.tenhh) ? "Không xác định" : item.tenhh;
+                series3.Points.Add(new SeriesPoint(tenhh, item.thanhtien));
             }
             chartdoanhthu3.Series.Add(series3);
             series3.Label.TextPattern = "{A}: {VP: p0}";
@@ -189,8 +197,8 @@ namespace QL_Quan_Kho_Hang
                 // Nếu tệp tồn tại, tải báo cáo
                 doc.Load(reportPath);
 
-                // Debug: Hiển thị thông tin kết nối
-                MessageBox.Show($"Server: {myFunctions._srv}\nDatabase: {myFunctions._db}\nUser: {myFunctions._us}", "Connection Info");
+          
+              
                 
                 // Thiết lập thông tin kết nối cơ sở dữ liệu
                 Thongtin = doc.Database.Tables[0].LogOnInfo;

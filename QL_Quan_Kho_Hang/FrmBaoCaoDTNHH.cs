@@ -50,7 +50,9 @@ namespace QL_Quan_Kho_Hang
             Series series = new Series("Doanh thu theo nhóm hàng ", ViewType.Pie3D);
             var lst = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm.Checked,ckb_ck.Checked);
             foreach (var item in lst) {
-                series.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tennhom = string.IsNullOrWhiteSpace(item.tennhom) ? "Không xác định" : item.tennhom;
+                series.Points.Add(new SeriesPoint(tennhom, item.thanhtien));
             }
             chartdoanhthu.Series.Add(series);
             series.Label.TextPattern = "{A}: {VP: p0}";
@@ -59,7 +61,9 @@ namespace QL_Quan_Kho_Hang
             var lst1 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value,ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst1)
             {
-                series1.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tennhom = string.IsNullOrWhiteSpace(item.tennhom) ? "Không xác định" : item.tennhom;
+                series1.Points.Add(new SeriesPoint(tennhom, item.thanhtien));
             }
             chartdoanhthu1.Series.Add(series1);
             series1.Label.TextPattern = "{A}: {VP: p0}";
@@ -68,7 +72,9 @@ namespace QL_Quan_Kho_Hang
             var lst2 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst2)
             {
-                series2.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tennhom = string.IsNullOrWhiteSpace(item.tennhom) ? "Không xác định" : item.tennhom;
+                series2.Points.Add(new SeriesPoint(tennhom, item.thanhtien));
             }
             chartdoanhthu2.Series.Add(series2);
             series2.Label.TextPattern = "{A}: {VP: p0}";
@@ -77,7 +83,9 @@ namespace QL_Quan_Kho_Hang
             var lst3 = _report.DoanhThuTheoNhomHangHoa(date_tu.Value, date_den.Value, ckb_tm.Checked, ckb_ck.Checked);
             foreach (var item in lst3)
             {
-                series3.Points.Add(new SeriesPoint(item.tennhom, item.thanhtien));
+                // Kiểm tra và xử lý giá trị rỗng hoặc null
+                string tennhom = string.IsNullOrWhiteSpace(item.tennhom) ? "Không xác định" : item.tennhom;
+                series3.Points.Add(new SeriesPoint(tennhom, item.thanhtien));
             }
             chartdoanhthu3.Series.Add(series3);
             series3.Label.TextPattern = "{A}: {VP: p0}";
